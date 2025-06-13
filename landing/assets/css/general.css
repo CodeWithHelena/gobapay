@@ -19,7 +19,7 @@
 body{
     /* background-color: rgb(44, 44, 44);
     color: #fff; */
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 a{
