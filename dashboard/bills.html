@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Iconify Script -->
+	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="assets/js/auth.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <main>
+      <div class="dashboard-container">
+        <div class="dashboard">
+            <div id="sidebar_container">
+                <!-- Sidebar Goes Here -->
+            </div>
+            <script src="assets/js/sidebar.js"></script>
+            
+          
+            <main class="main-content" style="background: #ffff;">
+
+              <div class="title d-flex justify-content-center align-items-center">
+                <h5 class="sm-title">Pay Bills</h5>
+              </div>
+              <section class="bills">
+                 <div class="container-fluid">                    
+                    <!-- <div class="title-message">
+                        Select Network Provider
+                    </div> -->
+                    <div class="row g-3 gx-5">
+                        <div class="col-lg-6">
+                           <div class="">
+                                
+                            <!-- <div class="box d-flex justify-content-between align-items-center">                                
+                                <div class="content d-flex justify-content-between align-items-center">
+                                    <div class="box-img me-2"><img src="assets/img/dstv-logo.jpg" alt=""></div>
+                                    <div class="details">
+                                        <h6>Dstv</h6>
+                                        <p>Get Dstv Subcription for all Packages</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="icon"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                            <div class="box d-flex justify-content-between">
+                                <div class="content d-flex justify-content-between align-items-center">                                    
+                                <div class="box-img me-2"><img src="assets/img/gotv-logo.png" alt=""></div>
+                                    <div class="details">
+                                        <h6>Gotv</h6>
+                                        <p>Get Gotv Subcription for all Packages</p>
+                                    </div>
+                                </div>                                
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                            <div class="box d-flex justify-content-between">
+                                <div class="content d-flex justify-content-between align-items-center">
+                                    <div class="box-img me-2"><img src="assets/img/startimes-logo.png" alt=""></div>
+                                    <div class="details">
+                                        <h6>Startimes</h6>
+                                        <p>Get Startimes Subcription for all Packages</p>
+                                    </div>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                            <div class="box d-flex justify-content-between">
+                                <div class="content d-flex justify-content-between align-items-center">                                    
+                                <div class="box-img me-2"><img src="assets/img/electricity-icon-md.png" alt=""></div>
+                                    <div class="details">
+                                        <h6>Electricy</h6>
+                                        <p>Pay Electricy Bills</p>
+                                    </div>
+                                </div>                                
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div> -->
+
+
+                            <div class="paybills">
+                                <div class="top-content d-flex justify-content-center align-items-center mb-5">
+                                    <div class="img me-2"><img src="assets/img/dstv-logo.jpg" alt=""></div>
+                                    <h6>Dstv</h6>
+                                </div>
+                                <div class="select-input mb-4">
+                                    <h6>Select Package</h6>
+                                    <select class="custom-select">
+                                        <option value="dstv_max">Dstv Max</option>
+                                        <option value="dstv_super">Dstv Super</option>                                    
+                                        <option value="dstv_main">Dstv Main</option>
+                                        <option value="dstv_start">Dstv Start</option>
+                                    </select>
+                                </div>
+                                <div class="amount mb-4">
+                                    <h6>Amount</h6>
+                                    <div class="amount-box">
+                                        <h6>N15,000</h6>
+                                        <p class="mb-0">Plus N100 service charge</p>
+                                    </div>
+                                </div>
+                                <div class="repeat-payment">
+                                    <h6>Repeat Subcription</h6>
+                                    <div class="subscription-box d-flex justify-content-between">
+                                        <div>
+                                            <h6>Enable Auto-renewal</h6>
+                                            <p>This payment will reoccur monthly</p>
+                                        </div>
+                                        <div class="toggle-container">  
+                                            <div class="toggle-switch" id="toggleButton">
+                                              <div class="knob"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-proceed"><button class="btn-brand">Proceed</button></div>
+                            </div>
+                               
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="transactions">
+                            <div class="tabs">
+                                <button class="tab-button active" data-tab="tab1">Recents</button>
+                                <button class="tab-button" data-tab="tab2">Upcoming</button>
+                            </div>
+                            <div id="tab1" class="tab-content active">
+    
+                                <div class="recent-transaction">
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center"><img src="assets/img/dstv-logo.jpg" alt=""></div>
+                                            <div>
+                                                <div class="name">Dstv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center">
+                                                <img src="assets/img/gotv-logo.png" alt="">
+                                            </div>
+                                            <div class="">
+                                                <div class="name">Gotv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center">
+                                                <img src="assets/img/dstv-logo.jpg" alt="">
+                                            </div>
+                                            <div>
+                                                <div class="name">Dstv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message pending">Pending</div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center">
+                                                <img src="assets/img/startimes-logo.png" alt="">
+                                            </div>
+                                            <div>
+                                                <div class="name">Startimes</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab2" class="tab-content">
+                                <div class="recent-transaction">
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center"><img src="assets/img/dstv-logo.jpg" alt=""></div>
+                                            <div>
+                                                <div class="name">Dstv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center">
+                                                <img src="assets/img/gotv-logo.png" alt="">
+                                            </div>
+                                            <div class="">
+                                                <div class="name">Gotv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <div class="details d-flex align-items-center">
+                                            <div class="box-img me-2 d-flex justify-content-center align-items-center">
+                                                <img src="assets/img/dstv-logo.jpg" alt="">
+                                            </div>
+                                            <div>
+                                                <div class="name">Dstv</div>
+                                                <div class="airtime-date">Jan 22nd, 08:25:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="airtime-amount">-N500.00</div>
+                                            <div class="airtime-message successful">Successful</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3 btn-view"><a href="bills-history.html" class="btn-brand">View All</a></div>
+                        </div>
+                    </div>
+                 </div>
+
+
+                
+              </section>
+            </main>
+          </div>
+      </div>
+
+
+         
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+      <!--Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+        const buttons = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.tab-content');
+    
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+    
+                // Hide all content and show the clicked one with animation
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                });
+    
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

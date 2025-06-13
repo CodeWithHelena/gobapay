@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Modal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Iconify Script -->
+	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        :root{
+            --primary-color: #0C3A30;
+            --secondary-color: #9EDD05;
+            --lite-primary: #29594B;
+            --lite-secondary: #D1EDBF;
+            --bg-grey: #EDF1EE;
+            --bg-grey2: #EDF1EE;
+            --peach: #FFFAEB;
+            --grey: #d7d6d4;
+        }
+
+        #closeModal{
+            font-size: 3.5rem;
+        }
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-modal{
+            background: white;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+        .custom-modal-header {
+            background: #9EDD05;
+            color: #0C3A30;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* border-radius: 20px 20px 0 0; */
+        }
+        .custom-modal-header img {
+            width: 50px;
+            height: 50px;
+            /* border-radius: 50%; */
+        }
+        .custom-modal-content {
+            padding: 20px;
+            min-height: 50vh;
+        }
+        .custom-modal-content .top-content{
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .custom-modal-content .top-content .bank-logo img{
+            width: 40px;
+        }
+        .custom-modal-content .top-content .transaction-message{
+            color: #9EDD05;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-modal-content .top-content .transaction-message .icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20px;
+            width: 20px;
+            background: #0C3A30;
+            border-radius: 50%;
+            margin-right: .3rem;
+        }
+        
+        .custom-modal-content .top-content .transaction-amount{
+            font-weight: 600;
+            font-size: 20px;
+            margin: .6rem 0;
+        }
+        .custom-modal-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .custom-modal-content li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .modal-footer {
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        .modal-footer button {
+            color: red;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .custom-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-modal-overlay.active .custom-modal{
+            transform: translateY(0);
+        }
+        @media (min-width: 768px) {
+            .custom-modal-overlay {
+                align-items: center;
+            }
+            .custom-modal{
+                max-width: 500px;
+                border-radius: 10px;
+            }
+        }
+
+        .table-container {
+            /* max-width: 100%; */
+            /* overflow-x: auto; */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .left-item{
+            text-align: right;
+        }
+
+        .btn-pay{
+            width: fit-content;
+            margin: auto;
+        }
+
+        .btn-brand{
+            width: fit-content;
+            border: none;
+            background:#9EDD05;
+            color: #0C3A30;
+            width: fit-content;
+            padding: .9rem 3rem;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 2.5rem auto 1.5rem;
+            border-radius: 10px;
+        }
+
+        /* Linked Id */
+        .linked-id-modal .table-container{
+            border: 1.5px solid var(--primary-color);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .linked-id-modal .table-container td{
+            font-weight: 600;
+            color: #454545;
+        }
+
+        .linked-id-modal .table-container .left-item{
+            color: #000;
+        }
+
+        .linked-id-modal .table-container .verified-item{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .linked-id-modal .table-container .verified-item .icon{
+            background: var(--lite-secondary);
+            padding: .3rem .5rem;
+            margin-right: .5rem;
+            border-radius: 6px;
+        }
+
+        .linked-id-modal .links{
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .custom-modal-content .top-content .transaction-title{
+                font-size: 14px;
+            }
+            table {
+                display: block;
+                /* overflow-x: auto; */
+                white-space: nowrap;
+            }
+
+
+            td {
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        }
+        .otp-container {
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+                    }
+            
+                    .otp-wrapper{
+                        max-width: 500px;
+                        padding: 1rem 4rem 3rem;
+                        margin-bottom: 1rem;
+                        
+                        border-radius: 20px;
+                    }
+                    .otp-input {
+                        width: 50px;
+                        height: 50px;
+                        text-align: center;
+                        font-size: 20px;
+                        border: 2px solid #ccc;
+                        border-radius: 5px;
+                        outline: none;
+                    }
+                    .otp-input:focus {
+                        background-color: #d1e7dd;
+                        border-color: #9EDD05;
+                    }
+            
+                    .verify-btn .btn-brand{
+                        width: 100%;
+                    }
+            
+                    .otp-title h4{
+                        font-size: 1.5rem;
+                        margin-bottom: 1rem;
+                    }
+            
+                    .otp-title p{
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: #333;
+                        margin-bottom: 1rem;
+                    }
+
+
+
+                    .custom-modal-content .input-container input{
+                        width: 100%;
+                        border: none;
+                        outline: none;
+                        background: var(--bg-grey);
+                        border-radius: 4px;
+                        padding: 1rem;
+
+                    }
+    </style>
+</head>
+<body>
+    <button id="openModal">Open Menu</button>
+    <!-- <div class="custom-modal-overlay" id="modalOverlay">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div>
+                    <h3>Payment Settings</h3>
+                </div>
+                <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
+            </div>
+            <div class="custom-modal-content">
+                <ul>
+                    <li>Set Transaction Pin <span>&#10095;</span></li>
+                    <li>Change Transaction Pin <span>&#10095;</span></li>
+                    <li>Forgot Transaction <span>&#10095;</span></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- TRANSACTION DETAILS PROCEED  -->
+     <!--
+    <div class="custom-modal-overlay" id="modalOverlay">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div>
+                    <h3 class="text-center">N2,000.00</h3>
+                </div>
+                <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
+            </div>
+            <div class="custom-modal-content">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Bank</td>
+                            <td class="left-item">MONIE POINT</td>
+                        </tr>
+                        <tr>
+                            <td>Account Number</td>
+                            <td class="left-item">Value 2</td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td class="left-item">ONUKAGHA ANNACIETA IFEOMA</td>
+                        </tr>
+                        <tr>
+                            <td>Amount</td>
+                            <td class="left-item">N2,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Fee</td>
+                            <td class="left-item">N15.00</td>
+                        </tr>
+                    </table>
+                </div> -->
+                
+                <!-- <div class="btn-pay">
+                    <button class="btn-brand">Pay</button>
+                </div> 
+
+                
+
+                <div class="otp-wrapper">
+                    <div class="img text-center"><img src="assets/img/verify-email-otp.png" alt=""></div>
+                    <div class="otp-title text-center">
+                        <p>Enter Transaction Pin</p>
+                    </div>
+                    <div class="otp-container">
+                        <input type="text" maxlength="1" class="otp-input" id="otp1" autofocus>
+                        <input type="text" maxlength="1" class="otp-input" id="otp2">
+                        <input type="text" maxlength="1" class="otp-input" id="otp3">
+                        <input type="text" maxlength="1" class="otp-input" id="otp4">
+                        <input type="text" maxlength="1" class="otp-input" id="otp5">
+                        <input type="text" maxlength="1" class="otp-input" id="otp6">
+                    </div>
+                    <div class="verify-btn mt-5"><button class="btn-brand">Send</button></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+-->
+
+
+
+<!-- UPDATE TRANSACTION PIN -->
+<div class="custom-modal-overlay" id="modalOverlay">
+    <div class="custom-modal">
+        <div class="custom-modal-header">
+            <div>
+                <h5 class="text-center">Update Transaction Pin</h5>
+            </div>
+            <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
+        </div>
+        <div class="custom-modal-content">
+            <div class="input-container">
+                <div class=" ">
+                    <input type="number" placeholder="Old pin">
+                </div>
+                <div class="my-3">
+                    <input type="number" placeholder="New pin">
+                </div>
+                <div>
+                    <input type="number" placeholder="Comfirm new pin">
+                </div>
+                
+            </div> 
+            
+             <div class="btn-pay">
+                <button class="btn-brand">Update pin</button>
+            </div> 
+
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- TRANSACTION HISTORY MODAL -->
+    <!-- <div class="custom-modal-overlay" id="modalOverlay">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div>
+                    <h3 class="text-center">Transaction Details</h3>
+                </div>
+                <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
+            </div>
+            <div class="custom-modal-content">
+                <div class="top-content">
+                    <div class="bank-logo"><img src="assets/img/fcmb.png" alt=""></div>
+                    <div class="transaction-title">Transfer from ONUKAGHA ANNACIETA IFEOMA </div>
+                    <div class="transaction-amount">N56, 100.00</div>
+                    <div class="transaction-message">
+                        <div class="icon"><span class="iconify" data-icon="mdi:check-bold"></span></div>
+                        <span>Successful</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>Transaction Type </td>
+                            <td class="left-item">Bank Deposit</td>
+                        </tr>
+                        <tr>
+                            <td>Sender Details</td>
+                            <td class="left-item">ONUKAGHA ANNACIETA IFEOMA</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Remark</td>
+                            <td class="left-item">UBAH CHIOMA Trf for Customers/ <br>
+                            AT68_TRF2MPT47ug18776454864277667
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Credited to</td>
+                            <td class="left-item">Wallet</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction No</td>
+                            <td class="left-item">250110060100747423521923</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Date</td>
+                            <td class="left-item">Jan 10th, 2025 10:15</td>
+                        </tr>
+                        <tr>
+                            <td>Session ID</td>
+                            <td class="left-item">09040525011010154328136263935</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="btn-pay">
+                    <button class="btn-brand">Share Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    
+    <!-- ACCOUNTS LIMITS LINKED ID DETAILS  -->
+     <!--
+    <div class="custom-modal-overlay" id="modalOverlay">
+        <div class="modal linked-id-modal">
+            <div class="custom-modal-header">
+                <div>
+                    <h3 class="text-center">Linked Id Details</h3>
+                </div>
+                <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
+            </div>
+            <div class="custom-modal-content">                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>ID Type</td>
+                            <td class="left-item verified-item">
+                                <div class="icon">
+                                    <span>Verified</span>
+                                    <span class="iconify" data-icon="mdi:check-bold"></span>
+                                </div>
+                                <span>BVN</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Full Name</td>
+                            <td class="left-item">Amarachi Elizabeth Eneh</td>
+                        </tr>
+                        <tr>
+                            <td>Id Number</td>
+                            <td class="left-item">32453******</td>
+                        </tr>
+                        <tr>
+                            <td>Date Of Birth</td>
+                            <td class="left-item">1998-10-05</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td class="left-item">Female</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <td>ID Type</td>
+                            <td class="left-item verified-item">
+                                <div class="icon">Verified<span class="iconify" data-icon="mdi:check-bold"></span></div>
+                                <span>NIN</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Full Name</td>
+                            <td class="left-item">Amarachi Elizabeth Eneh</td>
+                        </tr>
+                        <tr>
+                            <td>Id Number</td>
+                            <td class="left-item">26753******</td>
+                        </tr>
+                        <tr>
+                            <td>Date Of Birth</td>
+                            <td class="left-item">1998-10-05</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td class="left-item">Female</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-message">
+                    <p>
+                        <span>If there has been a change to the name on your ID, please</span>
+                        <a href="" class="links">click here to update your name</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div> 
+-->
+    <script>
+        document.getElementById('openModal').addEventListener('click', function() {
+            document.getElementById('modalOverlay').classList.add('active');
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        });
+
+        document.getElementById('signOut').addEventListener('click', function() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        });
+    </script>
+</body>
+</html>

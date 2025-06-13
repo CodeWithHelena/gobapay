@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Login</title>
+    <!-- Font Awesome 6 (Latest) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<style>
+    body {
+        /* font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to top left, #ffe6e6, #ffc1c1, #ff5e5e); */
+    }
+
+    .container {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 12px;
+        /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); */
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    p {
+        color: gray;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .otp-inputs input {
+        width: 45px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .otp-inputs input:focus,
+    .form-wrapper .inputs input {
+        border-color: #ff5e5e;
+        box-shadow: 0 0 3px #ff5e5e;
+    }
+
+    .validate-btn {
+        width: 90%;
+        background-color: #ff5e5e;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .validate-btn:hover {
+        background-color: #ff3f3f;
+    }
+
+    .resend {
+        color: #000;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .resend a {
+        color: #333;
+        /* text-decoration: underline; */
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <main>
+        <section class="login-form">
+            <div class="container-fluids">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="login-message text-center">
+                            <h1>DIGIFY.</h1>
+                            <p>
+                                Securely upload, manage, and access your important documents all in one place.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-wrapper">
+                            <div class="form-title">
+                                <h4 class="text-center fw-bolder">Verify OTP</h4>
+                                <!-- <p>Please enter the One-Time Password to
+                                verify your account </p> -->
+                            </div>
+                            <div class="container">
+                                <p>A One-Time Password has been sent to
+                                    <span>vivimarny@gmail.com</span>
+                                </p>
+
+                                <!-- <div class="otp-inputs">
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                </div> -->
+                                <div class="inputs mb-3">
+                                    <input type="number" name="email" id="email" placeholder="Enter OTP" required>
+                                </div>
+
+                                <div class="btn-div"><button class="btn-brand">VALIDATE</button></div>
+
+                                <div class="resend">
+                                    <p><a href="#">Resend OTP: <span>1:00</span></a></p>
+                                    <!-- <p><a href="#">Entered a wrong
+                                            number?</a></p> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const inputs = document.querySelectorAll('.otp-inputs input');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                [...pasteData].forEach((char, i) => {
+                    if (inputs[i]) {
+                        inputs[i].value = char;
+                    }
+                });
+                if (pasteData.length > 0) {
+                    inputs[pasteData.length - 1].focus();
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            inputs[0].focus();
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Login</title>
+    <!-- Font Awesome 6 (Latest) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<style>
+    body {
+        /* font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to top left, #ffe6e6, #ffc1c1, #ff5e5e); */
+    }
+
+    .container {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 12px;
+        /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); */
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    p {
+        color: gray;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .otp-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .otp-inputs input {
+        width: 45px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .otp-inputs input:focus,
+    .form-wrapper .inputs input {
+        border-color: #ff5e5e;
+        box-shadow: 0 0 3px #ff5e5e;
+    }
+
+    .validate-btn {
+        width: 90%;
+        background-color: #ff5e5e;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .validate-btn:hover {
+        background-color: #ff3f3f;
+    }
+
+    .resend {
+        color: #000;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .resend a {
+        color: #333;
+        /* text-decoration: underline; */
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <main>
+        <section class="login-form">
+            <div class="container-fluids">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="login-message text-center">
+                            <h1>DIGIFY.</h1>
+                            <p>
+                                Securely upload, manage, and access your important documents all in one place.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-wrapper">
+                            <div class="form-title">
+                                <h4 class="text-center fw-bolder">Verify OTP</h4>
+                                <!-- <p>Please enter the One-Time Password to
+                                verify your account </p> -->
+                            </div>
+                            <div class="container">
+                                <p>A One-Time Password has been sent to
+                                    <span>vivimarny@gmail.com</span>
+                                </p>
+
+                                <!-- <div class="otp-inputs">
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                    <input type="text" maxlength="1" />
+                                </div> -->
+                                <div class="inputs mb-3">
+                                    <input type="number" name="email" id="email" placeholder="Enter OTP" required>
+                                </div>
+
+                                <div class="btn-div"><button class="btn-brand">VALIDATE</button></div>
+
+                                <div class="resend">
+                                    <p><a href="#">Resend OTP: <span>1:00</span></a></p>
+                                    <!-- <p><a href="#">Entered a wrong
+                                            number?</a></p> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const inputs = document.querySelectorAll('.otp-inputs input');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                [...pasteData].forEach((char, i) => {
+                    if (inputs[i]) {
+                        inputs[i].value = char;
+                    }
+                });
+                if (pasteData.length > 0) {
+                    inputs[pasteData.length - 1].focus();
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            inputs[0].focus();
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+
+/* :root {
+--primary-color: #ff5e5e;
+--secondary-color: #201f1f;
+--dark-secondary: #333;
+--white: #fff;
+--dark-grey: grey;
+--bg-grey: #EDF1EE;
+--bg-grey2: rgb(239, 238, 238);
+--peach: var(--white)AEB;
+--grey: #d7d6d4;
+} */
+
+:root {
+--primary-color: #0A192F;
+--secondary-color: #00BFFF;
+--dark-secondary: #333;
+--white: #fff;
+--dark-grey: grey;
+--bg-grey: #EDF1EE;
+--bg-grey2: rgb(239, 238, 238);
+--peach: var(--white)AEB;
+--grey: #d7d6d4;
+--btn-danger: #dc3545;
+}
+
+body {
+font-family: Arial, sans-serif;
+overflow-x: hidden;
+background: var(--bg-grey);
+}
+
+section{
+padding-top: 5rem;
+}
+
+.bg-primary-color{
+background: var(--primary-color);
+}
+
+.bg-secondary-color {
+background: var(--secondary-color);
+}
+
+.bg-danger-color{
+background: var(--btn-danger);
+}
+
+.border-secondary-color{
+border: 2px solid var(--secondary-color);
+}
+
+.border-primary-color{
+border: 1px solid var(--primary-color);
+}
+
+
+.btn-brand {
+width: 100%;
+border: none;
+background: var(--secondary-color);
+color: var(--white);
+padding: 1rem;
+border-radius: 30px;
+font-weight: 600;
+transition: .7s;
+}
+
+.btn-brand.btn-brand-fit{
+width: fit-content;
+padding: .7rem 1.5rem;
+}
+
+.btn-brand.btn-brand-danger{
+background: var(--btn-danger);
+}
+
+.btn-brand-bg{
+background: var(--secondary-color) !important;
+}
+
+.btn-brand-outline{
+background: transparent;
+border: 2px solid var(--secondary-color) !important;
+color: var(--secondary-color);
+}
+
+
+.btn-brand:hover {
+opacity: 0.8;
+}
+
+.inputs input,
+.inputs select,
+.inputs textarea{
+width: 100%;
+border: none;
+outline: none;
+background: var(--bg-grey2);
+border-radius: 30px;
+padding: 1rem;
+}
+
+.inputs.inputs-border select,
+.inputs.inputs-border textarea,
+.inputs.inputs-border input {
+margin: auto;
+border: 1px solid var(--primary-color);
+background: var(--grey);
+}
+
+.pagination {
+margin-top: 1rem;
+}
+
+.pagination .page-item .page-link {
+color: var(--secondary-color);
+border: 1px solid var(--grey);
+}
+
+.pagination .page-item.active .page-link {
+background-color: var(--primary-color);
+border-color: var(--secondary-color);
+color: var(--white);
+}
+
+.pagination .page-item.disabled .page-link {
+color: var(--dark-secondary);
+background-color: var(--bg-grey);
+border-color: var(--grey);
+}
+
+
+/* DASHBOARD */
+.dashboard {
+display: grid;
+grid-template-columns: 250px 1fr;
+/* gap: 1rem; */
+min-height: 100vh;
+position: relative;
+}
+
+.dashboard.dashboard-toggle {
+grid-template-columns: 100px 1fr;
+}
+
+.sidebar {
+position: fixed;
+height: 100%;
+width: 250px;
+background-color: var(--primary-color);
+padding: 1rem 0;
+color: white;
+overflow: hidden;
+/* transition: left 0.3s ease, padding 0.3s ease; */
+overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar {
+width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+background: #f0f0f0;
+border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+background: var(--secondary-color);
+border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+background: var(--secondary-color);
+}
+
+
+
+
+
+
+.sidebar .brand-logo {
+border-bottom: 1px solid var(--bg-grey);
+padding: .5rem 0;
+}
+
+.sidebar .sidebar-menu {
+position: relative;
+
+list-style: none;
+height: 100%;
+}
+
+.sidebar ul li {
+font-weight: 600;
+font-size: 18px;
+text-wrap: nowrap;
+}
+
+.sidebar ul li i {
+font-size: 1.3rem;
+}
+
+.sidebar ul li:hover {}
+
+.sidebar ul {
+padding-left: 0 !important;
+}
+
+.sidebar ul li a {
+display: inline-block;
+padding: 1rem 0;
+padding-left: 2rem;
+
+}
+
+.sidebar ul li a span {
+display: inline-block;
+}
+
+
+.sidebar-link.active {
+width: 100%;
+background: var(--secondary-color);
+border-left: 2px solid var(--bg-grey);
+}
+
+.sidebar .sm-account {
+display: none;
+}
+
+.sidebar .dropdown .dropdown-container {
+display: none;
+padding-left: 2rem;
+padding-right: 0;
+}
+
+.sidebar .dropdown .dropdown-container a {
+display: block;
+padding: .7rem 0 .7rem 2rem;
+}
+
+.sidebar .dropdown .dropdown-container a:hover,
+.sidebar ul .sidebar-li:hover {
+background: var(--secondary-color);
+border-left: 2px solid var(--bg-grey);
+}
+
+.sidebar .dropdown {
+display: inline-block;
+transition: 1s;
+position: relative;
+text-wrap: nowrap;
+}
+
+.dropdown .dropdown-button {
+font-weight: 600;
+font-weight: 18px;
+border: none !important;
+outline: none;
+background-color: inherit;
+color: var(--bg-grey);
+margin: 0;
+padding: 1rem;
+padding-left: 2rem;
+}
+
+.sidebar .dropdown-content {
+display: none;
+background-color: #f9f9f9;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+z-index: 1;
+position: absolute;
+padding-left: 5rem !important;
+}
+
+.sidebar .dropdown-content a {
+float: none;
+color: var(--secondary-color);
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+text-align: left;
+font-size: .9rem;
+}
+
+.sidebar .dropdown .fa-chevron-down {
+transition: .7s;
+}
+
+.sidebar .dropdown:hover .fa-chevron-down {
+transform: rotate(180deg);
+}
+
+.sidebar .dropdown-content a:hover {
+background-color: var(--secondary-color);
+}
+
+.sidebar .dropdown:hover .dropdown-content {
+display: block;
+}
+
+.main-content {
+background: var(--bg-grey);
+position: relative;
+}
+
+.main-content .dashboards {
+/* background: var(--bg-grey); */
+}
+
+
+.main-content .title {
+width: 82%;
+padding: 1rem 1rem 1.1rem;
+box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+background: var(--white);
+position: fixed;
+z-index: 1000;
+}
+
+.main-content .title i{
+cursor: pointer;
+}
+
+.main-content .open-menu{
+display: none !important;
+}
+
+.main-content .open-menu {
+cursor: pointer;
+font-size: 1.5rem;
+background: var(--primary-color);
+color: var(--secondary-color);
+height: 2.3rem;
+width: 2.3rem;
+border-radius: 50%;
+}
+.sidebar .close-menu {
+
+
+}
+
+.dashboards {
+width: 100%;
+}
+
+.dashboards .dashboard-box {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 1rem;
+width: 100% !important;
+padding: 1rem 0;
+
+}
+
+.main-content .dashboard-box .box {
+max-width: 240px;
+min-height: 106px;
+background: #fff;
+display: flex;
+justify-content: space-between;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.dashboard .main-content .dashboard-box .icon {
+width: 20%;
+display: flex;
+justify-content: center;
+align-items: center;
+background: var(--primary-color);
+color: var(--secondary-color);
+padding: 0 1rem;
+}
+
+.dashboard .main-content .text {
+width: 80%;
+padding: 1rem .5rem;
+text-align: center;
+}
+
+
+@media (max-width: 991px) {
+.dashboards .dashboard-box {
+/* width: 100vw !important; */
+grid-template-columns: repeat(2, 1fr);
+
+}
+.main-content .dashboard-box .box {
+max-width: 100%;
+}
+
+}
+
+@media (max-width: 768px) {
+.main-content .title {
+width: 100%;
+}
+
+.main-content .open-menu {
+display: flex !important;
+}
+
+
+.dashboard {
+display: grid;
+grid-template-columns: 0px 1fr;
+}
+
+.dashboard.dashboard-toggle {
+/* grid-template-columns: ; */
+}
+
+.sidebar {
+width: 270px;
+left: -250px !important;
+top: 4.9rem;
+
+}
+.sidebar.sidebar-toggle-width {
+left: 0 !important;
+z-index: 1000;
+}
+.sidebar .brand-logo{
+display: none;
+}
+
+.dashboard .main-content .text h5 {
+font-size: 1rem;
+}
+
+
+
+
+
+}
+
+/* DASHBOARD TABLE */
+.dashboard-table{
+padding-top: 2rem;
+/* width: 100vw !important; */
+overflow-x: scroll !important;
+}
+.dashboard-table::-webkit-scrollbar {
+height: .8rem !important;
+background: #ccc !important;
+border-radius: 1rem !important;
+}
+
+.dashboard-table::-webkit-scrollbar-thumb {
+background: red !important;
+border-radius: 1rem !important;
+}
+@media (max-width: 768px) {
+.dashboard-table {
+width: 100vw !important;
+}
+}
+
+
+/* CHANGE PASSWORD */
+.change-password{
+/* margin-top: 7rem; */
+
+}
+
+/* ADD USER */
+@media (max-width: 991px) {
+.add-user .registered-users{
+margin-top: 4rem !important;
+}
+}
+
+/* */
+@media (max-width: 768px) {
+
+}
+
+/* ADD DOCUMENT / ADD USER FORM */
+.add-document form,
+.add-user form{
+width: 80%;
+margin: auto;
+}
+@media (max-width: 768px) {
+.add-document form,
+.add-user form {
+width: 95%;
+margin: auto;
+}
+}
+
+
+/* VIEW DOCUMENT */
+@media (max-width: 768px) {
+.view-document-details .btn-brand.btn-brand-bg{
+padding: .3rem .6rem;
+white-space: nowrap;
+
+}
+}

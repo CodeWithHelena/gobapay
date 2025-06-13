@@ -1,0 +1,71 @@
+
+.footer-section{
+    background: var(--primary-color);
+    color: #fff;
+    padding: 2rem 4rem 1rem;
+}
+
+.footer-section .about img{
+    width: 150px;
+}
+
+.footer-section .about p{
+    margin-top: 2rem;
+}
+
+.footer-section h4::after {
+    content: ""; /* Creates the bottom border */
+    display: block;
+    width: 40px; /* Adjust for 40% of text width */
+    height: 3px; /* Border thickness */
+    background-color: var(--secondary-color); /* Border color */
+     /* Centers the border under the text */
+    margin-top: 5px; /* Adds space between text and border */
+}
+
+.footer-section .about .socials p{
+    height: 35px;
+    width: 35px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary-color);
+}
+.footer-section .get-in-touch .content i{
+    color: var(--secondary-color);
+}
+
+.footer-section .footer-end{
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #fff;
+}
+
+.footer-section .footer-end span{
+    font-size: 10px;
+    color: var(--secondary-color);
+    padding: 0 .5rem;
+}
+
+@media (max-width: 991px) {
+    .footer-section .about,
+    .footer-section .quick-links{
+        margin-bottom: 2rem;
+    }
+
+}
+@media (max-width: 640px) {
+    .footer-section{
+        padding: 2rem 1rem;
+    }
+    .footer-section .service{
+        margin-bottom: 2rem;
+    }
+    .footer-section .footer-end{
+        flex-direction: column-reverse !important;
+    }
+
+}

@@ -1,0 +1,178 @@
+
+/* HEADER */
+header .navba{
+    background: var(--bg-grey);
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem 1rem;
+}
+
+header .navba ul li{
+    display: inline-block;
+    list-style-type: none;
+    padding: 0 .5rem;
+    font-weight: bold;
+}
+
+.navba-link {
+    text-decoration: none;
+    /* color: #333;
+    font-size: 18px; */
+    /* padding: 10px 15px; */
+    position: relative;
+}
+.navba-link::after {
+    content: "";
+    position: absolute;
+    left: .5rem;
+    bottom: 0;
+    width: 80%;
+    margin: auto;
+    height: 2px;
+    background-color: #00BF62;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navba .navba-link.navba-btn{
+    display: none;
+}
+
+.navba-link:hover::after, .navba-link.active::after {
+    transform: scaleX(1);
+}
+
+header .navba .action-btn{
+    font-weight: bold;
+    transform: translateY(-20%);
+}
+
+header .navba .login-btn{
+    display: inline-block;
+    transform: translateY(-80%) !important;
+}
+
+header .navba .open-toggler{
+    display: none;
+}
+header .navba .close-toggler{
+    display: none;
+}
+
+
+
+@media (max-width: 800px){
+    header .navba{
+        position: relative
+    }
+
+    header .navba ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 1000;
+        background: var(--primary-color);
+        color: var(--grey);
+        transition: 0.75s ease-out;
+        padding-left: 0;
+    }
+
+    .show-navba{
+        right: 0 !important;
+    }
+
+    header .navba ul li{
+        width: 100%;
+    }
+
+    header .navba ul li a{
+        display: inline-block;
+        width: 100%;
+        
+        padding: 1.5rem 0 1.5rem 1.5rem;
+    }
+
+    header .navba .brand-logo img{
+        width: 100px;
+    }
+
+    header .navba .open-toggler{
+        display: block;
+    }
+    header .navba .open-toggler .iconify{
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
+
+    
+    header .navba .close-toggler{
+        height: 3rem;
+        width: 3rem;
+        background: var(--secondary-color);
+        color: var(--lite-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+        margin-top: 1rem;
+        border-radius: 50%;
+        
+    }
+
+    header .navba ul li{
+        color: var(--bg-grey);
+
+    }
+
+    header .navba ul li:hover{
+        background: var(--dark-secondary-color);
+        color: var(--primary-color);
+    }
+
+    .navba-link::after {
+        /* background-color: var(--secondary-color); */
+        transform: scaleX(0);
+        width: 0;
+    }
+    /* .navba-link:hover::after,  */
+    .navba-link.active::after {
+        transform: scaleX(0);
+    }
+
+   
+}
+
+@media (max-width: 640px){
+    header .navba .action-btn {
+        display: none; 
+    }
+    .navba .navba-link.navba-btn {
+        display: flex;   
+    }
+    .navba-link.navba-btn:hover {
+        background: transparent;
+        color: var(--bg-grey);
+    }
+
+    .navba-btn a {
+        width: fit-content !important;
+        max-width: 168px !important;
+        padding: .8rem 1.7rem !important;
+        
+    }
+
+     header .navba{
+        padding: 2rem 1rem 1rem;
+    }
+}

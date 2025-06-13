@@ -1,0 +1,2372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- SPA NAVIGATOR -->
+    <script src="https://cdn.jsdelivr.net/npm/spa-navigator@latest/dist/spa-navigator.min.js"></script>
+    <!-- Style -->
+    <link rel="stylesheet" href="../assets/css/general.css">
+
+    <script>
+        window.onload = function () {
+
+            window.spa = new SPANavigator({
+                pages: ["mainDashboard", "changePassword", "dashboardtable", "addUser", "viewUsers", "addDocument", "viewDocument", "viewDocumentDetails", "updateDocumnet", "deleteDocument", "addCategory", "viewDocumentChange", "approveDocument", "viewPendingApproval"],
+                defaultPage: "mainDashboard"
+            });
+        };
+    </script>
+    <style>
+        /* Style to hide all pages by default */
+        .page {
+            display: none;
+            min-height: 60vh;
+        }
+
+        #home {
+            display: block;
+        }
+
+        /* Layout styles */
+        /* body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; } */
+        /* header, footer { background: #333; color: white; padding: 15px; }
+        nav a { margin: 0 15px; color: white; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        #content { padding: 20px; } */
+    </style>
+
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* :root {
+    --primary-color: #ff5e5e;
+    --secondary-color: #201f1f;
+    --dark-secondary: #333;
+    --white: #fff;
+    --dark-grey: grey;
+    --bg-grey: #EDF1EE;
+    --bg-grey2: rgb(239, 238, 238);
+    --peach: var(--white)AEB;
+    --grey: #d7d6d4;
+} */
+
+:root {
+    --primary-color: #0A192F;
+    --secondary-color: #00BFFF;
+    --dark-secondary: #333;
+    --white: #fff;
+    --dark-grey: grey;
+    --bg-grey: #EDF1EE;
+    --bg-grey2: rgb(239, 238, 238);
+    --peach: var(--white)AEB;
+    --grey: #d7d6d4;
+    --btn-danger: #dc3545;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background: var(--bg-grey);
+}
+
+section{
+    padding-top: 5rem;
+}
+
+.bg-primary-color{
+    background: var(--primary-color);
+}
+
+.bg-secondary-color {
+    background: var(--secondary-color);
+}
+
+.bg-danger-color{
+    background: var(--btn-danger);
+}
+
+.border-secondary-color{
+    border: 2px solid var(--secondary-color);
+}
+
+.border-primary-color{
+    border: 1px solid var(--primary-color);
+}
+
+
+.btn-brand {
+    width: 100%;
+    border: none;
+    background: var(--secondary-color);
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: .7s;
+}
+
+.btn-brand.btn-brand-fit{
+    width: fit-content;
+    padding: .7rem 1.5rem;
+}
+
+.btn-brand.btn-brand-danger{
+    background: var(--btn-danger);
+}
+
+.btn-brand-bg{
+    background: var(--secondary-color) !important;
+}
+
+.btn-brand-outline{
+    background: transparent;
+    border: 2px solid var(--secondary-color) !important;
+    color: var(--secondary-color);
+}
+
+
+.btn-brand:hover {
+    opacity: 0.8;
+}
+
+.inputs input,
+.inputs select,
+.inputs textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: var(--bg-grey2);
+    border-radius: 30px;
+    padding: 1rem;
+}
+
+.inputs.inputs-border select,
+.inputs.inputs-border textarea,
+.inputs.inputs-border input {
+    margin: auto;
+    border: 1px solid var(--primary-color);
+    background: var(--grey);
+}
+
+.pagination {
+    margin-top: 1rem;
+}
+
+.pagination .page-item .page-link {
+    color: var(--secondary-color);
+    border: 1px solid var(--grey);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--dark-secondary);
+    background-color: var(--bg-grey);
+    border-color: var(--grey);
+}
+
+
+/* DASHBOARD */
+.dashboard {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    /* gap: 1rem; */
+    min-height: 100vh;
+    position: relative;
+}
+
+.dashboard.dashboard-toggle {
+    grid-template-columns: 100px 1fr;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+    color: white;
+    overflow: hidden;
+    /* transition: left 0.3s ease, padding 0.3s ease; */
+    overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+
+
+
+
+
+.sidebar .brand-logo {
+    border-bottom: 1px solid var(--bg-grey);
+    padding: .5rem 0;
+}
+
+.sidebar .sidebar-menu {
+    position: relative;
+
+    list-style: none;
+    height: 100%;
+}
+
+.sidebar ul li {
+    font-weight: 600;
+    font-size: 18px;
+    text-wrap: nowrap;
+}
+
+.sidebar ul li i {
+    font-size: 1.3rem;
+}
+
+.sidebar ul li:hover {}
+
+.sidebar ul {
+    padding-left: 0 !important;
+}
+
+.sidebar ul li a {
+    display: inline-block;
+    padding: 1rem 0;
+    padding-left: 2rem;
+
+}
+
+.sidebar ul li a span {
+    display: inline-block;
+}
+
+
+.sidebar-link.active {
+    width: 100%;
+    background: var(--secondary-color);
+    border-left: 2px solid var(--bg-grey);
+}
+
+.sidebar .sm-account {
+    display: none;
+}
+
+.sidebar .dropdown .dropdown-container {
+    display: none;
+    padding-left: 2rem;
+    padding-right: 0;
+}
+
+.sidebar .dropdown .dropdown-container a {
+    display: block;
+    padding: .7rem 0 .7rem 2rem;
+}
+
+.sidebar .dropdown .dropdown-container a:hover,
+.sidebar ul .sidebar-li:hover {
+    background: var(--secondary-color);
+    border-left: 2px solid var(--bg-grey);
+}
+
+.sidebar .dropdown {
+    display: inline-block;
+    transition: 1s;
+    position: relative;
+    text-wrap: nowrap;
+}
+
+.dropdown .dropdown-button {
+    font-weight: 600;
+    font-weight: 18px;
+    border: none !important;
+    outline: none;
+    background-color: inherit;
+    color: var(--bg-grey);
+    margin: 0;
+    padding: 1rem;
+    padding-left: 2rem;
+}
+
+.sidebar .dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    position: absolute;
+    padding-left: 5rem !important;
+}
+
+.sidebar .dropdown-content a {
+    float: none;
+    color: var(--secondary-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: .9rem;
+}
+
+.sidebar .dropdown .fa-chevron-down {
+    transition: .7s;
+}
+
+.sidebar .dropdown:hover .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar .dropdown-content a:hover {
+    background-color: var(--secondary-color);
+}
+
+.sidebar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.main-content {
+    background: var(--bg-grey);
+    position: relative;
+}
+
+.main-content .dashboards {
+    /* background: var(--bg-grey); */
+}
+
+
+.main-content .title {
+    width: 82%;
+    padding: 1rem 1rem 1.1rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background: var(--white);
+    position: fixed;
+    z-index: 1000;
+}
+
+.main-content .title i{
+    cursor: pointer;
+}
+
+.main-content .open-menu{
+    display: none !important;
+}
+
+.main-content .open-menu {
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    height: 2.3rem;
+    width: 2.3rem;
+    border-radius: 50%;
+}
+.sidebar .close-menu {
+    
+
+}
+
+.dashboards {
+    width: 100%;
+}
+
+.dashboards .dashboard-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100% !important;
+    padding: 1rem 0;
+
+}
+
+.main-content .dashboard-box .box {
+    max-width: 240px;
+    min-height: 106px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.dashboard .main-content .dashboard-box .icon {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0 1rem;
+}
+
+.dashboard .main-content .text {
+    width: 80%;
+    padding: 1rem .5rem;
+    text-align: center;
+}
+
+
+@media (max-width: 991px) {
+    .dashboards .dashboard-box {
+        /* width: 100vw !important; */
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+        .main-content .dashboard-box .box {
+            max-width: 100%;
+        }
+
+}
+
+@media (max-width: 768px) {
+    .main-content .title {
+            width: 100%;
+    }
+
+    .main-content .open-menu {
+        display: flex !important;
+    }
+
+
+    .dashboard {
+        display: grid;
+        grid-template-columns: 0px 1fr;
+    }
+
+    .dashboard.dashboard-toggle {
+        /* grid-template-columns: ; */
+    }
+
+    .sidebar {
+        width: 270px;
+        left: -250px !important;
+        top: 4.9rem;
+        
+    }
+    .sidebar.sidebar-toggle-width {
+        left: 0 !important;
+        z-index: 1000;
+    }
+    .sidebar .brand-logo{
+        display: none;
+    }
+
+    .dashboard .main-content .text h5 {
+        font-size: 1rem;
+    }
+
+    
+
+
+
+}
+
+/* DASHBOARD TABLE */
+.dashboard-table{
+    padding-top: 2rem;
+    /* width: 100vw !important; */
+    overflow-x: scroll !important;
+}
+.dashboard-table::-webkit-scrollbar {
+    height: .8rem !important;
+    background: #ccc !important;
+    border-radius: 1rem !important;
+}
+
+.dashboard-table::-webkit-scrollbar-thumb {
+    background: red !important;
+    border-radius: 1rem !important;
+}
+@media (max-width: 768px) {
+    .dashboard-table {
+            width: 100vw !important;
+        }
+}
+
+
+/* CHANGE PASSWORD */
+.change-password{
+    /* margin-top: 7rem; */
+    
+}
+
+/* ADD USER */
+@media (max-width: 991px) {
+    .add-user .registered-users{
+        margin-top: 4rem !important;
+    }
+}
+
+/*  */
+@media (max-width: 768px) {
+    
+}
+
+/* ADD DOCUMENT / ADD USER FORM */
+.add-document form,
+.add-user form{
+    width: 80%;
+    margin: auto;
+}
+@media (max-width: 768px) {
+    .add-document form,
+        .add-user form {
+            width: 95%;
+            margin: auto;
+        }
+}
+
+
+/* VIEW DOCUMENT */
+@media (max-width: 768px) {
+.view-document-details .btn-brand.btn-brand-bg{
+    padding: .3rem .6rem;
+    white-space: nowrap;
+
+}
+}
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="dashboard-container">
+            <div class="dashboard" id="dashboard">
+                <div id="sidebar_container">
+                    <aside class="sidebar">
+                        <div class="brand-logo text-center">
+                            <h3>
+                                <span><img src="../assets/img/digify-icon.png" alt="" width="40px"></span>
+                                <span>IGIFY.</span>
+                            </h3>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="sidebar-li"><a href="javascript:void(0)" onclick="spa.showPage('mainDashboard')" class="sidebar-link active js-sidebar-link"><i class="fas fa-gauge me-2"></i><span class="sidebar-text">Dashboard</span></a></li>
+                            <li class="dropdown-li">
+                                <div class="dropdown sm-dropdown">
+                                    <button type="button" class="dropdown-button dropdown-toggle js-sidebar-link">
+                                        <i class="fas fa-users me-2"></i>
+                                        <span class="sidebar-text">Manage user</span>
+                                    </button>
+                                    <div class="dropdown-container">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('addUser')" class="sidebar-link">
+                                            <i class="fas fa-user-plus me-2"></i>
+                                            <span class="sidebar-text">Add user</span>
+                                        </a>
+                                        <a href="javascript:void(0)" onclick="spa.showPage('viewUsers')" class="sidebar-link">
+                                            <i class="fa-solid fa-user me-2"></i>
+                                            <span class="sidebar-text">View users</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown-li">
+                                <div class="dropdown sm-dropdown">
+                                    <button type="button" class="dropdown-button dropdown-toggle">
+                                        <i class="fas fa-folder-open"></i>
+                                        <span class="sidebar-text">Manage Document</span>
+                                    </button>
+                                    <div class="dropdown-container">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('addDocument')" class="sidebar-link">
+                                            <i class="fas fa-file-circle-plus me-2"></i>
+                                            <span class="sidebar-text">Add document</span>
+                                        </a>
+                                        <a href="javascript:void(0)" onclick="spa.showPage('addCategory')" class="sidebar-link">
+                                            <i class="fa-solid fa-user me-2"></i>
+                                            <span class="sidebar-text">Add Category</span>
+                                        </a>
+                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocument')" class="sidebar-link">
+                                            <i class="fas fa-file-lines me-3"></i>
+                                            <span class="sidebar-text">View document</span>
+                                        </a>
+                                        <a href="javascript:void(0)" onclick="spa.showPage('updateDocumnet')" class="sidebar-link">
+                                            <i class="fas fa-pen-to-square me-1"></i>
+                                            <span class="sidebar-text">Update document</span>
+                                        </a>
+                                        <a href="javascript:void(0)" onclick="spa.showPage('deleteDocument')" class="sidebar-link">
+                                            <i class="fas fa-trash me-2"></i>
+                                            <span class="sidebar-text">Delete document</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="sidebar-li"><a href="javascript:void(0)" onclick="spa.showPage('changePassword')" class="sidebar-link"><i class="fas fa-key"></i>
+                                    <span class="sidebar-text">Change password</span></a>
+                            </li>
+                            <li class="sidebar-li" id="logoutBTN"><a href="" class="sidebar-link"><i class="fa-solid fa-right-from-bracket"></i>
+                                    <span class="sidebar-text">Logout</span></a>
+                            </li>
+                        </ul>
+
+                    </aside>
+                </div>
+                <!-- <div class="overlay" onclick="closeSidebar()"></div> -->
+
+
+                <div class="main-content">
+
+                    <div class="title d-flex justify-content-between align-items-center">
+                        <!-- <h5 class="sm-title">Customer Service</h5> -->
+                        <div class="d-flex align-items-center">
+                            <h5 class="open-menu d-flex justify-content-center align-items-center me-3" id="open-menu"><i class="fa-solid fa-bars open-menu-icon"></i></h5>
+                            <h5>Hello, Admin</h5>
+                        </div>
+                        <div class="d-flex">
+                            <p class="me-3"><a href="javascript:void(0)" onclick="spa.showPage('changePassword')"><i class="fa-solid fa-gear"></i></a></p>
+                            <p><i class="fa-solid fa-right-from-bracket"></i></p>
+                        </div>
+                    </div>
+
+
+                    <div class="main-dashboard" id="mainDashboard">
+                        <!-- DASHBOARD BOX -->
+                        <section class="dashboards" id="">
+                            <div class="container-fluid">
+                                <div class="dashboard-box">
+                                    <div class="">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('viewUsers')" class="box">
+                                            <div class="icon">
+                                                <i class="fas fa-users me-2"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5>Total Users</h5>
+                                                <h5>2</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocument')" class="box">
+                                            <div class="icon" style="background: goldenrod; color: #0A192F;">
+                                                <i class="fas fa-folder-open"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5>Total Document</h5>
+                                                <h5>1,000</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- <div class="">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('approveDocument')" class="box">
+                                            <div class="icon" style="background: #00BFFF; color: #0A192F;">
+                                                <i class="fa-solid fa-bell"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5>Approve Document</h5>
+                                                <h5>2</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('approveDocument')" class="box">
+                                            <div class="icon" style="background: #dc3545; color: #0A192F;">
+                                                <i class="fa-solid fa-bell"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5>Notifications</h5>
+                                                <h5>2</h5>
+                                            </div>
+                                        </a>
+                                    </div> -->
+                                    <!-- <div class="">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('viewPendingApproval')" class="box">
+                                            <div class="icon" style="background: #dc3545; color: #0A192F;">
+                                                <i class="fa-solid fa-bell"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5>Pending Approvals</h5>
+                                                <h5>2</h5>
+                                            </div>
+                                        </a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <!-- DASHBOARD TABLE1 -->
+                        <section class="dashboard-table" id="">
+                            <div class="container-fluid mt-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-header d-flex justify-content-between align-items-center text-white" style="background-color: #0A192F; width: 100% !important;">
+
+                                        <h5 class="mb-0">User <strong>Management</strong></h5>
+                                        <div>
+                                            <a href="javascript:void(0)" onclick="spa.showPage('addUser')" class="btn btn-light btn-sm">
+                                                <i class="fa fa-plus-circle me-1"></i> Add New User
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Phone</th>
+                                                    <th>Email</th>
+                                                    <th>Delete</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                                <i class="fas fa-user text-secondary"></i>
+                                                            </div>
+
+                                                            Michael Holz
+                                                        </div>
+                                                    </td>
+                                                    <td>07082058309</td>
+                                                    <td>michaelholz@gmail.com</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                                <i class="fas fa-user text-secondary"></i>
+                                                            </div>
+
+                                                            Paula Wilson
+                                                        </div>
+                                                    </td>
+                                                    <td>07082058309</td>
+                                                    <td>paulawilson@gmail.com</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                                <i class="fas fa-user text-secondary"></i>
+                                                            </div>
+
+                                                            Antonio Moreno
+                                                        </div>
+                                                    </td>
+                                                    <td>07082058309</td>
+                                                    <td>antoniomoreno@gmail.com</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                                <i class="fas fa-user text-secondary"></i>
+                                                            </div>
+
+                                                            Mary Saveley
+                                                        </div>
+                                                    </td>
+                                                    <td>07082058309</td>
+                                                    <td>marysaveley</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                                <i class="fas fa-user text-secondary"></i>
+                                                            </div>
+
+                                                            Martin Sommer
+                                                        </div>
+                                                    </td>
+                                                    <td>12/08/2017</td>
+                                                    <td>Moderator</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                            <i class="fas fa-trash-alt me-1"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer text-center mt-3">
+                                        <button class="btn-brand btn-brand-fit">View All</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <!-- ADD USERS -->
+                    <section class="add-user page" id="addUser">
+                        <div class="container mt-4">
+                            <h4>Add New User</h4>
+                            <div class="row gy-5">
+                                <!-- Left: Form Section -->
+                                <div class="col-lg-6">
+                                    <form>
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="Enter full name">
+                                        </div>
+
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone" placeholder="Enter phone number">
+                                        </div>
+
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                        </div>
+
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                                        </div>
+
+                                        <button type="submit" class="btn-brand">
+                                            <i class="fas fa-user-plus me-1"></i> Add User
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!-- Right: User List Section -->
+                                <div class="col-lg-6 mt-5 registered-users">
+                                    <h6 class="text-center fw-bold">Registered Users</h6>
+
+                                    <!-- Responsive wrapper -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover mt-2">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Jane Doe</td>
+                                                    <td>jane@example.com</td>
+                                                    <td class="text-success">
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John Smith</td>
+                                                    <td>john@example.com</td>
+                                                    <td class="text-danger">
+                                                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- VIEW ALL USERS -->
+                    <section class="view-users page" id="viewUsers">
+                        <div class="container-fluid mt-4">
+                            <div class="mb-3">
+                                <h4 class="fw-semibold mb-5">User Management</h4>
+
+                                <div class="row g-3">
+                                    <!-- New User Button -->
+                                    <div class="col-md-6">
+                                        <a href="javascript:void(0)" onclick="spa.showPage('addUser')" class="btn btn-light btn-sm">
+                                            <i class="fa fa-plus-circle me-1"></i> Add New User
+                                        </a>
+                                    </div>
+
+                                    <!-- Search Field -->
+                                    <div class="col-md-6">
+                                        <div class="search-user position-relative" style="width:70% ;">
+                                            <input type="text" class="form-control rounded-pill ps-4 pe-5" placeholder="Search for User" style="border: 1px solid #D7B5F9; padding: 1rem;">
+                                            <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Delete</th>
+                                                <th>Update</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-secondary"></i>
+                                                        </div>
+
+                                                        Michael Holz
+                                                    </div>
+                                                </td>
+                                                <td>07082058309</td>
+                                                <td>michaelholz@gmail.com</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-secondary"></i>
+                                                        </div>
+
+                                                        Paula Wilson
+                                                    </div>
+                                                </td>
+                                                <td>07082058309</td>
+                                                <td>paulawilson@gmail.com</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-secondary"></i>
+                                                        </div>
+
+                                                        Antonio Moreno
+                                                    </div>
+                                                </td>
+                                                <td>07082058309</td>
+                                                <td>antoniomoreno@gmail.com</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-secondary"></i>
+                                                        </div>
+
+                                                        Mary Saveley
+                                                    </div>
+                                                </td>
+                                                <td>07082058309</td>
+                                                <td>marysaveley</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2" style="width: 40px; height: 40px;">
+                                                            <i class="fas fa-user text-secondary"></i>
+                                                        </div>
+
+                                                        Martin Sommer
+                                                    </div>
+                                                </td>
+                                                <td>12/08/2017</td>
+                                                <td>Moderator</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteUserModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- ADD DOCUMENT -->
+                    <section class="add-document page" id="addDocument">
+                        <div class="container">
+                            <h5 class="text-center my-4 fw-bolder">Upload Document</h5>
+                            <div class="row gy-5">
+                                <!-- Left: Form Section -->
+                                <div class="col-lg-6">
+                                    <form>
+                                        <!-- Category -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="category" class="form-label">Select Category</label>
+                                            <select class="form-select" id="category" required>
+                                                <option value="" disabled selected>Select a category</option>
+                                                <option value="baptism">Baptism Certificate</option>
+                                                <option value="marriage">Marriage Certificate</option>
+                                                <option value="confirmation">Confirmation Certificate</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Name -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="fullName" class="form-label">Name on Document</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="Enter full name" required>
+                                        </div>
+
+                                        <!-- Name of Entity -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="fullName" class="form-label">Name of Entity/Person</label>
+                                            <input type="text" class="form-control" id="fullName" placeholder="Enter full name" required>
+                                        </div>
+
+                                        <!-- Event Date -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="eventDate" class="form-label">Date of Event</label>
+                                            <input type="date" class="form-control" id="eventDate" required>
+                                        </div>
+
+                                        <!-- Upload File -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="uploadFile" class="form-label">Upload Document (PDF/Image)</label>
+                                            <input type="file" class="form-control" id="uploadFile" accept=".pdf, .jpg, .jpeg, .png" required>
+                                        </div>
+
+                                        <!-- Additional Notes (Optional) -->
+                                        <div class="inputs inputs-border mb-3">
+                                            <label for="notes" class="form-label">Additional Notes (Optional)</label>
+                                            <textarea class="form-control" id="notes" rows="3" placeholder="e.g., Witness"></textarea>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn-brand">Upload Document</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Right: User List Section -->
+                                <div class="col-lg-6 mt-5 registered-users">
+                                    <h6 class="text-center fw-bold">Recently added document</h6>
+
+                                    <!-- Responsive wrapper -->
+                                    <div class="card shadow-sm">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover mt-2">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Document Name</th>
+                                                        <th>Date</th>
+                                                        <th>View</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                <a href="#" target="_blank" class="text-decoration-none fw-medium">Eneh Amarachi Elizabeth.pdf</a>
+                                                            </div>
+                                                        </td>
+                                                        <td>12/08/2017</td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                <button class="btn btn-outline-primary btn-sm">
+                                                                    <i class="fas fa-eye"></i> View
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                <a href="#" target="_blank" class="text-decoration-none fw-medium">Odoh Prisca Nwachukwu.pdf.pdf</a>
+                                                            </div>
+                                                        </td>
+                                                        <td>12/08/2017</td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                <button class="btn btn-outline-primary btn-sm">
+                                                                    <i class="fas fa-eye"></i> View
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="card-footer text-center mt-3">
+                                                <a href="javascript:void(0)" onclick="spa.showPage('viewDocument')">
+                                                    <button class="btn-brand btn-brand-fit py-2">View All</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- VIEW DOCUMENT -->
+                    <section class="view-documnet page" id="viewDocument">
+                        <div class="container-fluid mt-4">
+                            <h4 class="fw-semibold mb-5">All Document</h4>
+                            <div class="row g-2 align-items-end mb-3">
+                                <!-- Search Input -->
+                                <div class="col-md-6 col-lg-4">
+                                    <label for="searchInput" class="form-label fw-semibold">Search by Name</label>
+                                    <input type="text" id="searchInput" class="form-control py-2" placeholder="Enter name or keyword" />
+                                </div>
+
+                                <!-- Filter: Category -->
+                                <div class="col-md-3 col-lg-3">
+                                    <label for="categoryFilter" class="form-label fw-semibold">Filter by Category</label>
+                                    <select id="categoryFilter" class="form-select py-2">
+                                        <option value="">All Categories</option>
+                                        <option value="baptism">Baptism Certificate</option>
+                                        <option value="marriage">Marriage Certificate</option>
+                                        <option value="confirmation">Confirmation Certificate</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter: Year -->
+                                <div class="col-md-3 col-lg-2">
+                                    <label for="yearFilter" class="form-label fw-semibold">Filter by Year</label>
+                                    <select id="yearFilter" class="form-select py-2">
+                                        <option value="">All Years</option>
+                                        <option>2025</option>
+                                        <option>2024</option>
+                                        <option>2023</option>
+                                        <option>2022</option>
+                                    </select>
+                                </div>
+
+                                <!-- Search Button -->
+                                <div class="col-md-6 col-lg-3 mt-2 mt-md-0">
+                                    <button class="btn-brand py-2 w-100">
+                                        <i class="fas fa-search me-1"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Document Name</th>
+                                                <th>Catgory</th>
+                                                <th>Date</th>
+                                                <th>View Document</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Eneh Amarachi Elizabeth.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Baptism</td>
+                                                <td>12/08/2017</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Odoh Prisca Nwachukwu.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Confirmation</td>
+                                                <td>12/08/2017</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Onyekachi Uche Joseph.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Baptism</td>
+                                                <td>06/01/1998</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Uba Mary Chizoba.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Marriage</td>
+                                                <td>07/08/1999</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Ozoemena Paul Ifeanyi.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Confirmation</td>
+                                                <td>05/07/1999</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                        </tbody>
+
+                                    </table>
+                                    <!-- Pagination UI -->
+                                    <nav>
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- VIEW DOCUMENT DETAILS -->
+                    <section class="view-document-details page" id="viewDocumentDetails">
+                        <div class="container mt-5">
+                            <h4 class="mb-4 fw-bold">View Document</h4>
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="row g-4">
+                                        <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Category</label>
+                                            <p class="mb-0 text-wrap">Baptism Certificate</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Name of Person/Entity</label>
+                                            <p class="mb-0 text-wrap">Johnathan Emmanuel Chukwu Okonkwo</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Date of Event</label>
+                                            <p class="mb-0 text-wrap">12/04/2022</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Note</label>
+                                            <p class="mb-0 text-wrap">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur, tempora. </p>
+                                        </div>
+
+                                        <!-- <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Witness/Sponsors</label>
+                                            <p class="mb-0 text-wrap">Mary Johnson, Peter Paul, Angela Anuforo</p>
+                                        </div>
+                        
+                                        <div class="col-6 col-md-6 col-lg-4">
+                                            <label class="form-label fw-semibold">Address</label>
+                                            <p class="mb-0 text-wrap">No. 15 Church Street, New Layout, Owerri, Imo State</p>
+                                        </div> -->
+                                    </div>
+                                    <div class="my-4">
+                                        <label class="fw-semibold">Uploaded Document:</label>
+                                        <div class="border rounded p-3 bg-light d-flex justify-content-between">
+                                            <div>
+                                                <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                <a href="#" target="_blank" class="text-decoration-none fw-medium">Eneh Amarachi Elizabeth.pdf</a>
+                                            </div>
+                                            <div>
+                                                <button class="btn-brand btn-brand-bg py-2" data-bs-toggle="modal" data-bs-target="#viewImageModal">
+                                                    <i class="fas fa-image me-1"></i> View Image
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocument')" class="btn-brand btn-brand-outline py-2">
+                                        <i class="fas fa-arrow-left me-1"></i> Back to Documents
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- UPDATE DOCUMENT -->
+                    <section class="update-document page" id="updateDocumnet">
+                        <div class="container-fluid mt-4">
+                            <h4 class="fw-semibold mb-5">Update Document</h4>
+                            <div class="row g-2 align-items-end mb-3">
+                                <!-- Search Input -->
+                                <div class="col-md-6 col-lg-4">
+                                    <label for="searchInput" class="form-label fw-semibold">Search by Name</label>
+                                    <input type="text" id="searchInput" class="form-control py-2" placeholder="Enter name or keyword" />
+                                </div>
+
+                                <!-- Filter: Category -->
+                                <div class="col-md-3 col-lg-3">
+                                    <label for="categoryFilter" class="form-label fw-semibold">Filter by Category</label>
+                                    <select id="categoryFilter" class="form-select py-2">
+                                        <option value="">All Categories</option>
+                                        <option value="baptism">Baptism Certificate</option>
+                                        <option value="marriage">Marriage Certificate</option>
+                                        <option value="confirmation">Confirmation Certificate</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter: Year -->
+                                <div class="col-md-3 col-lg-2">
+                                    <label for="yearFilter" class="form-label fw-semibold">Filter by Year</label>
+                                    <select id="yearFilter" class="form-select py-2">
+                                        <option value="">All Years</option>
+                                        <option>2025</option>
+                                        <option>2024</option>
+                                        <option>2023</option>
+                                        <option>2022</option>
+                                    </select>
+                                </div>
+
+                                <!-- Search Button -->
+                                <div class="col-md-6 col-lg-3 mt-2 mt-md-0">
+                                    <button class="btn-brand py-2 w-100">
+                                        <i class="fas fa-search me-1"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Document Name</th>
+                                                <th>Authorized By</th>
+                                                <th>Date</th>
+                                                <th>Edit Document</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Eneh Amarachi Elizabeth.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Mark O.</td>
+                                                <td>12/08/2017</td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editDocumentModal">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Odoh Prisca Nwachukwu.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Francis Obi.</td>
+                                                <td>12/08/2017</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Onyekachi Uche Joseph.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Daniel Uchechukwu</td>
+                                                <td>06/01/1998</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Uba Mary Chizoba.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Francis Obi</td>
+                                                <td>07/08/1999</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Ozoemena Paul Ifeanyi.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Daniel Uchechukwu</td>
+                                                <td>05/07/1999</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                        <button class="btn btn-outline-primary btn-sm">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr> -->
+                                        </tbody>
+
+                                    </table>
+                                    <!-- Pagination UI -->
+                                    <nav>
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <!-- DELETE DOCUMENT -->
+                    <section class="delete-document page" id="deleteDocument">
+                        <div class="container-fluid mt-4">
+                            <h4 class="fw-semibold mb-5">Update Document</h4>
+                            <div class="row g-2 align-items-end mb-3">
+                                <!-- Search Input -->
+                                <div class="col-md-6 col-lg-4">
+                                    <label for="searchInput" class="form-label fw-semibold">Search by Name</label>
+                                    <input type="text" id="searchInput" class="form-control py-2" placeholder="Enter name or keyword" />
+                                </div>
+
+                                <!-- Filter: Category -->
+                                <div class="col-md-3 col-lg-3">
+                                    <label for="categoryFilter" class="form-label fw-semibold">Filter by Category</label>
+                                    <select id="categoryFilter" class="form-select py-2">
+                                        <option value="">All Categories</option>
+                                        <option value="baptism">Baptism Certificate</option>
+                                        <option value="marriage">Marriage Certificate</option>
+                                        <option value="confirmation">Confirmation Certificate</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter: Year -->
+                                <div class="col-md-3 col-lg-2">
+                                    <label for="yearFilter" class="form-label fw-semibold">Filter by Year</label>
+                                    <select id="yearFilter" class="form-select py-2">
+                                        <option value="">All Years</option>
+                                        <option>2025</option>
+                                        <option>2024</option>
+                                        <option>2023</option>
+                                        <option>2022</option>
+                                    </select>
+                                </div>
+
+                                <!-- Search Button -->
+                                <div class="col-md-6 col-lg-3 mt-2 mt-md-0">
+                                    <button class="btn-brand py-2 w-100">
+                                        <i class="fas fa-search me-1"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Document Name</th>
+                                                <th>Authorized By</th>
+                                                <th>Date</th>
+                                                <th>Edit Document</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div>
+                                                        <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                        <a href="#" target="_blank" class="text-decoration-none fw-medium">Eneh Amarachi Elizabeth.pdf</a>
+                                                    </div>
+                                                </td>
+                                                <td>Rev. Father Mark O.</td>
+                                                <td>12/08/2017</td>
+                                                <td>
+                                                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteDocumentModal">
+                                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                                    <td>1</td>
+                                                                    <td>
+                                                                        <div>
+                                                                            <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                            <a href="#" target="_blank" class="text-decoration-none fw-medium">Odoh Prisca Nwachukwu.pdf</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Rev. Father Francis Obi.</td>
+                                                                    <td>12/08/2017</td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                            <button class="btn btn-outline-primary btn-sm">
+                                                                                <i class="fas fa-eye"></i> View
+                                                                            </button>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>
+                                                                        <div>
+                                                                            <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                            <a href="#" target="_blank" class="text-decoration-none fw-medium">Onyekachi Uche Joseph.pdf</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Rev. Father Daniel Uchechukwu</td>
+                                                                    <td>06/01/1998</td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                            <button class="btn btn-outline-primary btn-sm">
+                                                                                <i class="fas fa-eye"></i> View
+                                                                            </button>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>
+                                                                        <div>
+                                                                            <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                            <a href="#" target="_blank" class="text-decoration-none fw-medium">Uba Mary Chizoba.pdf</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Rev. Father Francis Obi</td>
+                                                                    <td>07/08/1999</td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                            <button class="btn btn-outline-primary btn-sm">
+                                                                                <i class="fas fa-eye"></i> View
+                                                                            </button>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>
+                                                                        <div>
+                                                                            <i class="fas fa-file-pdf fa-lg text-danger me-2"></i>
+                                                                            <a href="#" target="_blank" class="text-decoration-none fw-medium">Ozoemena Paul Ifeanyi.pdf</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>Rev. Father Daniel Uchechukwu</td>
+                                                                    <td>05/07/1999</td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentDetails')">
+                                                                            <button class="btn btn-outline-primary btn-sm">
+                                                                                <i class="fas fa-eye"></i> View
+                                                                            </button>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr> -->
+                                        </tbody>
+
+                                    </table>
+                                    <!-- Pagination UI -->
+                                    <nav>
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- ADD DOCUMENT CATEGORY -->
+                    <section class="add-category page" id="addCategory">
+                        <div class="container my-5">
+                            <div class="mb-4">
+                                <div class="mb-5">
+                                    <h3>Manage Document Categories</h3>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn-brand btn-brand-fit py-2" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                        <i class="fa fa-plus-circle me-1"></i> Add New Category
+                                    </button>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Category Name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Baptism</td>
+                                        <td>
+                                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editCategoryModal">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteCategoryModal">
+                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Comfirmation</td>
+                                        <td>
+                                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editCategoryModal">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteCategoryModal">
+                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+
+
+                    <!-- APPROVE DOCUMENT -->
+                    <section class="approve-document page" id="approveDocument">
+                        <div class="container my-5">
+                            <h3 class="mb-4">Approve Document Requests</h3>
+                            <table class="table table-hover table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Requested Action</th>
+                                        <th>Requested By</th>
+                                        <th>Date</th>
+                                        <th>View Changes</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Baptism Certificate.pdf</td>
+                                        <td>Update</td>
+                                        <td>John Doe</td>
+                                        <td>2025-04-10</td>
+                                        <td>
+                                            <a href="javascript:void(0)" onclick="spa.showPage('viewDocumentChange')">
+                                                <button class="btn btn-outline-primary btn-sm">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm">Approve</button>
+                                            <button class="btn btn-danger btn-sm">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+
+
+                    <!-- VIEW DOCUMENT CHANGE -->
+                    <section class="view-document-changes page" id="viewDocumentChange">
+                        <div class="container mt-5">
+                            <h4 class="mb-4">View Document Changes</h4>
+                            <!-- Additional Info -->
+                            <div class="card my-4 border-secondary-color">
+                                <div class="card-header bg-secondary-color text-white">
+                                    <strong>User's Note to Admin</strong>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-0">I corrected the full name to match what is on the certificate and updated the priest’s name to the correct spelling. I also changed the date to the accurate baptism date.</p>
+                                </div>
+                            </div>
+
+                            <!-- Document Info Section -->
+                            <div class="row g-4">
+                                <!-- Old Info -->
+                                <div class="col-lg-6">
+                                    <div class="card border-primary-color h-100">
+                                        <div class="card-header bg-primary-color text-white">
+                                            <strong>Old Document Info</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <p><strong>Full Name:</strong> Eneh Amarachi Elizabeth</p>
+                                            <p><strong>Category:</strong> Baptism Certificate</p>
+                                            <p><strong>Date of Event:</strong> 12/08/2017</p>
+                                            <p><strong>Authorized By:</strong> Rev. Father Mark O.</p>
+                                            <p><strong>Address:</strong> St. John's Catholic Church, Owerri</p>
+                                            <p><strong>Witness/Sponsors:</strong> Mr. Chinedu & Mrs. Adaobi</p>
+                                            <p><strong>Document (PDF):</strong>
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#oldImageModal"><i class="fas fa-file-pdf fa-lg text-danger me-2"></i>View Document</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- New Info -->
+                                <div class="col-lg-6">
+                                    <div class="card border-primary-color h-100">
+                                        <div class="card-header bg-primary-color text-white">
+                                            <strong>Proposed Changes</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <p><strong>Full Name:</strong> Eneh Amarachi E.</p>
+                                            <p><strong>Category:</strong> Baptism Certificate</p>
+                                            <p><strong>Date of Event:</strong> 15/08/2017</p>
+                                            <p><strong>Authorized By:</strong> Rev. Father M. Okoro</p>
+                                            <p><strong>Address:</strong> Holy Trinity Catholic Church, Owerri</p>
+                                            <p><strong>Witness/Sponsors:</strong> Mr. Chinedu & Miss Amaka</p>
+                                            <p><strong>Document (PDF):</strong>
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#newImageModal"><i class="fas fa-file-pdf fa-lg text-danger me-2"></i>View Document</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-center gap-3 my-4">
+                                <button class="btn btn-success px-4"><i class="fas fa-check"></i> Approve Changes</button>
+                                <button class="btn btn-danger px-4"><i class="fas fa-times"></i> Decline Changes</button>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+
+                    <!-- VIEW PENDING APPROVAL-->
+                    <section class="view-pending-approval page" id="viewPendingApproval">
+                        <div class="container my-5">
+                            <h3 class="mb-4">Pending Document Approvals</h3>
+                            <table class="table table-hover table-striped">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Document Name</th>
+                                        <th>Requested Action</th>
+                                        <th>Requested By</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Marriage Certificate.pdf</td>
+                                        <td>Delete</td>
+                                        <td>Jane Smith</td>
+                                        <td>2025-04-12</td>
+                                        <td>
+                                            <button class="btn btn-outline-secondary">Cancel
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+
+
+                    <!-- CHANGE PASSWORD -->
+                    <section class="change-password page" id="changePassword">
+                        <div class=" container mt-5" style="max-width: 500px;">
+                            <div class="card shadow-sm">
+                                <div class="card-header text-white" style="background-color: #343a40;">
+                                    <h5 class="mb-0">Change Password</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="inputs mb-3">
+                                            <label for="currentPassword" class="form-label">Current Password</label>
+                                            <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password" required>
+                                        </div>
+                                        <div class="inputs mb-3">
+                                            <label for="newPassword" class="form-label">New Password</label>
+                                            <input type="password" class="form-control" id="newPassword" placeholder="Enter new password" required>
+                                        </div>
+                                        <div class="inputs mb-3">
+                                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password" required>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn-brand">Update Password</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Edit User Modal -->
+        <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form id="editUserForm">
+                        <div class="modal-body">
+                            <div class="inputs mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" placeholder="Enter full name">
+                            </div>
+                            <div class="inputs mb-3">
+                                <label for="editEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="editEmail" placeholder="Enter email">
+                            </div>
+                            <div class="inputs mb-3">
+                                <label for="editPhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="editPhone" placeholder="Enter phone number">
+                            </div>
+                            <div class="inputs mb-3">
+                                <label for="editPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="editPassword" placeholder="Enter new password">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn-brand btn-brand-fit btn-brand-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn-brand btn-brand-fit">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDIT CATEGORY MODAL -->
+        <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form id="editCategoryForm">
+                        <div class="modal-body">
+                            <div class="inputs mb-3">
+                                <label for="editCategory" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="editCategory" placeholder="Category name">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn-brand btn-brand-fit btn-brand-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn-brand btn-brand-fit">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- EDIT DOCUMENT MODAL -->
+        <div class="modal fade" id="editDocumentModal" tabindex="-1" aria-labelledby="editDocumentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editDocumentModalLabel">Edit Document</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form>
+                        <div class="modal-body">
+                            <div class="inputs mb-3">
+                                <label for="editCategory" class="form-label">Category</label>
+                                <select class="form-select" id="editCategory">
+                                    <option selected disabled>Select category</option>
+                                    <option value="baptism">Baptism Certificate</option>
+                                    <option value="marriage">Marriage Certificate</option>
+                                    <option value="confirmation">Confirmation Certificate</option>
+                                    <!-- Add more if needed -->
+                                </select>
+                            </div>
+
+                            <div class="inputs mb-3">
+                                <label for="editFullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="editFullName" placeholder="Enter name on document">
+                            </div>
+
+                            <div class="inputs mb-3">
+                                <label for="editDate" class="form-label">Date of Event</label>
+                                <input type="date" class="form-control" id="editDate">
+                            </div>
+
+                            <div class="inputs mb-3">
+                                <label for="editAuthorizedBy" class="form-label">Authorized By</label>
+                                <input type="text" class="form-control" id="editAuthorizedBy" placeholder="Priest, Pastor, Lawyer, etc.">
+                            </div>
+
+                            <div class="inputs mb-3">
+                                <label for="editDocumentFile" class="form-label">Upload New Document (Optional)</label>
+                                <input type="file" class="form-control" id="editDocumentFile">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn-brand btn-brand-fit btn-brand-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn-brand btn-brand-fit">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--VIEW DOCUMENT IMAGE MODAL-->
+        <div class="modal fade" id="viewImageModal" tabindex="-1" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewImageModalLabel">Document Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="../assets/img/baptism-card.jpg" alt="Document Image" class="img-fluid rounded shadow-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- COMFIRM DELETE USER Modal -->
+        <div class="modal fade" id="confirmDeleteUserModal" tabindex="-1" aria-labelledby="confirmDeleteUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="confirmDeleteUserModalLabel">Confirm</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Are you sure you want to delete this user?</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- COMFIRM DELETE DOCUMENT Modal -->
+        <div class="modal fade" id="confirmDeleteDocumentModal" tabindex="-1" aria-labelledby="confirmDeleteDocumentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="confirmDeleteDocumentModalLabel">Confirm</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Are you sure you want to delete this Document?</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- ADD DOCUMENT CATEGORY MODAL -->
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="inputs mb-3">
+                                <label for="categoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName" placeholder="Enter category name">
+                            </div>
+                            <button type="submit" class="btn-brand btn-brand-fit py-2">Add Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- COMFIRM DELETE CATEGORY MODAL -->
+        <div class="modal fade" id="confirmDeleteCategoryModal" tabindex="-1" aria-labelledby="confirmDeleteCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="confirmDeleteCategoryModalLabel">Confirm</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Are you sure you want to delete this Category?</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- APPROVE DOCUMENT CHANGES OLD IMAGE MODAL-->
+        <div class="modal fade" id="oldImageModal" tabindex="-1" aria-labelledby="oldImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Old Document Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="old-doc-image.jpg" alt="Old Document" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPROVE DOCUMENT CHANGES NEW IMAGE MODAL -->
+        <div class="modal fade" id="newImageModal" tabindex="-1" aria-labelledby="newImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Updated Document Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="new-doc-image.jpg" alt="New Document" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+    <script>
+        // OPEN SIDEBAR / CLOSE SIDEBAR
+        const openMenu = document.getElementById('open-menu');
+
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('sidebar-toggle-width');
+
+            const openMenuIcon = openMenu.querySelector('.open-menu-icon');
+
+            if (openMenuIcon.classList.contains('fa-bars')) {
+                openMenuIcon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                openMenuIcon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+
+        openMenu.addEventListener('click', (e) => {
+            toggleMenu()
+        });
+
+
+
+        // SIDEBAR MENU DROPDOWN
+        var dropdown = document.getElementsByClassName("dropdown-button");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+
+        // ADD ACTIVE CLASS TO SIDEBAR LINKS
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebarLinks = document.querySelectorAll(".sidebar-link");
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener("click", function () {
+                    toggleMenu()
+                    // Remove 'active' from all sidebar links
+                    sidebarLinks.forEach(link => link.classList.remove("active"));
+
+                    // Add 'active' to the clicked link
+                    this.classList.add("active");
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!--Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</body>
+
+</html>

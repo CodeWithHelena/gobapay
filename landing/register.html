@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Register</title>
+    <link rel="stylesheet" href="assets/css/general.css">
+</head>
+<body>
+    <main>
+        <section class="register bg-cover">
+            <div class="register-container">
+                <div class="brand-logo p-3"><a href="/landing/"><img src="assets/img/logo__2.png" alt=""></a></div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-wrapper">
+                            <div class="title">
+                                <h4>Create Account</h4>
+                            </div>
+                            <form class="form" >
+                                <div>
+                                    <input type="text" name="first_name" placeholder="First Name" id="first_name">
+                                </div>
+                                <div>
+                                    <input type="text" name="middle_name" placeholder="Middle Name" id="middle_name">
+                                </div>
+                                <div>
+                                    <input type="text" name="last_name" placeholder="Last Name" id="last_name">
+                                </div>
+                                <div>
+                                    <input type="number" name="phone" placeholder="Phone" id="phone">
+                                </div>
+                                <div>
+                                    <input type="email" name="email" placeholder="Email" id="email">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <p class="">Male</p>
+                                    <input type="radio" name="gender" id="male">
+                                    <p class="ms-3">Female</p>
+                                    <input type="radio" name="gender" id="female">
+                                </div>
+                                  
+                                <div>
+                                     
+                                <select class="custom-select" id="country">
+                                    <option value="NG">Nigeria</option>
+                                    <option value="GH">Ghana</option>
+                                    <option value="CM">Cameroon</option>
+                                </select>
+                                </div>                             
+                                <div>
+                                    <input type="text" name="address" placeholder="Address" id="address">
+                                </div>
+                                <div>
+                                    <input type="number" name="bvn" placeholder="BVN Number" id="bvn">
+                                </div>
+                                <div>
+                                    <input type="text" name="businessName" placeholder="Business Name" id="businessName">
+                                </div>
+                                <div>
+                                    <input type="password" name="password" placeholder="Password" id="password">
+                                </div>
+                                <div>
+                                    <input type="password" name="repeat_password" placeholder="Repeat Password" id="repeat_password">
+                                </div>
+                                <div>
+                                    <p class="form-text">Already have an account? <a href="login.html" class="">Login</a></p>
+                                </div>
+                                <div class="register-btn mt-2">
+                                    <button type="button" id="registerBtn" class="btn-brand">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 bg-wrapper">
+                        <div class="register-bg bg-cover">
+                            <div>
+                                <p>Welcome to <span class="gobapay">Gobapay</span>
+                                    <span class="welcome-message">Open a new account</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+         <div class="message-container">
+            <div id="toast-container"></div>
+        </div>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     <!--Jquery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script type="module" src="assets/js/auth/register.js"></script>
+</body>
+</html>

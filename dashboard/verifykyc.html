@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Boostrap 5.3.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Iconify Script -->
+	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="assets/js/auth.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <main>
+      <div class="dashboard-container">
+        <div class="dashboard">
+            <div id="sidebar_container">
+                <!-- Sidebar Goes Here -->
+            </div>
+            <script src="assets/js/sidebar.js"></script>
+            
+            <main class="main-content" style="background: #fff;">
+
+              <div class="title d-flex justify-content-center align-items-center">
+                <h5 class="sm-title">Verify Kyc</h5>
+              </div>
+              
+              <section class="verify-kyc">
+                <div class="container-fluid">
+                    <div class="text-center">
+                        <div class="img"><img src="assets/img/kyc-icon.png" alt="" width="100px"></div>
+                        <div class="text">
+                            <p>To keep your account secure and fully functional, please complete your KYC verification by uploading valid identification documents</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="verify-content-left">
+                                <div class="input-box d-flex justify-content-between">
+                                    <div class="text">
+                                        <p>National Indentification Number (NIN)</p>
+                                        <p>Enter your unique NIN number</p>
+                                    </div>
+                                    <div>
+                                        <input type="number"class="nin-number" name="" id="" placeholder="NIN">
+                                    </div>
+                                </div>
+                                <div class="input-box d-flex justify-content-between">
+                                    <div class="text">
+                                        <p>Upload NIN Document</p>
+                                        <p>Add your NIN Document</p>
+                                    </div>
+                                    <div class="file-upload">
+                                        <input type="file" id="ninFileInput">
+                                        <label for="ninFileInput" id="ninFileLabel">Select Document</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-box d-flex justify-content-between mt-3">
+                                    <div class="text">
+                                        <p>Upload Passport</p>
+                                        <p>Add a passport photograph</p>
+                                    </div>
+                                    <div class="file-upload">
+                                        <input type="file" id="passportFileInput">
+                                        <label for="passportFileInput" id="passportFileLabel">Select Photo</label>
+                                    </div>                            </div>
+                               
+
+                                <div class="d-flex justify-content-center"><button class="submitBtn">Submit All Document</button></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </main>
+          </div>
+      </div>
+
+
+         
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+      <!--Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+         const fileInputs = [
+                { inputId: 'ninFileInput', labelId: 'ninFileLabel' },
+                { inputId: 'passportFileInput', labelId: 'passportFileLabel' }
+            ];
+
+            fileInputs.forEach(({ inputId, labelId }) => {
+                const input = document.getElementById(inputId);
+                const label = document.getElementById(labelId);
+
+                input.addEventListener('change', () => {
+                    label.textContent = input.files.length > 0 ? input.files[0].name : 'Select Document';
+                });
+            });
+    </script>
+
+
+</body>
+</html>
