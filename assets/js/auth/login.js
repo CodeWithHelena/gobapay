@@ -1,5 +1,5 @@
 import { showToast } from '../../../../dashboard/assets/js/message.js'
-
+//import { showToast } from '../../../dashboard/'
 //showToast('Session Expired. Login to continue', 'warning');
 // LOGIN VALIDATION 
 
@@ -63,7 +63,7 @@ const BASE_URL = 'https://gobapay.onrender.com/api';
         if (data.success) {
             localStorage.setItem('authToken', data.token);
             showToast(`${data.message || 'Login Successful. Redirecting...'}`, "success");
-            location.href = '../dashboard/index.html';
+            location.href = '../../../dashboard/';
         } else {
             showToast(`${data.message || 'Login failed.'}`, "danger");
         }

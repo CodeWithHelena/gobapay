@@ -134,7 +134,7 @@ const fetchUserProfile = async () => {
 
         document.getElementById('accountNumValue').textContent = user.beneficiaryAccountNumber;
         document.getElementById('tierValue').textContent = user.tier.level > 0 ? `Tier ${user.tier.level}` : " ";
-        document.getElementById('fullNameValue').textContent = user.fullName;
+        document.getElementById('fullNameValue').textContent = user.fullName || "Loading..";
         document.getElementById('phoneNumValue').textContent = user.phone;
         document.getElementById('genderValue').textContent = user.gender;
         document.getElementById('dobValue').textContent = user.dob;
