@@ -63,7 +63,9 @@ const BASE_URL = 'https://gobapay.onrender.com/api';
         if (data.success) {
             localStorage.setItem('authToken', data.token);
             showToast(`${data.message || 'Login Successful. Redirecting...'}`, "success");
-            location.href = '../../../dashboard/';
+            setTimeout(() => {
+                location.href = '../../../dashboard/';
+            }, 3000);
         } else {
             showToast(`${data.message || 'Login failed.'}`, "danger");
         }

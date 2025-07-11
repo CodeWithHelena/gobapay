@@ -24,7 +24,7 @@ footer.innerHTML = `
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12 about">
-                        <a href="/landing/"><img src="assets/img/brand-logo.jpg" alt=""></a>
+                        <a href="/"><img src="assets/img/brand-logo.jpg" alt=""></a>
                         <p>Glittarz Online Business Account (Goba) is a brand which makes your business success our main priority. We aim to empower business owners and teach them the new strategies towards having a stress-free and successful business era.</p>
                         <p><span class="d-block fw-bold">Follow Us:</span></p>
                         <div class="socials d-flex">
@@ -37,20 +37,20 @@ footer.innerHTML = `
                     <div class="col-lg-2 col-md-6 col-12 quick-links">
                         <h4 class="mb-4">Quick Links</h4>
                         <div class="">
-                            <p><a href="register.html">Register</a></p>
-                            <p><a href="index.html#choose-us">Why Choose Us</a></p>
-                            <p><a href="branches.html">Our Branches</a></p>
-                            <p><a href="contact-us.html">Contact</a></p>
-                            <p><a href="index.html#faq">Faq</a></p>
+                            <p><a href="../auth/register.html">Register</a></p>
+                            <p><a href=".././index.html#choose-us">Why Choose Us</a></p>
+                            <p><a href=".././branches.html">Our Branches</a></p>
+                            <p><a href=".././contact-us.html">Contact</a></p>
+                            <p><a href=".././index.html#faq">Faq</a></p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-12 service">
                         <h4 class="mb-4">Our Pages</h4>
                         <div class="">
-                            <p><a href="company-policy.html">Company Policy</a></p>
+                            <p><a href=".././company-policy.html">Company Policy</a></p>
                             <p><a href="">Advanced Security</a></p>
-                            <p><a href="privacy-policy.html">Privacy Policy</a></p>
-                            <p><a href="termsof-service.html">Terms of Service</a></p>
+                            <p><a href=".././privacy-policy.html">Privacy Policy</a></p>
+                            <p><a href=".././termsof-service.html">Terms of Service</a></p>
                             <p><a href="">Making Transactions</a></p>
                         </div>
                     </div>

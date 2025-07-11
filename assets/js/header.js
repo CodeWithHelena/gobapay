@@ -3,15 +3,15 @@ const header = document.getElementById('header');
 header.innerHTML = `
     <header>
         <nav class="navba">
-            <div class="brand-logo"><a href="/landing/"><img src="assets/img/logo__2.png" alt=""></a></div>
+            <div class="brand-logo"><a href="/"><img src="/assets/img/logo__2.png" alt=""></a></div>
             <ul id="navba-links">
                 <div class="close-toggler">
                     <span class="iconify" data-icon="fa6-solid:xmark"  onclick="closeNavba()"></span>
                 </div>
-                <li class="navba-link active"><a href="/landing/" onclick="closeNavba()">HOME</a></li>
-                <li class="navba-link"><a href="about.html" onclick="closeNavba()">ABOUT US</a></li>
-                <li class="navba-link"><a href="index.html#faq" onclick="closeNavba()">FAQ</a></li>
-                <li class="navba-link"><a href="contact-us.html" onclick="closeNavba()">CONTACT</a></li>
+                <li class="navba-link active"><a href="/" onclick="closeNavba()">HOME</a></li>
+                <li class="navba-link"><a href=".././about.html" onclick="closeNavba()">ABOUT US</a></li>
+                <li class="navba-link"><a href=".././index.html#faq" onclick="closeNavba()">FAQ</a></li>
+                <li class="navba-link"><a href=".././contact-us.html" onclick="closeNavba()">CONTACT</a></li>
                 <li class="navba-link navba-btn mt-3">
                     <a href="login.html" class="btn-brand btn-brand-outline ms-4" onclick="closeNavba()">Login</a>
                     <a href="register.html" class=" btn-brand ms-2" onclick="closeNavba()">Get Started</a>

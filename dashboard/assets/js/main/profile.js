@@ -24,11 +24,11 @@ const fetchUserProfile = async () => {
         // ✅ Check if "success" is false
         if (!data.success) {
             if (data.error === "jwt expired") {
-                console.log("Session expired. Logging out...");
-                showToast('Session Expired. Login to continue', 'warning');
+                console.log("Session of profile expired . Logging out...");
+                showToast('Session of profile expired Expired. Login to continue', 'warning');
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../../login.html";
                 }, 3500);
                 return;
             }else if(data.error === "invalid token"){
@@ -36,7 +36,7 @@ const fetchUserProfile = async () => {
                 showToast('Invalid Session Id.', 'danger')
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../../login.html";
                 }, 3500);
                 return;
             } 

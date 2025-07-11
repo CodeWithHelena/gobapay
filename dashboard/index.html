@@ -15,8 +15,7 @@
 	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/modal.css">
-    
-    <script src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
   
     <style>
         
@@ -30,13 +29,13 @@
             <div id="sidebar_container">
               <!-- Sidebar Goes Here -->
             </div>
-            <script src="assets/js/sidebar.js"></script>
+            <script type="module" src="assets/js/sidebar.js"></script>
           
             <main class="main-content" style="background: #fff;">
               <header class="header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="img me-2"><a href="profile.html"><img src="assets/img/profile-icon.png" alt=""></a></div>
-                <h4"><a href="profile.html">Hi <span id="username">Amarachi</span></a></h4>
+                <h4><a href="profile.html"> <span id="username" class="skeleton" style="width: 100px; padding: 0 1rem;">Hi User</span></a></h4>
                 </div>
                 <!-- <input type="text" placeholder="Search here..."> -->
                  <div class="d-flex">
@@ -120,7 +119,18 @@
           
               <section class="transactions">
                 <h5>Recent Transactions</h5>
-                <div class="transactions-wrapper">
+                <div class="transaction-card">
+                
+                  <div class="card-body">
+                    <div class="icon-circle">
+                      <i class="fas fa-rotate-right"></i>
+                      <span class="info-icon">!</span>
+                    </div>
+                    <h3>No transactions yet</h3>
+                    <p>After your first transaction, you will be able to view it here.</p>
+                  </div>
+                </div>
+               <!-- <div class="transactions-wrapper">
                     <div class="box d-flex justify-content-between align-items-center">
                         <div class="left-content d-flex">
                             <div class="icon"><span class="iconify arrow-up" data-icon="fluent:arrow-up-12-filled"></span></div>
@@ -173,7 +183,7 @@
                       <div class="success-message">Transaction Successful</div>
                   </div>
               </div>
-                </div>
+                </div> -->
                 
               </section>
             </main>
@@ -183,21 +193,22 @@
       <!-- MODAL -->
       <div class="custom-modal-overlay" id="custom-modal-overlay">
         <div class="custom-modal">
-            <div class="custom-modal-header">
+             <div class="custom-modal-header">
                 <div>
                     <h5 class="text-center">Add Money</h5>
                 </div>
                 <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
             </div>
+            
             <div class="custom-modal-content">
                 <div class="accountdetails-container">
                   <div class="">
                     <p>Account Name</p>
-                    <h6 class="fw-bold" id="account-name">Eneh Amarachi Elizabeth</h6>
+                    <h6 class="fw-bold skeleton" id="modalAccountName" style="width: 250px;"></h6>Eneh Amarachi Elizabeth</h6>
                   </div>
                   <div class="mt-2">
                     <p>Gobapay Account Number</p>
-                    <h6 class="fw-bold" id="account-number">23823754389</h6>
+                    <h6 class="fw-bold skeleton" id="modalAccountNumber" style="width: 150px;">23823754389</h6>
                   </div> 
                     
                 </div> 
@@ -211,6 +222,7 @@
     
                 
             </div>
+            
         </div>
     </div>
 

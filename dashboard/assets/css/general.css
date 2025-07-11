@@ -82,6 +82,62 @@ a{
   color: var(--bg-grey);
   padding: 1rem;
  }
+
+ .transaction-card .card-body {
+  max-width: 500px;
+   text-align: center;
+   padding-top: 4rem;
+ }
+
+ /* .transaction-card-lg .card-body {
+ 
+   text-align: center;
+   padding-top: 4rem;
+   background: red;
+ } */
+
+ .transaction-card .icon-circle {
+   position: relative;
+   width: 64px;
+   height: 64px;
+   margin: 0 auto 20px;
+   border-radius: 50%;
+   background-color: #f0f0f0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 24px;
+   color: #555;
+ }
+
+ .transaction-card .info-icon {
+   position: absolute;
+   bottom: 8px;
+   right: 10px;
+   font-size: 12px;
+   background: #ccc;
+   color: white;
+   border-radius: 50%;
+   width: 16px;
+   height: 16px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-weight: bold;
+ }
+
+ .transaction-card .card-body h3 {
+   font-size: 16px;
+   font-weight: 600;
+   color: #333;
+   margin-bottom: 10px;
+ }
+
+ .transaction-card .card-body p {
+   font-size: 13px;
+   color: #666;
+ }
+
 .sm-title{
   /* display: none; */
 }
@@ -186,6 +242,34 @@ section{
   cursor: pointer;
   margin-left: 10px;
 }
+
+
+/* SKELETON LOADING */
+.skeleton {
+  /* min-width: 200px; */
+  background-color: #eee ;
+  color: transparent;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  padding: .5rem .5rem;
+  height: 20px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #eee;
+  }
+
+  50% {
+    background-color: #ddd;
+  }
+
+  100% {
+    background-color: #eee;
+  }
+}
+
 
 body{
   /* background: var(--lite-secondary); */
@@ -486,16 +570,17 @@ section{
     #sidebar_container{
       width: 100%;
       height: fit-content;
-      bottom: 4rem;
+      bottom: 3.5rem;
       position: fixed;
       background: red;
+      z-index: 1000;
     }
 
     .sidebar {
       width: inherit;
       height: inherit;
       padding: .5rem 0;
-      background: #fff;
+      background: #fff !important;
       color: #535c5a;
       border-top: 1.5px solid var(--grey);
     }
@@ -551,29 +636,19 @@ section{
       display: none;
     }
 
-    /* .sidebar .sidebar-menu .settings{
-      width: fit-content;
-      position: static;
-      border-top:none;
-      padding: 0;
-    } */
-
     .sidebar .sidebar-menu .iconify{
       display: inline-block;
       color: var(--primary-color);
     }
 
     .main-content {
-      /* padding: 0.5rem; */
+
+  }
+}
+  @media (max-width: 640px) {
+    .dashboard .cards{
+      margin: .3rem;
     }
-/* 
-    .header input {
-      width: 100px;
-    } */
-
-    
-    
-
   }
 
 
@@ -592,7 +667,22 @@ section{
     font-size: 18px;
     font-weight: 600;
     border-radius: 30px;
+    animation: glowScale 2s infinite ease-in-out;
   }
+    /* Animation Keyframes */
+    @keyframes glowScale {
+  
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #9EDD05, 0 0 20px #9EDD05;
+      }
+  
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #648907, 0 0 15px #648907;
+      }
+    }
   .featured-item {
     width: 70%;
     /* border: 2px solid green; */
@@ -623,37 +713,49 @@ section{
   .featured-item .item .icon{
     width: 40px;
     height: 40px;
-    /* border: 2px solid red; */
-    /* padding: 1rem; */
     background: var(--primary-color);
     border-radius: 5px;
   }
 
   .featured-item .item .iconify{
-    
     display: inline-block;
     color: var(--secondary-color);
-    /* font-size: 2rem; */
   }
 
   @media (max-width: 640px) {
     .featured-wrapper{
       display: block !important;
       padding-top: 1rem;
+
     }
 
     .featured .verify-kyc{
-      margin:0 0 2rem 0;
+      margin:0 0 2rem .3rem;
     }
 
+    .featured-item {
+      width: 100%;
+    }
     .featured-item .item{
-      background: var(--lite-secondary);
       width: 85px;
       height: 85px;
-      border-radius: 10px;
   
     }
   }
+
+    @media (max-width: 460px) {
+      .featured-item {
+        width: 100%;
+      }
+  
+      .featured-item .item {
+        padding-top: 1rem;
+        padding-bottom: .6rem;
+        width: 75px;
+        height: 75px;
+  
+      }
+    }
 
 
 
@@ -723,6 +825,7 @@ section{
 }
 
 
+
 @media (max-width: 640px) {
   .transactions {
     background: #fff;
@@ -756,9 +859,26 @@ section{
   border: none;
   background: var(--bg-grey);
   outline: none;
-  
   padding: 1rem;
   border-radius: 10px;
+}
+
+.transfer-section .transfers .display-message{
+display: none;
+}
+.transfer-section .transfers .display-message p{
+  width: 97%;
+  margin: .5rem auto 0;
+  padding: .5rem 1rem ;
+  background: var(--peach);
+  border-radius: 10px;
+}
+.transfer-section .transfers .display-message .spanx{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #dc3545;
+  color: #fff;
 }
 
 .transfer-section .transfers p{
@@ -809,8 +929,11 @@ section{
   transform: translateY(0);
 }
 
-.transactions{
-  
+.transactions h5{
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .recent-transaction .box{
@@ -1350,8 +1473,19 @@ section{
   font-size: 14px;
   font-weight: 500;
 }
+/* .profile-section tr td .skeleton{
+  background: red;
+  margin-bottom:;
+  min-width: 250px !important;
+} */
 .profile-section .left-item{
   text-align: right;
+  display: flex;
+  justify-content: end;
+}
+
+.profile-section .left-item .skeleton{
+  width: 250px;
 }
 
 @media (max-width: 600px) {
@@ -1369,6 +1503,78 @@ section{
   font-size: 14px;
 }
 }
+
+
+/* RECEIPT.HTML */
+.receipt-section .receipt-wrapper {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem 1rem .1rem;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.receipt-section .receipt .message{
+  width: 60%;
+  margin: auto;
+  background: var(--secondary-color);
+  border-radius: 60px;
+  padding: .4rem;
+}
+
+.receipt-section .receipt .success-check{
+  background: var(--primary-color);
+  color: #ccc;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.receipt-section .receipt tr{
+  border-bottom: 1px solid #D1EDBF;
+}
+
+.receipt-section .receipt .left-item span{
+  display: block;
+}
+
+.receipt-section .receipt .bottom-content{
+  font-size: 14px;
+}
+.receipt-section .receipt .bottom-content a{
+  color: var(--dark-secondary);
+}
+.receipt-section .transaction-status{
+  padding-top: 3rem;
+}
+/* .receipt-section .transaction-box{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.receipt-section  .transaction-box .box{
+  border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1.5rem .1rem;
+}
+.receipt-section .transaction-box .icon{
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--lite-secondary);
+}
+.receipt-section .transaction-box .text{
+  font-size: 13px;
+  text-align: center;
+}
+
+.receipt-section .close-btn button{
+  width: 100%;
+  background: var(--dark-secondary);
+} */
+
+
 
 
 

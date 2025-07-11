@@ -1,8 +1,10 @@
+import { showToast } from './message.js';
+
 const sideBar = document.getElementById('sidebar_container');
 
 sideBar.innerHTML = `
      <aside class="sidebar">
-        <div class="brand-logo"><img src="assets/img/logo__2.png" alt=""></div>
+        <div class="brand-logo"><img src="assets/img/brand-logo2.jpg" alt=""></div>
           <ul class="sidebar-menu">
             <li>
               <a href="index.html" class="sidebar-link">
@@ -74,5 +76,32 @@ sideBar.innerHTML = `
     </aside>
 `
 
+//Handles Navdropdowns
+var dropdown = document.getElementsByClassName("dropdown-button");
+var i;
 
-console.log(sideBar)
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+
+//Logout Button
+const authToken = localStorage.getItem('authToken');
+const logoutBtn = document.getElementById('logoutBTN');
+
+logoutBtn.addEventListener('click', (e)=> {
+  e.preventDefault();
+  localStorage.removeItem(authToken);
+  showToast("loging Out...", "warning");
+          setTimeout(() => {
+              location.href = '../../auth/login.html';
+  }, 3000);
+})

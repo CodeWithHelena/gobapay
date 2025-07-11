@@ -110,7 +110,7 @@ const fetchUserProfile = async () => {
                 showToast('Session Expired. Login to continue', 'warning');
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../login.html";
                 }, 3500);
                 return;
             }else if(data.error === "invalid token"){
@@ -118,7 +118,7 @@ const fetchUserProfile = async () => {
                 showToast('Invalid Session Id.', 'danger')
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../login.html";
                 }, 3500);
                 return;
             } 
@@ -139,12 +139,14 @@ const fetchUserProfile = async () => {
         document.getElementById('genderValue').textContent = user.gender;
         document.getElementById('dobValue').textContent = user.dob;
         document.getElementById('emailValue').textContent = user.gender || "nothing";
+        
         document.getElementById('addressValue').textContent = user.gender || "nothing";
 
        
 
     } catch (error) {
         console.error('Error fetching user profile:', error.message);
+        
     }
 };
 

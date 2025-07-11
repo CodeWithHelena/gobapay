@@ -15,7 +15,7 @@
 	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/modal.css">
-    <script src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
     <style>
         
     </style>
@@ -28,7 +28,7 @@
             <div id="sidebar_container">
                 <!-- Sidebar Goes Here -->
             </div>
-            <script src="assets/js/sidebar.js"></script>
+            <script type="module" src="assets/js/sidebar.js"></script>
             
           
             <main class="main-content" style="background: #ffff;">
@@ -50,8 +50,19 @@
                                     <button class="tab-button" data-tab="tab2">Beneficiaries</button>
                                 </div>
                                 <div id="tab1" class="tab-content active">
+                                    <div class="transaction-card">
                                     
-                                    <div class="recent-transaction">
+                                        <div class="card-body">
+                                            <div class="icon-circle">
+                                                <i class="fas fa-rotate-right"></i>
+                                                <span class="info-icon">!</span>
+                                            </div>
+                                            <h3>No transactions yet</h3>
+                                            <p>After your first transaction, you will be able to view it here.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="recent-transaction">
                                         <div class="box">
                                             <div class="d-flex align-items-center">
                                                 <div class="bank-icon"><img src="assets/img/zenith.png" alt=""></div>
@@ -102,11 +113,18 @@
                                             </div>                                            
                                             <div class="dots"><span class="iconify" data-icon="mdi:dots-vertical"></span></div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div id="tab2" class="tab-content">
-                                    <!-- <h2>Tab 2 Content</h2> -->
-                                    <p>You Have Not Added Any Beneficiaries</p>
+                                    <div class="transaction-card">
+                                        <div class="card-body">
+                                            <div class="icon-circle">
+                                                <i class="fas fa-rotate-right"></i>
+                                                <span class="info-icon">!</span>
+                                            </div>
+                                            <p>You Have Not Added Any Beneficiaries</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +181,9 @@
       </div>
 
 
-         
+      <div class="message-container">
+        <div id="toast-container"></div>
+      </div>  
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     

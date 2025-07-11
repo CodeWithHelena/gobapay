@@ -32,7 +32,7 @@ const fetchUserDashboard = async () => {
                 showToast('Invalid Session Id.', 'danger')
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../login.html";
                 }, 3500);
                 return;
             } 
@@ -43,9 +43,18 @@ const fetchUserDashboard = async () => {
 
         const user = data.data;
         //Add user name in dashboard 
-        document.getElementById('username').textContent = user.firstName;
-        document.getElementById('account-name').textContent = user.firstName;
-        document.getElementById('account-number').textContent = user.beneficiaryAccountNumber;
+        // const usersName = document.getElementById('username').textContent = user.firstName;
+        // usersName.classList.remove('skeleton');
+
+        const usersName = document.getElementById('username');
+        const modalAccountName = document.getElementById('modalAccountName');
+        const modalAccountNumber = document.getElementById('modalAccountNumber');
+        const DetailsArr = [usersName, modalAccountName, modalAccountNumber];
+
+        DetailsArr.forEach(detail => detail.classList.remove('skeleton'));
+        usersName.textContent = user.firstName;
+        modalAccountName.textContent = user.firstName;
+        modalAccountNumber.textContent = user.beneficiaryAccountNumber;
         const userBalance =  user.balance;
 
         // User account balance

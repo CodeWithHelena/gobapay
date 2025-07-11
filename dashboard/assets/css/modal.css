@@ -116,6 +116,9 @@ body {
 .custom-modal-content .second-item{
     display: none;
 }
+.custom-modal-content .third-item {
+    display: none;
+}
 .custom-modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -305,6 +308,36 @@ td {
     /* margin-left: 1rem; */
 }
 
+/* Transaction Successful */
+ .transaction-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+ .transaction-box .box {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1.5rem .1rem;
+}
+
+.transaction-box .icon {
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--lite-secondary);
+}
+
+.transaction-box .text {
+    font-size: 13px;
+    text-align: center;
+}
+.transaction-box .receipt-section .close-btn button {
+    width: 100%;
+    background: var(--dark-secondary);
+}
+
 @media (max-width: 768px) {
     .accountdetails-container .btn-pay{
         width: 100%;
@@ -318,5 +351,20 @@ td {
     }
     .transfer-fund{
         margin-left: 1rem !important;
+    }
+}
+@media (max-width: 640px) {
+    .transaction-box{
+        margin: 0 .5rem;
+    }
+    .transaction-box .box {
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: .5rem .1rem;  
+         }
+    .transaction-box .box .text{
+        font-size: 12px;
+        width: 60px;
+        margin: auto;
     }
 }

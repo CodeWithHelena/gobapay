@@ -29,7 +29,7 @@
 		<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
 		<link rel="stylesheet" href="assets/css/general.css" />
 		<link rel="stylesheet" href="assets/css/modal.css" />
-		<script src="assets/js/auth.js"></script>
+		<script type="module" src="assets/js/auth.js"></script>
 		<style></style>
 	</head>
 	<body>
@@ -39,7 +39,7 @@
 					<div id="sidebar_container">
 						<!-- Sidebar Goes Here -->
 					</div>
-					<script src="assets/js/sidebar.js"></script>
+					<script type="module" src="assets/js/sidebar.js"></script>
 					
 
 					<main class="main-content" style="background: #ffff">
@@ -66,14 +66,14 @@
 												</div>
 												<div class="my-3">
 													<input
-														type="number"
+														type="password"
 														id="newPin"
 														placeholder="New Pin"
 													/>
 												</div>
 												<div>
 													<input
-														type="number"
+														type="password"
 														id="comfirmNewPin"
 														placeholder="Comfirm New Pin"
 													/>
@@ -95,6 +95,10 @@
 						</div>
 					</main>
 				</div>
+			</div>
+
+			<div class="message-container">
+				<div id="toast-container"></div>
 			</div>
 		</main>
 		<script
@@ -188,13 +192,15 @@
 							`${data.message || 'Pin Update Successfully'}`,
 							'success'
 						);
+
+						loginPassword = ' ';
+						newPin = ' '
+						comfirmNewPin = ' '
+						
+
 					} else {
 						showToast(`${data.error || 'Failed to update Pin'}`, 'danger');
 						alert('test');
-						localStorage.removeItem('authToken');
-						setTimeout(() => {
-							window.location.href = '../landing/login.html';
-						}, 3500);
 					}
 				} catch (error) {
 					//disableLoginBTN('remove');

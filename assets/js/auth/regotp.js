@@ -73,8 +73,10 @@ verifyOtpBtn.addEventListener('click', async (e) => {
 
         if (data.success) {
             showToast(`${data.message || "OTP Verified Successfully"}`, "success");
-            //location.href = "../login/index.html";
             console.log('otp verified')
+            setTimeout(() => {
+                location.href = '../../../dashboard/';
+            }, 3000);
         } else {
             showToast(`${data.message || "OTP Verification Failed"}`, "danger");
         }

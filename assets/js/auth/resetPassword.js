@@ -59,7 +59,10 @@ const resetPassword = document.getElementById('reset_password');
                     showToast(`${data.message || "Password Update Successfully"}`, "success");
                     //location.href = "reset-password-otp.html";
                     localStorage.removeItem('resetpaswordEmail');
-                    console.log('password update successfully ')
+                    console.log('password update successfully ');
+                    setTimeout(() => {
+                        location.href = "login.html";;
+                    }, 3000);
                 } else {
                     showToast(`${data.message || "Failed to update password"}`, "danger");
                 }

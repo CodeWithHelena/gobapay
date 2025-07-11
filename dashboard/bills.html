@@ -15,7 +15,7 @@
 	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/modal.css">
-    <script src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
     <style>
         
     </style>
@@ -28,7 +28,7 @@
             <div id="sidebar_container">
                 <!-- Sidebar Goes Here -->
             </div>
-            <script src="assets/js/sidebar.js"></script>
+            <script type="module" src="assets/js/sidebar.js"></script>
             
           
             <main class="main-content" style="background: #ffff;">
@@ -45,7 +45,7 @@
                         <div class="col-lg-6">
                            <div class="">
                                 
-                            <!-- <div class="box d-flex justify-content-between align-items-center">                                
+                            <div class="box d-flex justify-content-between align-items-center">                                
                                 <div class="content d-flex justify-content-between align-items-center">
                                     <div class="box-img me-2"><img src="assets/img/dstv-logo.jpg" alt=""></div>
                                     <div class="details">
@@ -85,10 +85,13 @@
                                     </div>
                                 </div>                                
                                 <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                            </div> -->
+                            </div>
+                            <div class="text-center fw-bolder">
+                                <h6>Coming Soon...</h3>
+                            </div>
 
 
-                            <div class="paybills">
+                            <!-- <div class="paybills">
                                 <div class="top-content d-flex justify-content-center align-items-center mb-5">
                                     <div class="img me-2"><img src="assets/img/dstv-logo.jpg" alt=""></div>
                                     <h6>Dstv</h6>
@@ -124,7 +127,7 @@
                                     </div>
                                 </div>
                                 <div class="btn-proceed"><button class="btn-brand">Proceed</button></div>
-                            </div>
+                            </div> -->
                                
                         </div>
                     </div>
@@ -135,8 +138,19 @@
                                 <button class="tab-button" data-tab="tab2">Upcoming</button>
                             </div>
                             <div id="tab1" class="tab-content active">
+                                <div class="transaction-card">
+                                
+                                    <div class="card-body">
+                                        <div class="icon-circle">
+                                            <i class="fas fa-rotate-right"></i>
+                                            <span class="info-icon">!</span>
+                                        </div>
+                                        <h3>No bills yet</h3>
+                                        <p>After your first bill, you will be able to view it here.</p>
+                                    </div>
+                                </div>
     
-                                <div class="recent-transaction">
+                                <!-- <div class="recent-transaction">
                                     <div class="box">
                                         <div class="details d-flex align-items-center">
                                             <div class="box-img me-2 d-flex justify-content-center align-items-center"><img src="assets/img/dstv-logo.jpg" alt=""></div>
@@ -195,10 +209,20 @@
                                             <div class="airtime-message successful">Successful</div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div id="tab2" class="tab-content">
-                                <div class="recent-transaction">
+                                <div class="transaction-card">
+                                
+                                    <div class="card-body">
+                                        <div class="icon-circle">
+                                            <i class="fas fa-rotate-right"></i>
+                                            <span class="info-icon">!</span>
+                                        </div>
+                                        <p>You have no upcoming bills.</p>
+                                    </div>
+                                </div>
+                                <!-- <div class="recent-transaction">
                                     <div class="box">
                                         <div class="details d-flex align-items-center">
                                             <div class="box-img me-2 d-flex justify-content-center align-items-center"><img src="assets/img/dstv-logo.jpg" alt=""></div>
@@ -242,16 +266,17 @@
                                             <div class="airtime-message successful">Successful</div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="py-3 btn-view"><a href="bills-history.html" class="btn-brand">View All</a></div>
                         </div>
                     </div>
                  </div>
-
-
-                
               </section>
+
+                <div class="message-container">
+                    <div id="toast-container"></div>    
+                </div>
             </main>
           </div>
       </div>

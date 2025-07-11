@@ -15,7 +15,7 @@
 	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/modal.css">
-    <script src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
     <style>
         
     </style>
@@ -28,7 +28,7 @@
             <div id="sidebar_container">
                 <!-- Sidebar Goes Here -->
             </div>
-            <script src="assets/js/sidebar.js"></script>
+            <script type="module" src="assets/js/sidebar.js"></script>
             
             <main class="main-content" style="background: #fff;">
 
@@ -46,14 +46,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="verify-content-left">
+                            <form class="verify-content-left" id="kycForm" enctype="multipart/form-data">
                                 <div class="input-box d-flex justify-content-between">
                                     <div class="text">
                                         <p>National Indentification Number (NIN)</p>
                                         <p>Enter your unique NIN number</p>
                                     </div>
                                     <div>
-                                        <input type="number"class="nin-number" name="" id="" placeholder="NIN">
+                                        <input type="number"class="nin-number" name="" id="ninNumber" placeholder="NIN">
                                     </div>
                                 </div>
                                 <div class="input-box d-flex justify-content-between">
@@ -78,9 +78,9 @@
                                     </div>                            </div>
                                
 
-                                <div class="d-flex justify-content-center"><button class="submitBtn">Submit All Document</button></div>
+                                <div class="d-flex justify-content-center"><button type="submit" id="submitKYC"  class="submitBtn">Submit All Document</button></div>
 
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,9 @@
       </div>
 
 
-         
+      <div class="message-container">
+        <div id="toast-container"></div>
+      </div> 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
@@ -115,6 +117,89 @@
             });
     </script>
 
+    <script type="module">
+        import { showToast } from './assets/js/message.js';  // Your existing toast function
+
+        const token = localStorage.getItem('authToken');
+        const BASE_URL = 'https://gobapay.onrender.com/api';
+        const submitKYCBtn = document.getElementById('submitKYC');
+
+        const kycForm = document.getElementById('kycForm');
+
+        kycForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const ninNumber = document.getElementById('ninNumber').value;
+            const ninFile = document.getElementById('ninFileInput').files[0];
+            const passportPhotoFile = document.getElementById('passportFileInput').files[0];
+
+            if (!ninNumber || !ninFile || !passportPhotoFile) {
+                return showToast("All fields including documents must be filled", "danger");
+            }
+
+            if(ninNumber.length < 11 ){
+                return showToast("Nin Number cannot be less than 11", "danger")
+            }
+
+            
+            
+            const formData = new FormData();
+            formData.append('ninNumber', ninNumber);
+            formData.append('ninFile', ninFile);
+            formData.append('passportPhotoFile', passportPhotoFile);
+
+            try {
+                disableKYCBtn('add');
+
+                const response = await fetch(`${BASE_URL}/user/submit-kyc`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                        // Do not set Content-Type when sending FormData
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+                disableKYCBtn('remove');
+
+                if (!response.ok) {
+                    if (data.message === "Invalid token" && data.error === "jwt expired") {
+                        showToast('Session Expired. Login to continue', 'warning');
+                        localStorage.removeItem('authToken');
+                        setTimeout(() => {
+                            window.location.href = "../landing/login.html";
+                        }, 3500);
+                    }else if(data.message === "KYC verification already in progress"){
+                        
+
+                    }
+                     else {
+                        showToast(data.message || "KYC submission failed", "danger");
+                    }
+                    return;
+                }
+
+                if (data.success) {
+                    showToast(data.message || "KYC submitted successfully", "success");
+                    kycForm.reset();
+                } else {
+                    showToast(data.message || "Failed to submit KYC", "danger");
+                }
+
+            } catch (error) {
+                disableKYCBtn('remove');
+                console.error('KYC Error:', error);
+                showToast(error.message || "Something went wrong", "danger");
+            }
+        });
+
+        function disableKYCBtn(option) {
+            submitKYCBtn.classList[option]("disableBtn");
+            const spinner = document.querySelector('.fa-spinner');
+            if (spinner) spinner.style.display = option === 'add' ? 'inline-block' : 'none';
+        }
+    </script>
 
 </body>
 </html>

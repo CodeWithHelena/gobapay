@@ -2,7 +2,7 @@
 
 export function showToast(message, type) {
     const toastContainer = document.getElementById('toast-container');
-
+    
     // Remove existing toast before adding a new one
     toastContainer.innerHTML = '';
 

@@ -1,26 +1,18 @@
 //import { showToast } from './message.js';
-
-
+import { showToast } from './message.js';
+console.log('this is Auth');
 const checkAuth = () => {
     const authToken = localStorage.getItem('authToken');
-   // console.log("This is the token:", authToken); // Debugging log
-
-    if (!authToken) {
-        console.log('Token does not exist, redirecting...');
-        window.location.href = "../landing/login.html";
-        /*
-        showToast('Session Expired. Login to continue', 'warning');
-    
-        // Redirect after the toast disappears (3.5 seconds to ensure smooth transition)
+    if (!authToken || authToken === null) {
+        showToast("Token does not exist, redirecting...", "warning");
         setTimeout(() => {
-            window.location.href = "../landing/login.html";
-        }, 3500);
-        */
+            location.href = '../../auth/login.html';
+        }, 3000);
     }
 };
 
 // Call function to check authentication
-//checkAuth();
+checkAuth();
 
 
 
