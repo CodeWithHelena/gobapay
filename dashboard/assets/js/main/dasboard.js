@@ -52,7 +52,7 @@ const fetchUserDashboard = async () => {
         const DetailsArr = [usersName, modalAccountName, modalAccountNumber];
 
         DetailsArr.forEach(detail => detail.classList.remove('skeleton'));
-        usersName.textContent = user.firstName;
+        usersName.textContent = "Hi " + user.firstName;
         modalAccountName.textContent = user.firstName;
         modalAccountNumber.textContent = user.beneficiaryAccountNumber;
         const userBalance =  user.balance;
@@ -87,79 +87,6 @@ const fetchUserDashboard = async () => {
 // Call function to fetch user profile on page load
 fetchUserDashboard();
 
-
-
-/*
-// UPDATE PASSWORD PIN
-const BASE_URL = 'https://gobapay.onrender.com/api';
- const update_password = document.getElementById('update_password');
-
- update_password.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    const oldPass = document.getElementById('oldPass').value;
-    const newPass = document.getElementById('newPass').value;
-    const comfirmNewPass = document.getElementById('comfirmNewPass').value;
-
-
-    if (!oldPass || !newPass || !comfirmNewPass ) {
-        return showToast("Both fields must not be empty", "danger");
-    }
-
-    if (oldPass.length < 8 || newPass.length < 8 || comfirmNewPass.length < 8) {
-        return showToast("Password cannot be less than 8 characters", "danger");
-    }
-
-    if(newPass !== comfirmNewPass){
-        return showToast("Password does not match", "danger");
-    }
-
-    try {
-        //disableLoginBTN('add');
-
-        const response = await fetch(`${BASE_URL}/user/update-transaction-pin`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ oldPass, newPass, comfirmNewPass})
-        });
-
-        console.log('My response is:', response);
-
-        //disableLoginBTN('remove');
-
-        // Handle server errors properly
-        if (!response.ok) {
-            const errorData = await response.json(); // Get error response
-            let errorMessage = errorData.message || 'An unknown error occurred.';
-
-            if (response.status === 401) {
-                errorMessage = errorData.message || "Invalid account number or password.";
-            } else if (response.status === 429) {
-                errorMessage = errorData.message || "Too many requests!";
-            } else if (response.status >= 400 && response.status < 500) {
-                errorMessage = `Client Error (${response.status}): ${errorMessage}`;
-            }
-
-            throw new Error(errorMessage);
-        }
-
-        const data = await response.json(); // Parse JSON response
-
-        if (data.success) {
-            showToast(`${data.message || 'Password updated successfully'}`, "success");
-            
-        } else {
-            showToast(`${data.message || 'Failed to update'}`, "danger");
-        }
-    } catch (error) {
-        //disableLoginBTN('remove');
-        console.error('Error:', error.message);
-        showToast(error.message, "danger");
-    }
-});
-
-*/
-
 function disableLoginBTN(option) {
     loginButton.classList[option]("disableBtn");
     document.querySelector('.fa-spin')?.classList[option]('fa-spinner');
@@ -168,11 +95,35 @@ function disableLoginBTN(option) {
 
 
 
+/* ADD MONEY MODAL */
+const addFundBtn = document.getElementById('addFund');
+
+// Open and close modal
+ document.getElementById('openModal').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('custom-modal-overlay').classList.add('active');
+});
+document.getElementById('openModal2').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('custom-modal-overlay').classList.add('active');
+});
+
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('custom-modal-overlay').classList.remove('active');
+    addFundBtn.innerHTML = "Copy Number";
+});
+
+
+
+addFundBtn.addEventListener('click', () =>{
+     copyToClipboard()
+     addFundBtn.innerHTML = "Copied";
+})
 
 
 
 function copyToClipboard() {
-    const text = document.getElementById("copyText").innerText;
+    const text = document.getElementById("modalAccountNumber").innerText;
 
     // Create a temporary input element
     const tempInput = document.createElement("input");
@@ -186,11 +137,5 @@ function copyToClipboard() {
 
     // Remove the temporary input
     document.body.removeChild(tempInput);
-
-    // Show confirmation (optional)
-    document.getElementById("copiedMsg").style.display = "inline";
-    setTimeout(() => {
-      document.getElementById("copiedMsg").style.display = "none";
-    }, 2000);
  }
 

@@ -224,15 +224,14 @@ td {
         font-size: 14px;
     }
     table {
-        display: block;
-        /* overflow-x: auto; */
+        /* display: block; */
         white-space: nowrap;
     }
 
 
     td {
     padding: 10px;
-    text-align: left;
+    /* text-align: left; */
     font-size: 14px;
 }
 }
@@ -301,6 +300,10 @@ td {
 }
 .add-fund{
     background: var(--lite-secondary) !important;
+}
+
+.add-fund.copyNum{
+    width: 123.8px;
 }
 
 .transfer-fund{

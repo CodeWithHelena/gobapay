@@ -35,7 +35,7 @@
               <header class="header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <div class="img me-2"><a href="profile.html"><img src="assets/img/profile-icon.png" alt=""></a></div>
-                <h4><a href="profile.html"> <span id="username" class="skeleton" style="width: 100px; padding: 0 1rem;">Hi User</span></a></h4>
+                <h4><a href="profile.html"> <span id="username" class="skeleton" style="width: 100px; padding: 0 1rem; font-size: 1rem;">Hi User</span></a></h4>
                 </div>
                 <!-- <input type="text" placeholder="Search here..."> -->
                  <div class="d-flex">
@@ -204,17 +204,17 @@
                 <div class="accountdetails-container">
                   <div class="">
                     <p>Account Name</p>
-                    <h6 class="fw-bold skeleton" id="modalAccountName" style="width: 250px;"></h6>Eneh Amarachi Elizabeth</h6>
+                    <h6 class="fw-bold skeleton" id="modalAccountName" style="width: 250px;"></h6></h6>
                   </div>
                   <div class="mt-2">
                     <p>Gobapay Account Number</p>
-                    <h6 class="fw-bold skeleton" id="modalAccountNumber" style="width: 150px;">23823754389</h6>
+                    <h6 class="fw-bold skeleton" id="modalAccountNumber" style="width: 150px;"></h6>
                   </div> 
                     
                 </div> 
                 
                  <div class="btn-addmoney">
-                    <button class="btn-brand add-fund">Copy Number</button>
+                    <button class="btn-brand add-fund copyNum" id="addFund">Copy Number</button>
                     <button class="btn-brand add-fund transfer-fund">
                       <a href="transfer.html">Transfer Fund<span class="iconify ms-2" data-icon="mdi:arrow-right" data-width="24" data-height="24"></span></a>
                     </button>
@@ -242,23 +242,6 @@
 
     <script src="assets/js/script.js"></script>
     <script type="module" src="assets/js/main/dasboard.js"></script>
-    <script>
-     // OPEN AND CLOSE MODAL
-    document.getElementById('openModal').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('custom-modal-overlay').classList.add('active');
-    });
-    document.getElementById('openModal2').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('custom-modal-overlay').classList.add('active');
-    });
-
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('custom-modal-overlay').classList.remove('active');
-        // firstItem.style.display = 'block';
-        // secondItem.style.display = 'none';
-    });
-  </script>
 
      
 </body>

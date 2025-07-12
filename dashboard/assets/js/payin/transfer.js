@@ -5,6 +5,7 @@
     const BASE_URL = 'https://gobapay.onrender.com/api';
     const openModal = document.getElementById('openModal');
 
+    const amountInput = document.getElementById('amount');
     const amounTop = document.getElementById('amounTop')
     
     const firstItem = document.getElementById('first-item');
@@ -12,6 +13,8 @@
     const thirdItem = document.getElementById('thirdItem');
     const displayMessage = document.getElementById('displayMessage');
     const displayMessageDiv = document.querySelector('.display-message');
+    const sucsessAmount = document.getElementById('sucsessAmount');
+    const sucsessName = document.getElementById('sucsessName');
 
     document.getElementById('closeDisplayMessage').addEventListener('click', ()=> {
         displayMessageDiv.style.display = 'none';
@@ -50,6 +53,27 @@
         });
     });
 
+    
+    function formattedAmount (inputAmt,amtTop,successAmt){
+        const inputAmtAvlue = inputAmt.value;
+        // Convert to number safely
+        const amountInt = parseFloat(inputAmtAvlue.replace(/,/g, ''));
+
+        // Check if it's a valid number
+        if (!isNaN(amountInt)) {
+            const formatted = amountInt.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            });
+            
+            amtTop.innerHTML = `₦${formatted}`;
+            successAmt.innerHTML = `₦${formatted}`;
+            const sendAmount = document.getElementById('sendAmount').innerHTML = `₦${formatted}`;
+        } else {
+            console.log(amountInt + " is not a number");
+        }
+   }
+
 
 
     //GET TRANSACTION DEATAILS
@@ -58,7 +82,7 @@
 
         const beneficiaryAccountNumber = document.getElementById('accountNumber').value;
         const beneficiaryBank = document.getElementById('beneficiaryBank').value;
-        const amount = document.getElementById('amount').value;
+        const amount = amountInput.value;
         const description = document.getElementById('description').value;
         const payBtn = document.getElementById('payBtn');
 
@@ -67,14 +91,19 @@
             return showToast('All Fields Must be Filled', 'danger');
         }
 
+       
+
         function transactionDetails(dataName) {
             document.getElementById('custom-modal-overlay').classList.add('active');
 
-            amounTop.innerHTML = `₦${amount}`
+            //formattedAmount ();
+            formattedAmount (amountInput,amounTop,sucsessAmount);
+
+            //amounTop.innerHTML = `₦${amount}`
             const bankName = document.getElementById('bankName').innerHTML = beneficiaryBank;
             const AccountNumber = document.getElementById('beneficiaryAccountNumber').innerHTML = beneficiaryAccountNumber;
             const accountName = document.getElementById('accountName').innerHTML = dataName;
-            const sendAmount = document.getElementById('sendAmount').innerHTML = amount;
+            //const sendAmount = document.getElementById('sendAmount').innerHTML = amount;
             const transactionFee = document.getElementById('transactionFee');
 
 
@@ -116,7 +145,8 @@
             const data = await response.json();
 
             if (data.success) {
-                localStorage.setItem('accNumber', beneficiaryAccountNumber)
+                localStorage.setItem('accNumber', beneficiaryAccountNumber);
+                localStorage.setItem('accName', data.data);
                 transactionDetails(data.data);
 
                 payBtn.addEventListener("click", () =>{                    
@@ -194,7 +224,7 @@
                 disableLoginBTN('remove');
 
                 if (!response.ok) {
-                    document.getElementById('custom-modal-overlay').classList.remove('active');
+                    //document.getElementById('custom-modal-overlay').classList.remove('active');
                     let errorMessage = 'Failed to get transaction details';
 
                     try {
@@ -213,13 +243,16 @@
                 if (data.success === "true") {
 
                     //showToast(data.message || 'Transfer Successful', 'success');
+                    
+                } else {
+                    
+                    //document.getElementById('custom-modal-overlay').classList.remove('active');
+                    //showToast(data.error || 'Transfer failed', 'danger');
+                    formattedAmount (amountInput,amounTop,sucsessAmount);
+                    sucsessName.innerHTML = localStorage.getItem('accName');
                     amounTop.innerHTML = "Transaction Successful"
                     secondItem.style.display = "none";
                     thirdItem.style.display = "block"; 
-                } else {
-                    
-                    document.getElementById('custom-modal-overlay').classList.remove('active');
-                    showToast(data.error || 'Transfer failed', 'danger');
                 }
 
             } catch (error) {
