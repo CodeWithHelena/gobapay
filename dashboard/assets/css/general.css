@@ -569,16 +569,16 @@ section{
 
     #sidebar_container{
       width: 100%;
-      height: fit-content;
-      bottom: 3.5rem;
+      height: 3rem;
+      bottom: 0;
       position: fixed;
-      background: red;
+      background: #fff;
       z-index: 1000;
     }
 
     .sidebar {
       width: inherit;
-      height: inherit;
+      height: 3rem;
       padding: .5rem 0;
       background: #fff !important;
       color: #535c5a;
