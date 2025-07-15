@@ -1536,7 +1536,7 @@ display: none;
 }
 
 .receipt-section .receipt .left-item span{
-  display: block;
+  /* display: block; */
 }
 
 .receipt-section .receipt .bottom-content{
@@ -1547,6 +1547,10 @@ display: none;
 }
 .receipt-section .transaction-status{
   padding-top: 3rem;
+}
+
+.receipt .table .skeleton{
+  max-width: 250px !important;
 }
 /* .receipt-section .transaction-box{
   display: grid;
@@ -1574,6 +1578,26 @@ display: none;
   width: 100%;
   background: var(--dark-secondary);
 } */
+ table {
+   width: 100%;
+   border-collapse: collapse;
+ }
+
+@media (max-width: 600px) {
+
+  .receipt-section table {
+    max-width: 300px !important;
+    /* display: block; */
+    /* white-space: nowrap !important; */
+  }
+
+
+  .receipt-section td {
+    padding: 10px;
+    /* text-align: left; */
+    font-size: 14px;
+  }
+}
 
 
 
