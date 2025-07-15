@@ -44,7 +44,7 @@
                             <div class="row">
                                 <div class="col-lg12">
                                     <div class="receipt-wrapper">
-                                        <div class="receipt d-none">
+                                        <div class="receipt">
                                             <div class="top-content d-flex justify-content-between align-items-center mb-4">
                                                 <div class="img"><img src="/assets/img/brand-logo.jpg" alt="" width="60px"></div>
                                                 <div class="receipt-title">
@@ -56,7 +56,7 @@
                                                 <span>Transaction Successful</span>
                                             </div>
                                             <div class="amount text-center py-2">
-                                                <h5 class="fw-bolder">₦100,000.00</h5>
+                                                <h5 class="fw-bolder skeleton" id="receiptAmount" style="max-width: 100px; margin: auto;"></h5>
                                                 <p></p>
                                             </div>
                                             <div>
@@ -68,10 +68,10 @@
                                                         </td>
                                                         <td class="left-item" id="accountNumValue">
                                                             <!-- <div class="skeleton"></div> -->
-                                                            <div>
-                                                                <span>Amarachi Eneh</span>
-                                                                <span>1872723079</span>
-                                                                <span>GobaPay</span>
+                                                            <div class="d-flex flex-column justify-content-end align-items-end" style="border:2px solid blue">
+                                                                <span class="skeleton" id="receiptSenderName" style="max-width: 200px"></span>
+                                                                <span class="skeleton" id="receiptSenderAccount"  style="max-width: 150px"></span>
+                                                                <span class="skeleton" id="receiptSenderBank"  style="max-width: 150px"></span>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -81,24 +81,30 @@
                                                         </td>
                                                         <td class="left-item" id="accountNumValue">
                                                             <!-- <div class="skeleton"></div> -->
-                                                            <div>
-                                                                <span>Amarachi Eneh</span>
-                                                                <span>1872723079</span>
-                                                                <span>GobaPay</span>
+                                                            <div class="d-flex flex-column justify-content-end align-items-end">
+                                                                <span class="skeleton" id="receiptRecieverName"  style="max-width: 200px"></span>
+                                                                <span class="skeleton" id="receiptRecieverAccount"  style="max-width: 150px"></span>
+                                                                <span class="skeleton" id="receiptRecieverBank"  style="max-width: 150px"></span>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Transaction Date</td>
-                                                        <td class="left-item"><span id="tierValue"> </span><span class="upgrade">July 8 2025, 16:56:05</span></td>
+                                                        <td class="left-item d-flex flex-column justify-content-end align-items-end">
+                                                            <span class="upgrade skeleton" id="receiptTransactionDate"  style="max-width: 170px"></span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Referrence</td>
-                                                        <td class="left-item"><span id="tierValue"> </span><span class="upgrade">0003456f66784R4335667</span></td>
+                                                        <td class="left-item">
+                                                            <span class="upgrade skeleton" id="receiptTransactionRef"></span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Narration</td>
-                                                        <td class="left-item"><span id="tierValue"> </span><span class="upgrade">Test</span></td>
+                                                        <td class="left-item d-flex flex-column justify-content-end align-items-end">
+                                                            <span class="upgrade skeleton" id="receiptDescription"  style="max-width: 150px"></span>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                         
@@ -110,7 +116,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="transaction-status text-center">
+                                        <div class="transaction-status d-none text-center">
                                             <div>
                                                 <div class="img"><img src="assets/img/success-check.png" alt="" width="120px"></div>
                                                 <div class="mt-2">
@@ -163,7 +169,7 @@
     <!--Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
-    <script type="module" src=""></script>
+    <script type="module" src="assets/js/payin/receipt.js"></script>
 
 
 

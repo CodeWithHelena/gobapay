@@ -53,26 +53,22 @@
         });
     });
 
-    
-    function formattedAmount (inputAmt,amtTop,successAmt){
-        const inputAmtAvlue = inputAmt.value;
-        // Convert to number safely
-        const amountInt = parseFloat(inputAmtAvlue.replace(/,/g, ''));
+  
+    function formattedAmount(amounts) {
+        const rawValue = String(amounts).replace(/,/g, ''); // Clean commas if any
+        const amountInt = parseFloat(rawValue);
 
-        // Check if it's a valid number
         if (!isNaN(amountInt)) {
             const formatted = amountInt.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
             });
-            
-            amtTop.innerHTML = `₦${formatted}`;
-            successAmt.innerHTML = `₦${formatted}`;
-            const sendAmount = document.getElementById('sendAmount').innerHTML = `₦${formatted}`;
+            return `₦${formatted}`;
         } else {
-            console.log(amountInt + " is not a number");
+            console.log(rawValue + " is not a valid number");
+            return null;
         }
-   }
+    }
 
 
 
@@ -96,16 +92,13 @@
         function transactionDetails(dataName) {
             document.getElementById('custom-modal-overlay').classList.add('active');
 
-            //formattedAmount ();
-            formattedAmount (amountInput,amounTop,sucsessAmount);
-
-            //amounTop.innerHTML = `₦${amount}`
+            amounTop.innerHTML = formattedAmount(amount)
+            document.getElementById('sendAmount').innerHTML = formattedAmount(amount)
+            
             const bankName = document.getElementById('bankName').innerHTML = beneficiaryBank;
             const AccountNumber = document.getElementById('beneficiaryAccountNumber').innerHTML = beneficiaryAccountNumber;
             const accountName = document.getElementById('accountName').innerHTML = dataName;
-            //const sendAmount = document.getElementById('sendAmount').innerHTML = amount;
             const transactionFee = document.getElementById('transactionFee');
-
 
         };
 
@@ -240,6 +233,8 @@
                 const data = await response.json();
                 console.log(data)
 
+                let transactionReference = "";
+
                 if (data.success === "true") {
 
                     //showToast(data.message || 'Transfer Successful', 'success');
@@ -248,11 +243,26 @@
                     
                     //document.getElementById('custom-modal-overlay').classList.remove('active');
                     //showToast(data.error || 'Transfer failed', 'danger');
-                    formattedAmount (amountInput,amounTop,sucsessAmount);
-                    sucsessName.innerHTML = localStorage.getItem('accName');
-                    amounTop.innerHTML = "Transaction Successful"
-                    secondItem.style.display = "none";
-                    thirdItem.style.display = "block"; 
+                    
+                      transactionReference = data.reference; // Store reference
+                      console.log(transactionReference)
+                      const receiverName = data.receiverName;
+                      const amountFormatted = formattedAmount(data.amount);
+
+                      document.getElementById('sucsessAmount').textContent = amountFormatted;
+                      document.getElementById('sucsessName').textContent = receiverName;
+
+                      secondItem.style.display = "none";
+                      thirdItem.style.display = "block";
+
+                      // Attach the event listener here
+                      const viewReceiptBtn = document.getElementById('viewReceiptBtn');
+                      if (viewReceiptBtn) {
+                        viewReceiptBtn.addEventListener('click', () => {
+                            const encodedRef = encodeURIComponent(transactionReference);
+                            window.location.href = `receipt.html?reference=${encodedRef}`;
+                        });
+                      }
                 }
 
             } catch (error) {

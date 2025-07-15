@@ -25,14 +25,14 @@ const fetchUserDashboard = async () => {
                 showToast('Session Expired. Login to continue', 'warning');
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../landing/login.html";
+                    window.location.href = "../../auth/login.html";
                 }, 3500);
                 return;
             }else if(data.error === "invalid token"){
                 showToast('Invalid Session Id.', 'danger')
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../login.html";
+                    window.location.href = "../../auth/login.html";
                 }, 3500);
                 return;
             } 

@@ -118,7 +118,7 @@ const fetchUserProfile = async () => {
                 showToast('Invalid Session Id.', 'danger')
                 localStorage.removeItem('authToken');
                 setTimeout(() => {
-                    window.location.href = "../login.html";
+                    window.location.href = "../../auth/login.html";
                 }, 3500);
                 return;
             } 
