@@ -570,7 +570,7 @@ section{
     #sidebar_container{
       width: 100%;
       height: 3rem;
-      bottom: 3rem;
+      bottom: 0;
       position: fixed;
       background: #fff;
       z-index: 1000;
@@ -1516,7 +1516,8 @@ display: none;
 }
 
 .receipt-section .receipt .message{
-  width: 60%;
+  max-width: 60%;
+  text-wrap: nowrap;
   margin: auto;
   background: var(--secondary-color);
   border-radius: 60px;
@@ -1583,10 +1584,13 @@ display: none;
    border-collapse: collapse;
  }
 
+ .receipt-section table #receiptTransactionRef{
+  text-wrap: wrap;
+ }
+
 @media (max-width: 600px) {
 
   .receipt-section table {
-    max-width: 300px !important;
     /* display: block; */
     /* white-space: nowrap !important; */
   }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GobaPay</title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Boostrap 5.3.3 CDN -->
@@ -12,188 +13,186 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <!-- Iconify Script -->
-	<script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
+    <script src="https://code.iconify.design/3/3.0.0/iconify.min.js"></script>
     <link rel="stylesheet" href="assets/css/general.css">
     <link rel="stylesheet" href="assets/css/modal.css">
     <script type="module" src="assets/js/auth.js"></script>
     <style>
-        
+
     </style>
 </head>
+
 <body>
 
     <main>
-      <div class="dashboard-container">
-        <div class="dashboards">
-            <div id="sidebar_container" style="height: 0 !important;">
-                <!-- Sidebar Goes Here -->
-            </div>
-            <script type="module" src="assets/js/sidebar.js"></script>
-            
-          
-            <main class="main-content" style="background: #ffff;">
-                <style>
-                    @media (max-width: 768px) {
-                        .dashboards .sidebar img{
-                            display: none !important;
-                        }
-                    }
-                </style>
-              <div class="title d-flex justify-content-center align-items-center">
-                <h5 class="sm-title">Account</h5>
-              </div>
-          
-              <section class="account-section">
-                <div class="account-container">
-                    <div class="box d-flex justify-content-between" onclick="location.href = 'profile.html'">
-                        <div class="icon"><span class="iconify" data-icon="mdi:account"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">
-                                <h6>Account Profile</h6>
-                                <p>View your profile</p>
+        <div class="dashboard-container">
+            <div class="dashboard">
+                <div id="sidebar_container">
+                    <!-- Sidebar Goes Here -->
+                </div>
+                <script type="module" src="assets/js/sidebar.js"></script>
+
+
+                <main class="main-content" style="background: #ffff;">
+
+                    <div class="title d-flex justify-content-center align-items-center">
+                        <h5 class="sm-title">Profile</h5>
+                    </div>
+
+                <section class="account-section">
+                    <div class="account-container">
+                        <div class="box d-flex justify-content-between" onclick="location.href = 'profile.html'">
+                            <div class="icon"><span class="iconify" data-icon="mdi:account"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Account Profile</h6>
+                                    <p>View your profile</p>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
                             </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                        </div>
+                        <div class="box d-flex justify-content-between" onclick="location.href = 'account-limit.html'">
+                            <div class="icon"><span class="iconify" data-icon="mdi:cash"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6> Account Limits</h6>
+                                    <p>View your transaction limits</p>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                        </div>
+                        <div class="box d-flex justify-content-between" onclick="location.href = ' '">
+                            <div class="icon"><span class="iconify" data-icon="mdi:shield-lock"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Security Center</h6>
+                                    <p>Protect your funds</p>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                        </div>
+                        <div class="box d-flex justify-content-between" onclick="location.href = 'support.html'">
+                            <div class="icon"><span class="iconify" data-icon="mdi:headset"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Customer Service</h6>
+                                    <p>247 customer service</p>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                        </div>
+                        <div class="box d-flex justify-content-between" id="openModal">
+                            <div class="icon"><span class="iconify" data-icon="mdi:cog"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Settings</h6>
+                                    <p>Account settings</p>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                        </div>
+                        <div class="box d-flex justify-content-between pb-2" onclick="location.href = 'terms-and-condition.html'">
+                            <div class="icon"><span class="iconify" data-icon="mdi:book"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Terms and Conditions</h6>
+                
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
+                        </div>
+                        <div class="box d-flex justify-content-between pb-2" onclick="location.href = 'privacy-policy.html'">
+                            <div class="icon"><span class="iconify" data-icon="mdi:shield-check"></span></div>
+                            <div class="content d-flex justify-content-between align-items-center">
+                                <div class="details">
+                                    <h6>Privacy and Policy</h6>
+                                </div>
+                                <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="box d-flex justify-content-between" onclick="location.href = 'account-limit.html'">
-                        <div class="icon"><span class="iconify" data-icon="mdi:cash"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">                                
-                                <h6> Account Limits</h6>
-                                <p>View your transaction limits</p>
+                
+                </section>
+                
+                <div class="custom-modal-overlay" id="modalOverlay">
+                    <div class="custom-modal">
+                        <div class="custom-modal-header">
+                            <div>
+                                <h3>Settings</h3>
                             </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                            <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
                         </div>
-                    </div>
-                    <div class="box d-flex justify-content-between" onclick="location.href = ' '">
-                        <div class="icon"><span class="iconify" data-icon="mdi:shield-lock"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">                                
-                                <h6>Security Center</h6>
-                                <p>Protect your funds</p>
+                        <section class="account-section">
+                            <div class="account-container">
+                                <div class="box d-flex justify-content-between" onclick="location.href = 'update-transaction-pin.html'">
+                                    <div class="icon"><span class="iconify" data-icon="mdi:account"></span></div>
+                                    <div class="content d-flex justify-content-between align-items-center">
+                                        <div class="details">
+                                            <h6>Update Payment Pin</h6>
+                                            <p>Update your transaction pin</p>
+                                        </div>
+                                        <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                                    </div>
+                                </div>
+                                <div class="box d-flex justify-content-between" onclick="location.href = 'update-password.html'">
+                                    <div class="icon"><span class="iconify" data-icon="mdi:account-circle"></span></div>
+                                    <div class="content d-flex justify-content-between align-items-center">
+                                        <div class="details">
+                                            <h6>Update Password</h6>
+                                            <p>Update your login password</p>
+                                        </div>
+                                        <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                                    </div>
+                                </div>
+                                <div class="box d-flex justify-content-between" onclick="location.href = ' '">
+                                    <div class="icon"><span class="iconify" data-icon="mdi:shield-lock"></span></div>
+                                    <div class="content d-flex justify-content-between align-items-center">
+                                        <div class="details">
+                                            <h6>Security Center</h6>
+                                            <p>Protect your funds</p>
+                                        </div>
+                                        <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                        </div>
-                    </div>
-                    <div class="box d-flex justify-content-between" onclick="location.href = 'support.html'">
-                        <div class="icon"><span class="iconify" data-icon="mdi:headset"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">                                
-                                <h6>Customer Service</h6>
-                                <p>247 customer service</p>
-                            </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                        </div>
-                    </div>
-                    <div class="box d-flex justify-content-between" id="openModal">
-                        <div class="icon"><span class="iconify" data-icon="mdi:cog"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">
-                                <h6>Settings</h6>
-                                <p>Account settings</p>
-                            </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                        </div>
-                    </div>
-                    <div class="box d-flex justify-content-between pb-2" onclick="location.href = 'terms-and-condition.html'">
-                        <div class="icon"><span class="iconify" data-icon="mdi:book"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">                                
-                                <h6>Terms and Conditions</h6>
-                                
-                            </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                        </div>
-                    </div>
-                    <div class="box d-flex justify-content-between pb-2" onclick="location.href = 'privacy-policy.html'">
-                        <div class="icon"><span class="iconify" data-icon="mdi:shield-check"></span></div>
-                        <div class="content d-flex justify-content-between align-items-center">
-                            <div class="details">                                
-                                <h6>Privacy and Policy</h6>
-                            </div>
-                            <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                        </div>
+                
+                        </section>
                     </div>
                 </div>
 
-              </section>
 
-              <div class="custom-modal-overlay" id="modalOverlay">
-                <div class="custom-modal">
-                    <div class="custom-modal-header">
-                        <div>
-                            <h3>Settings</h3>
-                        </div>
-                        <span id="closeModal" style="margin-left:auto; cursor:pointer; font-size: 40px;">&times;</span>
-                    </div>
-                    <section class="account-section">
-                        <div class="account-container">
-                            <div class="box d-flex justify-content-between" onclick="location.href = 'update-transaction-pin.html'">
-                                <div class="icon"><span class="iconify" data-icon="mdi:account"></span></div>
-                                <div class="content d-flex justify-content-between align-items-center">
-                                    <div class="details">
-                                        <h6>Update Payment Pin</h6>
-                                        <p>Update your transaction pin</p>
-                                    </div>
-                                    <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                                </div>
-                            </div>
-                            <div class="box d-flex justify-content-between" onclick="location.href = 'update-password.html'">
-                                <div class="icon"><span class="iconify" data-icon="mdi:account-circle"></span></div>
-                                <div class="content d-flex justify-content-between align-items-center">
-                                    <div class="details">
-                                        <h6>Update Password</h6>
-                                        <p>Update your login password</p>
-                                    </div>
-                                    <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                                </div>
-                            </div>
-                            <div class="box d-flex justify-content-between" onclick="location.href = ' '">
-                                <div class="icon"><span class="iconify" data-icon="mdi:shield-lock"></span></div>
-                                <div class="content d-flex justify-content-between align-items-center">
-                                    <div class="details">
-                                        <h6>Security Center</h6>
-                                        <p>Protect your funds</p>
-                                    </div>
-                                    <div class="icon2"><span class="iconify" data-icon="mdi:chevron-right"></span></div>
-                                </div>
-                            </div>
-                        </div>
-        
-                      </section>
-                </div>
+                </main>
             </div>
-
-            <div class="message-container">
-                <div id="toast-container"></div>
-            </div>
-            </main>
-          </div>
-      </div>
+        </div>
 
 
-         
+        <div class="message-container">
+            <div id="toast-container"></div>
+        </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
 
-      <!--Jquery -->
+
+    <!--Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 
     <script>
-        document.getElementById('openModal').addEventListener('click', function() {
+        document.getElementById('openModal').addEventListener('click', function () {
             document.getElementById('modalOverlay').classList.add('active');
         });
 
-        document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('closeModal').addEventListener('click', function () {
             document.getElementById('modalOverlay').classList.remove('active');
         });
 
-        document.getElementById('signOut').addEventListener('click', function() {
+        document.getElementById('signOut').addEventListener('click', function () {
             document.getElementById('modalOverlay').classList.remove('active');
         });
     </script>
 
+
+
 </body>
+
 </html>

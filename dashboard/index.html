@@ -119,8 +119,11 @@
           
               <section class="transactions">
                 <h5>Recent Transactions</h5>
-                <div class="transaction-card">
+                <!-- Container for transactions -->
+                <div id="transactionList"></div>
                 
+                <!-- "No transaction" message -->
+                <div id="noTransactionMessage" class="transaction-card" style="display: none;">
                   <div class="card-body">
                     <div class="icon-circle">
                       <i class="fas fa-rotate-right"></i>
@@ -130,6 +133,19 @@
                     <p>After your first transaction, you will be able to view it here.</p>
                   </div>
                 </div>
+
+
+                <!-- <div class="transaction-card">
+                
+                  <div class="card-body">
+                    <div class="icon-circle">
+                      <i class="fas fa-rotate-right"></i>
+                      <span class="info-icon">!</span>
+                    </div>
+                    <h3>No transactions yet</h3>
+                    <p>After your first transaction, you will be able to view it here.</p>
+                  </div>
+                </div> -->
                <!-- <div class="transactions-wrapper">
                     <div class="box d-flex justify-content-between align-items-center">
                         <div class="left-content d-flex">
@@ -189,6 +205,7 @@
             </main>
           </div>
       </div>
+ 
 
       <!-- MODAL -->
       <div class="custom-modal-overlay" id="custom-modal-overlay">
@@ -242,6 +259,88 @@
 
     <script src="assets/js/script.js"></script>
     <script type="module" src="assets/js/main/dasboard.js"></script>
+
+    <script>
+      const token = localStorage.getItem('authToken');
+      const BASE_URL = 'https://gobapay.onrender.com/api';
+
+      
+      const transactionContainer = document.getElementById('transactionList');
+        const noTransactionMessage = document.getElementById('noTransactionMessage');
+
+        let currentPage = 1;
+        let totalPages = 1;
+        let isLoading = false;
+
+        async function fetchTransactions(page = 1) {
+          if (isLoading || page > totalPages) return;
+          isLoading = true;
+
+          try {
+            const response = await fetch(`${BASE_URL}/transaction?page=${page}`, {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+
+            const data = await response.json();
+
+            if (data.success && data.transactions.length > 0) {
+              noTransactionMessage.style.display = 'none';
+              totalPages = data.totalPages;
+
+              data.transactions.forEach(tx => {
+                const txDiv = document.createElement('div');
+                txDiv.className = 'transactions-wrapper';
+                txDiv.innerHTML = `
+          <div class="box d-flex justify-content-between align-items-center">
+            <div class="left-content d-flex">
+              <div class="icon credit">
+                <span class="iconify arrow-down" data-icon="mingcute:arrow-down-fill"></span>
+              </div>
+              <div class="details">
+                <div class="name">${tx.receiver}</div>
+                <div class="date">${tx.date}</div>
+              </div>
+            </div>
+            <div class="right-content">
+              <div class="amount">+ ₦${parseFloat(tx.amount).toLocaleString('en-NG', {
+                  minimumFractionDigits: 2
+                })}</div>
+              <div class="success-message">Transaction ${tx.status}</div>
+            </div>
+          </div>
+        `;
+                transactionContainer.appendChild(txDiv);
+              });
+            } else if (page === 1) {
+              // Only show "no transactions" on first page
+              noTransactionMessage.style.display = 'block';
+            }
+          } catch (error) {
+            console.error('Failed to fetch transactions:', error);
+          } finally {
+            isLoading = false;
+          }
+        }
+
+        // Load first page on load
+        fetchTransactions(currentPage);
+
+        // Infinite scroll
+        window.addEventListener('scroll', () => {
+          const bottomOffset = 100; // pixels from bottom to trigger next page
+          if (
+            window.innerHeight + window.scrollY >= document.body.offsetHeight - bottomOffset &&
+            !isLoading &&
+            currentPage < totalPages
+          ) {
+            currentPage++;
+            fetchTransactions(currentPage);
+          }
+        });
+
+    </script>
 
      
 </body>
