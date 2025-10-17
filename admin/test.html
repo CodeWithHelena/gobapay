@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #0C3A30;
+            --secondary-color: #9EDD05;
+            --lite-primary: #29594B;
+            --lite-secondary: #D1EDBF;
+            --dark-secondary: #648907;
+            --bg-grey: #EDF1EE;
+            --bg-grey2: #EDF1EE;
+            --peach: #FFFAEB;
+            --grey: #d7d6d4;
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 70px;
+            --transition-speed: 0.3s;
+
+            /* Light theme (default) */
+            --bg-color: #f5f7fb;
+            --text-color: #212529;
+            --card-bg: white;
+            --header-border: #e0e0e0;
+            --stat-title-color: #6c757d;
+            --chart-bg: #f8f9fa;
+            --chart-color: #6c757d;
+            --activity-border: #f0f0f0;
+            --activity-time: #6c757d;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1f2e;
+            --text-color: #e9ecef;
+            --card-bg: #242c3d;
+            --header-border: #2a3244;
+            --stat-title-color: #a0aec0;
+            --chart-bg: #2a3244;
+            --chart-color: #a0aec0;
+            --activity-border: #2a3244;
+            --activity-time: #a0aec0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* FIX: Prevents horizontal scrollbar during animations */
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Sidebar Wrapper for Mobile Overlay */
+        .sidebar-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .sidebar-wrapper.active {
+            pointer-events: all;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+            pointer-events: none;
+        }
+
+        .sidebar-wrapper.active .overlay {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: white;
+            transition: width var(--transition-speed) ease, background-color var(--transition-speed) ease;
+            z-index: 1001;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(0);
+            padding: 1rem 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        [data-theme="dark"] .sidebar {
+            background-color: var(--card-bg);
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        .sidebar .brand-logo {
+            border-bottom: 1px solid var(--bg-grey);
+            padding: .5rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar .brand-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-link,
+        .dropdown-button {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px 12px 25px;
+            color: var(--bg-grey);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color var(--transition-speed);
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover,
+        .dropdown-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-link .iconify,
+        .dropdown-button .iconify {
+            font-size: 1.2rem;
+            margin-right: .7rem;
+            min-width: 24px;
+            color: #9EDD05 !important;
+        }
+
+        .sidebar-link span,
+        .dropdown-button span {
+            transition: opacity var(--transition-speed);
+            white-space: nowrap;
+        }
+
+        .dropdown-button.dropdown-toggle::after {
+            transition: transform var(--transition-speed) ease;
+            margin-left: 1rem;
+        }
+
+        .dropdown-button.dropdown-toggle.active::after {
+            transform: rotate(180deg);
+        }
+
+        .sidebar.collapsed .sidebar-link span,
+        .sidebar.collapsed .dropdown-button span {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .dropdown-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height var(--transition-speed) ease;
+        }
+
+        .dropdown-container.open {
+            max-height: 500px;
+        }
+
+        .dropdown-container a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px 12px 50px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: background-color var(--transition-speed);
+        }
+
+        .dropdown-container a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .dropdown-container a .iconify {
+            font-size: 1.2rem;
+            margin-right: .7rem;
+            min-width: 24px;
+        }
+
+        .lg-account {
+            display: block;
+        }
+
+        .sm-account {
+            display: none;
+        }
+
+        .close-sidebar {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            transition: margin-left var(--transition-speed) ease;
+        }
+
+        .main-content.expanded {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--header-border);
+        }
+
+        .page-title {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-left: 15px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            color: var(--stat-title-color);
+            font-size: 0.9rem;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color);
+        }
+
+        .bg-success {
+            background-color: var(--secondary-color);
+        }
+
+        .bg-warning {
+            background-color: var(--dark-secondary);
+        }
+
+        .bg-danger {
+            background-color: #f4717f;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .positive {
+            color: var(--secondary-color);
+        }
+
+        .negative {
+            color: #f4717f;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .chart-container,
+        .recent-activity {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--chart-bg);
+            border-radius: 8px;
+            color: var(--chart-color);
+        }
+
+        .activity-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--activity-border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex-grow: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--activity-time);
+        }
+
+        @media (min-width: 576.02px) {
+            .sidebar-wrapper {
+                width: auto;
+                pointer-events: all;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lg-account {
+                display: none;
+            }
+
+            .sm-account {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar-wrapper {
+                transform: translateX(-100%);
+                transition: transform var(--transition-speed) ease;
+                width: 100%;
+            }
+
+            .sidebar-wrapper.active {
+                transform: translateX(0);
+            }
+
+            .sidebar {
+                width: var(--sidebar-width);
+                transform: translateX(0);
+            }
+
+            .close-sidebar {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar.collapsed {
+                width: var(--sidebar-width);
+            }
+
+            .sidebar.collapsed .sidebar-link span,
+            .sidebar.collapsed .dropdown-button span {
+                opacity: 1;
+            }
+
+            .lg-account {
+                display: block;
+            }
+
+            .sm-account {
+                display: none;
+            }
+
+            .main-content.expanded {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="header">
+            <div class="d-flex align-items-center">
+                <button class="toggle-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard Overview</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <div>
+                        <div class="fw-bold">John Doe</div>
+                        <div class="small text-muted">Administrator</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">TOTAL REVENUE</div>
+                    <div class="stat-icon bg-primary"><i class="fas fa-dollar-sign"></i></div>
+                </div>
+                <div class="stat-value">$24,580</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 12.5% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">ORDERS</div>
+                    <div class="stat-icon bg-success"><i class="fas fa-shopping-bag"></i></div>
+                </div>
+                <div class="stat-value">1,258</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 8.3% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">CUSTOMERS</div>
+                    <div class="stat-icon bg-warning"><i class="fas fa-users"></i></div>
+                </div>
+                <div class="stat-value">5,372</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 5.7% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">CONVERSION RATE</div>
+                    <div class="stat-icon bg-danger"><i class="fas fa-chart-line"></i></div>
+                </div>
+                <div class="stat-value">3.25%</div>
+                <div class="stat-change negative"><i class="fas fa-arrow-down"></i> 1.2% from last month</div>
+            </div>
+        </div>
+        <div class="content-grid">
+            <div class="chart-container">
+                <div class="section-header">
+                    <h2 class="section-title">Revenue Analysis</h2><a href="#" class="view-all">View Report</a>
+                </div>
+                <div class="chart-placeholder"><i class="fas fa-chart-bar fa-3x me-3"></i><span>Interactive Revenue Chart</span></div>
+            </div>
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Activity</h2><a href="#" class="view-all">View All</a>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon bg-primary"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">New order received</div>
+                            <div class="activity-time">Order #3245 for $128.99</div>
+                            <div class="activity-time">2 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-success"><i class="fas fa-user-plus"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">New customer registered</div>
+                            <div class="activity-time">Sarah Johnson signed up</div>
+                            <div class="activity-time">15 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-warning"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">High traffic warning</div>
+                            <div class="activity-time">Peak traffic detected</div>
+                            <div class="activity-time">45 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-danger"><i class="fas fa-truck"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Delivery delayed</div>
+                            <div class="activity-time">Order #3124 will be late</div>
+                            <div class="activity-time">1 hour ago</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-wrapper" id="sidebar_container">
+        <div class="overlay"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const sideBarContainer = document.getElementById('sidebar_container');
+        sideBarContainer.innerHTML += `
+            <aside class="sidebar">
+                <button class="close-sidebar"><i class="fas fa-xmark"></i></button>
+                <div class="brand-logo"><img src="https://via.placeholder.com/200x60/0C3A30/FFFFFF?text=Brand+Logo" alt=""></div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html" class="sidebar-link"><iconify-icon icon="mdi:view-dashboard-outline"></iconify-icon><span>Overview</span></a></li>
+                    <li><a href="transfer.html" class="sidebar-link"><iconify-icon icon="fluent:money-hand-20-filled"></iconify-icon><span>Transactions</span></a></li>
+                    <li class="lg-account">
+                        <div class="dropdown sm-dropdown">
+                            <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:account-circle"></iconify-icon><span>Account</span></button>
+                            <div class="dropdown-container">
+                                <a href="profile.html"><iconify-icon icon="mdi:account"></iconify-icon> Profile</a>
+                                <a href="account-limit.html"><iconify-icon icon="mdi:cash"></iconify-icon> Account Limits</a>
+                                <a href="support.html"><iconify-icon icon="mdi:headset"></iconify-icon> Customer Service</a>
+                                <a href="terms-and-condition.html"><iconify-icon icon="mdi:book"></iconify-icon> Terms and Condition</a>
+                                <a href="privacy-policy.html"><iconify-icon icon="mdi:shield-check"></iconify-icon> Privacy and Policy</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="lg-account">
+                        <div class="dropdown sm-dropdown">
+                            <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:cog"></iconify-icon><span>Settings</span></button>
+                            <div class="dropdown-container">
+                                <a href="update-transaction-pin.html"><iconify-icon icon="mdi:account"></iconify-icon> Update Payment Pin</a>
+                                <a href="update-password.html"><iconify-icon icon="mdi:cash"></iconify-icon>Update Password</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="sm-account"><a href="account.html" class="sidebar-link"><iconify-icon icon="mdi:account-circle"></iconify-icon><span>Account</span></a></li>
+                    <li class="sm-account"><a href="settings.html" class="sidebar-link"><iconify-icon icon="mdi:cog"></iconify-icon><span>Settings</span></a></li>
+                    <li class="sm-logout"><a href="#" class="sidebar-link" id="logoutBTN"><iconify-icon icon="mdi:logout"></iconify-icon><span>Logout</span></a></li>
+                </ul>
+            </aside>
+        `;
+
+        const sidebar = sideBarContainer.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        document.querySelectorAll('.dropdown-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const dropdownContainer = this.nextElementSibling;
+                this.classList.toggle('active');
+                dropdownContainer.classList.toggle('open');
+            });
+        });
+
+        document.querySelector('.toggle-btn').addEventListener('click', function () {
+            if (window.innerWidth <= 576) {
+                sideBarContainer.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            }
+        });
+
+        sideBarContainer.querySelector('.close-sidebar').addEventListener('click', function () {
+            sideBarContainer.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        sideBarContainer.querySelector('.overlay').addEventListener('click', function () {
+            sideBarContainer.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        const manageInitialViewState = () => {
+            if (window.innerWidth > 576 && window.innerWidth <= 768) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            } else if (window.innerWidth > 768) {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+            }
+        };
+
+        manageInitialViewState();
+        window.addEventListener('resize', manageInitialViewState);
+
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        document.getElementById('logoutBTN').addEventListener('click', function (e) {
+            e.preventDefault();
+            alert('Logging out...');
+        });
+    </script>
+</body>
+
+</html>

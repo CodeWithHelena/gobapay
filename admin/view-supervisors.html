@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>View Supervisors</title>
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="stylesheet" href="/assets/css/view-supervisors.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+    <main style="margin-left:280px;padding:2rem;">
+        <div class="container">
+            <h2>Supervisors</h2>
+            <div class="card mt-2">
+                <table style="width:100%;border-collapse:collapse">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</ th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="supervisorTable">
+                        <!-- JS will populate rows. Example row with edit button below -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- Edit modal -->
+    <div id="editModal" class="modal hide" role="dialog" aria-hidden="true">
+        <div class="modal-panel card">
+            <button class="modal-close btn" id="modalClose">✕</button>
+            <h3>Edit Supervisor</h3>
+            <form id="editSupervisorForm">
+                <div style="display:grid;grid-template-columns:repeat(autofit,minmax(220px,1fr));gap:1rem">
+    <div class="form-group"><label for="edit_first_name">First name</ label><input id="edit_first_name" name="first_name" type="text" required></div>
+    <div class="form-group"><label for="edit_middle_name">Middle name</ label><input id="edit_middle_name" name="middle_name" type="text"></div>
+    <div class="form-group"><label for="edit_last_name">Last name</ label><input id="edit_last_name" name="last_name" type="text" required></div>
+    <div class="form-group"><label for="edit_email">Email</label><input id="edit_email" name="email" type="email" required></div>
+    <div class="form-group"><label for="edit_phone">Phone</label><input id="edit_phone" name="phone" type="tel"></div>
+    <div class="form-group"><label for="edit_department">Department</ label><input id="edit_department" name="department" type="text"></div>
+    <div class="form-group"><label for="edit_password">Password</ label><input id="edit_password" name="password" type="password"></div>
+    <div class="form-group"><label for="edit_isActive">Active</ label><input id="edit_isActive" name="isActive" type="checkbox"></div>
+    </div>
+    <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:
+    1rem">
+        <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</ button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    <style>
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 5, 0.45);
+            display: flex;
+            alignitems: center;
+            justify-content: center;
+            padding: 1rem;
+            transition: opacity .2s;
+            z-index:
+                70
+        }
+    
+        .modal.hide {
+            opacity: 0;
+            pointer-events: none
+        }
+    
+        .modal-panel {
+            width: min(880px, 96%);
+            position: relative
+        }
+    
+        .modal-close {
+            position: absolute;
+            right: 14px;
+            top: 12px
+        }
+    </style>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/supervisors.js"></script>
+    </body>
+    
+    </html>

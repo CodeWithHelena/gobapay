@@ -1,0 +1,136 @@
+<nav class="app-sidebar card" aria-label="Main sidebar">
+    <div class="logo-wrap">
+        <img src="/assets/img/logo.png" alt="logo" class="logo" />
+        <button id="theme-toggle" aria-label="toggle theme" class="btn theme-toggle">🌗</button>
+    </div>
+
+
+    <ul class="nav-list">
+        <li><a href="/dashboard.html" data-link="/dashboard.html" class="nav-item">📊 <span>Dashboard</span></a></li>
+
+
+        <li class="nav-group">
+            <button class="nav-item group-toggle">🧑‍💼 <span>Supervisor</span> <span class="caret">▸</span></button>
+            <ul class="nav-sub">
+                <li><a href="/add-supervisor.html" data-link="/add-supervisor.html" class="nav-item sub">➕ Add/Create Supervisor</a></li>
+                <li><a href="/view-supervisors.html" data-link="/view-supervisors.html" class="nav-item sub">👁️ View Supervisors</a></li>
+            </ul>
+        </li>
+
+
+        <li class="nav-group">
+            <button class="nav-item group-toggle">⚙️ <span>Settings</span> <span class="caret">▸</span></button>
+            <ul class="nav-sub">
+                <li><a href="/settings.html" data-link="/settings.html" class="nav-item sub">🛠 Update Settings</a></li>
+            </ul>
+        </li>
+
+
+        <li><a href="#logout" class="nav-item logout">🚪 <span>Logout</span></a></li>
+    </ul>
+</nav>
+
+
+<style>
+    .app-sidebar {
+        width: 260px;
+        padding: 1rem;
+        min-height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem
+    }
+
+    .logo-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.5rem
+    }
+
+    .logo {
+        height: 46px;
+        width: auto
+    }
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        padding: .6rem .75rem;
+        border-radius: 10px
+    }
+
+    .nav-item:hover {
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.03), transparent);
+        transform: translateX(4px);
+        transition: transform .15s
+    }
+
+    .nav-item.sub {
+        padding-left: 1.75rem
+    }
+
+    .nav-sub {
+        display: none;
+        padding-left: 0.5rem;
+        margin-top: 0.25rem
+    }
+
+    .nav-group.open .nav-sub {
+        display: block
+    }
+
+    .nav-item.active {
+        background: var(--lite-secondary);
+        border-left: 4px solid var(--secondary-color)
+    }
+
+    .caret {
+        margin-left: auto;
+        opacity: .7
+    }
+
+    .logout {
+        margin-top: auto
+    }
+
+    .theme-toggle {
+        background: transparent;
+        border-radius: 8px;
+        padding: .35rem
+    }
+
+
+    @media (max-width:900px) {
+        .app-sidebar {
+            position: relative;
+            width: 100%;
+            min-height: auto;
+            flex-direction: row;
+            align-items: center;
+            padding: .6rem
+        }
+
+        .nav-list {
+            flex-direction: row;
+            gap: .5rem
+        }
+
+        .nav-item {
+            padding: .45rem .6rem
+        }
+    }
+</style>

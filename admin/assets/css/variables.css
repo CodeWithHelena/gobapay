@@ -1,0 +1,51 @@
+:root {
+    --primary-color: #0C3A30;
+    --secondary-color: #9EDD05;
+    --lite-primary: #29594B;
+    --lite-secondary: #D1EDBF;
+    --dark-secondary: #648907;
+    --bg-grey: #EDF1EE;
+    --bg-grey2: #EDF1EE;
+    --peach: #FFFAEB;
+    --grey: #d7d6d4;
+
+    /* layout tokens */
+    --bg: var(--bg-grey);
+    --surface: #FFFFFF;
+    --muted-text: #6b6b6b;
+    --text: #0a0a0a;
+    --accent: var(--primary-color);
+}
+
+/* Dark theme override - generated from your palette */
+:root[data-theme='dark'],
+[data-theme='dark'] {
+    --primary-color: #15846C;
+    /* lighter teal for emphasis */
+    --secondary-color: #A3E600;
+    /* vivid green adjusted */
+    --lite-primary: #2A6453;
+    --lite-secondary: #3E731B;
+    --dark-secondary: #668E00;
+    --bg-grey: #0D110E;
+    --bg-grey2: #0D110E;
+    --peach: #1F1700;
+    --grey: #4A4845;
+
+    /* layout tokens */
+    --bg: #0D110E;
+    --surface: #0F1614;
+    --muted-text: #AEB3AA;
+    --text: #EDF1EE;
+    --accent: var(--primary-color);
+}
+
+/* Helpful utility tokens that adapt automatically */
+:root {
+    --card-bg: var(--surface);
+    --card-border: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme='dark'] {
+    --card-border: rgba(255, 255, 255, 0.04);
+}

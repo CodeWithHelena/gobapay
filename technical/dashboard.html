@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/css/general.css">
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="header">
+            <div class="d-flex align-items-center">
+                <button class="toggle-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard Overview</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon i-toggle"></i></button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <div>
+                        <div class="fw-bold">John Doe</div>
+                        <div class="small text-muted">Administrator</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">TOTAL REVENUE</div>
+                    <div class="stat-icon bg-primary"><i class="fas fa-dollar-sign"></i></div>
+                </div>
+                <div class="stat-value">$24,580</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 12.5% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">ORDERS</div>
+                    <div class="stat-icon bg-success"><i class="fas fa-shopping-bag"></i></div>
+                </div>
+                <div class="stat-value">1,258</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 8.3% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">CUSTOMERS</div>
+                    <div class="stat-icon bg-warning"><i class="fas fa-users"></i></div>
+                </div>
+                <div class="stat-value">5,372</div>
+                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 5.7% from last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">CONVERSION RATE</div>
+                    <div class="stat-icon bg-danger"><i class="fas fa-chart-line"></i></div>
+                </div>
+                <div class="stat-value">3.25%</div>
+                <div class="stat-change negative"><i class="fas fa-arrow-down"></i> 1.2% from last month</div>
+            </div>
+        </div>
+        <div class="content-grid">
+            <div class="chart-container">
+                <div class="section-header">
+                    <h2 class="section-title">Revenue Analysis</h2><a href="#" class="view-all">View Report</a>
+                </div>
+                <div class="chart-placeholder"><i class="fas fa-chart-bar fa-3x me-3"></i><span>Interactive Revenue Chart</span></div>
+            </div>
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Activity</h2><a href="#" class="view-all">View All</a>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon bg-primary"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">New order received</div>
+                            <div class="activity-time">Order #3245 for $128.99</div>
+                            <div class="activity-time">2 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-success"><i class="fas fa-user-plus"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">New customer registered</div>
+                            <div class="activity-time">Sarah Johnson signed up</div>
+                            <div class="activity-time">15 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-warning"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">High traffic warning</div>
+                            <div class="activity-time">Peak traffic detected</div>
+                            <div class="activity-time">45 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon bg-danger"><i class="fas fa-truck"></i></div>
+                        <div class="activity-content">
+                            <div class="activity-title">Delivery delayed</div>
+                            <div class="activity-time">Order #3124 will be late</div>
+                            <div class="activity-time">1 hour ago</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-wrapper" id="sidebar_container">
+        <div class="overlay"></div>
+        <!-- Side Bar goes here  -->
+        <script src="assets/js/sidebar.js"></script>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="assets/js/script.js"></script> -->
+     <script src="assets/js/theme-manager.js"></script>
+</body>
+
+</html>
