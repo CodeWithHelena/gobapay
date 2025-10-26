@@ -779,6 +779,14 @@ body {
      color: var(--primary-color);
  }
 
+ [data-theme="dark"] .tab-container .tab-item:hover {
+     color: var(--secondary-color);
+ }
+
+ .tab-container .tab-item.active:hover {
+    color: var(--primary-color);
+ }
+
  .tab-container .tab-content {
      display: none;
      background-color: var(--bg-color);
@@ -911,29 +919,29 @@ body {
       padding: 1rem !important;
   }
 
-  #view-supervisors-tab table tbody tr {
+  .views-tab table tbody tr {
       padding-bottom: 2.5rem !important;
-      cursor: pointer;
+      cursor: pointer ;
       border-bottom: 1px solid var(--grey-ea);
   }
 
-  #view-supervisors-tab table tbody tr:hover {
+  .views-tab table tbody tr:hover {
       background-color: var(--grey-f1f);
   }
 
-  [data-theme="dark"] #view-supervisors-tab table tbody tr:hover {
+  [data-theme="dark"] .views-tab table tbody tr:hover {
       background: var(--hover-bg-dark);
       color: var(--chart-color);
   }
 
 
-  #view-supervisors-tab table tbody tr .tr-role {
+  .views-tab table tbody tr .tr-role {
       text-transform: capitalize;
       font-weight: 500;
       color: var(--muted);
   }
 
-  #view-supervisors-tab table tbody tr .date-joined{
+  .views-tab table tbody tr .date-joined{
     color: var(--text-color);
   }
 
@@ -992,11 +1000,6 @@ body {
       border: 1px solid rgba(40, 167, 69, 0.12)
   }
 
-  .status-suspended {
-      background: var(--status-suspended);
-      color: var(--suspend);
-      border: 1px solid rgba(253, 126, 20, 0.12)
-  }
 
   .actions .btn {}
 
@@ -1229,6 +1232,13 @@ body {
      opacity: 0.8;
      color: var(--primary-color) !important;
  }
+
+ [data-theme="dark"] .btn-back:hover {
+     opacity: 0.8;
+     color: var(--secondary-color) !important;
+ }
+
+
 
  .profile-header {
      display: flex;

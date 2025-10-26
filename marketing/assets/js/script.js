@@ -1,33 +1,19 @@
+import { showToast } from './message.js'; 
 
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+const BASE_URL = 'https://gobapay.onrender.com/api';
+const TOKEN_KEY = 'admin_tkn';
 
-        if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        }
+function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            if (newTheme === 'dark') {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
+function showToastSafe(msg, type = 'info') {
+  if (typeof showToast === 'function') showToast(msg, type);
+  else alert(msg);
+}
 
-        document.getElementById('logoutBTN').addEventListener('click', function (e) {
-            e.preventDefault();
-            alert('Logging out...');
-        });
+// Make utilities globally available
+window.BASE_URL = BASE_URL;
+window.TOKEN_KEY = TOKEN_KEY;
+window.getToken = getToken;
+window.showToastSafe = showToastSafe;

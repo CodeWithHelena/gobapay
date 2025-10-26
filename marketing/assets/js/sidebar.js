@@ -8,11 +8,11 @@ const sideBarContainer = document.getElementById('sidebar_container');
                     
                     <li>
                         <div class="dropdown">
-                            <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:account-circle" class="iconify"></iconify-icon><span>Supervisor</span></button>
+                            <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:account-group" class="iconify"></iconify-icon><span>Customer</span></button>
                             <div class="dropdown-container">
-                                <a href="supervisor.html"><iconify-icon icon="mdi:account" class="iconify"></iconify-icon> Add Supervisor</a>
-                                <a href="supervisor.html"><iconify-icon icon="mdi:cash" class="iconify"></iconify-icon> View Supervisors</a>
-                                <a href="supervisor.html"><iconify-icon icon="mdi:headset" class="iconify"></iconify-icon> Supervisor History</a>
+                                <a href="customer.html"><iconify-icon icon="mdi:account-plus" class="iconify"></iconify-icon> Add Customer</a>
+                                <a href="customer.html"><iconify-icon icon="mdi:account-eye" class="iconify"></iconify-icon> View Customer</a>
+                                <a href="customer.html"><iconify-icon icon="mdi:history" class="iconify"></iconify-icon> Customer History</a>
                             </div>
                         </div>
                     </li>
@@ -20,7 +20,7 @@ const sideBarContainer = document.getElementById('sidebar_container');
                         <div class="dropdown">
                             <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:cog" class="iconify"></iconify-icon><span>Settings</span></button>
                             <div class="dropdown-container">                                
-                                <a href="settings.html"><iconify-icon icon="mdi:headset" class="iconify"></iconify-icon>  Transaction Settings</a>
+                                <a href="settings.html"><iconify-icon icon="mdi:account-circle" class="iconify"></iconify-icon>Profile</a>
                                 <a href="#" class="sidebar-theme-option">
                                     <iconify-icon icon="solar:moon-bold" class="iconify"></iconify-icon> 
                                     Theme

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Supervisor - Admin Panel</title>
+    <title>customer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -225,6 +225,195 @@
         color: rgba(0,0,0,0.45);
         pointer-events: none;
         }
+
+
+        .gender-radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    margin: 0;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+    border-color: var(--secondary-color) !important;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+    .customer {
+        padding: 0;
+    }
+
+    .customer .profile-header{
+        background-color: var(--lite-secondary);
+        height: 110px;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem 1rem .5rem 1rem;
+        border-bottom: none;
+    }
+
+    .customer .profile-info {
+        padding-top: 0;
+    }
+    .customer .profile-header .image-name{
+        gap: 1rem;
+    }
+
+    .customer .profile-image-section {
+        display: block;
+        gap: 0.75rem;
+        /* transform: translateY(50px); */
+    }
+    .customer  .avatar-2.placeholder {
+        width: 90px;
+        height: 90px;
+        font-size: 3rem;
+        background: #efeeee;
+        color: var(--primary-color);
+        cursor: pointer;
+        opacity: 1;
+    }
+
+    .customer .detail-value.status-badge{
+        font-size: .8rem;
+    }
+
+    .customer .profile-name{
+        color: var(--primary-color);
+    }
+
+    .customer .profile-staff-id{
+        color: var(--lite-primary);
+        font-weight: 600;
+    }
+
+    .customer .btn-edit-profile{
+        background: var(--secondary-color);
+        color: #fff;
+        padding: .3rem .5rem;
+    }
+
+    .customer .btn-edit-profile:hover{
+        background: var(--secondary-color);
+    }
+
+    .customer .profile-details{
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem ;
+    }
+
+    .customer .details-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .customer .details-grid-wrap{
+        margin-bottom: 1rem;
+    }
+
+    .customer .detail-item-wrapper{
+    }
+    .customer .detail-item{
+        padding: .5rem .5rem;
+        text-wrap: wrap;
+    }
+    .customer .detail-label{
+        padding-left: .3rem;
+    }
+    .customer .detail-value{
+        text-wrap: wrap;
+    }
+    .customer .status-active,
+    .customer .status-suspended{
+        font-size: .9rem;
+    
+    }
+    .customer .status-suspended{
+        color: var(--suspend);
+    }
+    .customer .status-active{
+        background: var(--active);
+        color: #fff;
+    }
+
+    
+    @media (max-width: 991px) {
+        .tab-container .tab-content {
+            margin-left: 0;
+        }
+        .form-container {
+        padding-left: 30px;
+    }
+    }
+    
+    @media (max-width: 768px) {
+        .customer .sm-profile-header{
+            flex-direction: row;
+            text-align: left;
+        }
+        .customer  .avatar-2.placeholder {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        .customer .profile-image-section {
+            
+            /* transform: translateY(-18px); */
+        }
+    }
+
+    @media (max-width: 640px) {
+    .customer .grid-row-flex{
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .customer .btn-back{
+        margin-bottom: 0 !important;
+    }
+    .tab-container .tab-content {
+        
+        margin-left: 0;
+    }
+    .btn-back-wrapper{
+        margin-bottom: 0 !important;
+    }
+    .customer .profile-details {
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+    }
+    @media (max-width: 480px) {
+    .customer .profile-name {
+        font-size: 1.1rem;
+    }
+    }
     </style>
 </head>
 
@@ -235,7 +424,7 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="align-self-center w-100">
-                <h1 class="header-title">Supervisor</h1>
+                <h1 class="header-title">Customer</h1>
             </div>
         </div>
 
@@ -243,16 +432,15 @@
             <!-- Tab Navigation -->
             <div class="tab-navigation">
                 <ul class="tab-list">
-                    <li class="tab-item active" data-tab="add-supervisor">
+                    <li class="tab-item active" data-tab="add-customer">
                         <i class="fas fa-user-plus"></i>
-                        <span>Add Supervisor</span>
+                        <span>Add Customer</span>
                     </li>
-                    <li class="tab-item" data-tab="view-supervisors">
+                    <li class="tab-item" data-tab="view-customers">
                         <i class="fas fa-list"></i>
-                        <span>View Supervisors</span>
+                        <span>View Customers</span>
                     </li>
                     <li class="tab-item" data-tab="history">
-                        
                         <i class="fas fa-history"></i>
                         <span>History</span>
                     </li>
@@ -261,7 +449,7 @@
             
             <!-- Tab Content -->
             <div class="tab-content-wrapper">
-                <div class="tab-content " id="add-supervisor-tab">
+                <div class="tab-content active" id="add-customer-tab">
                     <div class="form-container">
                         <div class="employee-details-card">
                             <div class="card-header">
@@ -272,16 +460,16 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="card-title">Add Supervisor</div>
-                                    <div class="card-description">Fill in the details below to add a new supervisor to the system.</div>
+                                    <div class="card-title">Add Customer</div>
+                                    <div class="card-description">Fill in the details below to add a new customer to the system.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-header">
-                            <h2 class="form-title">Supervisor Details</h2>
+                            <h2 class="form-title">Customer Details</h2>
                         </div>
             
-                        <form id="addSupervisorForm">
+                        <form id="addCustomerForm">
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label for="first_name">First name *</label>
@@ -300,25 +488,42 @@
                                     <input id="email" name="email" type="email" required />
                                 </div>
                                 <div class="form-group">
+                                    <label>Gender *</label>
+                                    <div class="gender-radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="male" required>
+                                            Male
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="female" required>
+                                            Female
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="other" required>
+                                            Other
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input id="phone" name="phone" type="tel" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="department">Department</label>
-                                
-                                    <!-- custom beautiful dropdown (keeps native <select> for accessibility) -->
-                                    <div class="custom-select-wrap" style="position:relative;">
-                                        <select id="department" name="department" required style="width:100%; padding:12px 40px 12px 12px; border-radius:8px; border:none;  font-size:1rem;">
-                                            <option value="">Select department</option>
-                                            <option value="marketing">Marketing</option>
-                                            <option value="administrator">Administrator</option>
-                                            <option value="support">Support</option>
-                                        </select>
-                                        <!-- custom arrow using Font Awesome (no JS required) -->
-                                        <i class="fa fa-caret-down" aria-hidden="true" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:rgba(0,0,0,0.45)"></i>
-                                    </div>
+                                    <label for="country">Country</label>
+                                    <input id="country" name="country" type="text" />
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input id="address" name="address" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessName">Business Name</label>
+                                    <input id="businessName" name="businessName" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="bvn">BVN</label>
+                                    <input id="bvn" name="bvn" type="text" />
+                                </div>
                                 <div class="form-group">
                                     <label for="password">Password *</label>
                                     <input id="password" name="password" type="password" required />
@@ -331,21 +536,21 @@
             
                             <div class="form-actions me-5">
                                 <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
-                                <button type="submit" class="btn btn-brand" id="createSupervisorBtn">Add Supervisor</button>
+                                <button type="submit" class="btn btn-brand" id="createCustomerBtn">Add Customer</button>
                             </div>
                         </form>
                     </div>
                 </div>
             
-                <div class="tab-content active" id="view-supervisors-tab">
+                <div class="tab-content views-tab" id="view-customers-tab">
                     <div class="">                      
                         <div class="container-fluid my-4">
                             <div class="table-card">
                                 <div class="topbar">
                                     <div class="container-hero gap-3">
                                         <div class="mb-4">
-                                            <h4 class="mb-0"><i class="fas fa-users me-2"></i>Manage Supervisors</h4>
-                                            <small class="text-muted">Search for supervisor, edit, suspend and delete.</small>
+                                            <h4 class="mb-0"><i class="fas fa-users me-2"></i>Manage Customers</h4>
+                                            <small class="text-muted">Search for customer, edit, suspend and delete.</small>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center search-export-div">
                                             <div class="input-group search-div">
@@ -368,7 +573,7 @@
                                                     <div><input type="checkbox" aria-label="select all"></div>
                                                 </th>
                                                 <th>Name</th>
-                                                <th>Role</th>
+                                                <th>Acc. Number</th>
                                                 <th>Status</th>
                                                 <th>Date Joined</th>
                                                 <th>Actions</th>
@@ -387,27 +592,48 @@
                 </div>
 
                 <div class="tab-content" id="history-tab">
-                    <h1>Supervisor History</h1>
+                    <!-- <h1>Supervisor History</h1> -->
+                    <div class="profile-header2 mb-2">
+                        <!-- <button class="btn btn-back" id="backToSupervisorsBtn">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Customers
+                        </button> -->
+                    </div>
                 </div>
             
-                <div class="tab-content" id="supervisor-details-tab">
-                <section class="tab-profile-wrapper">
-                    <div class="profile-header2 mb-4">
-                        <button class="btn btn-back" id="backToSupervisorsBtn">
-                            <i class="fas fa-arrow-left me-2"></i> Back to Supervisors
+                <div class="tab-content" id="customer-details-tab">
+                    <div class="btn-back-wrapper mb-2">
+                        <button class="btn btn-back" id="backToCustomersBtn">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Customers
                         </button>
                     </div>
+                <section class="tab-profile-wrapper customer">
                     <div class="profile-container">
-                        <div class="profile-header">
-                            <div class="profile-image-section">
-                                <span class="avatar-2 placeholder">
-                                    <i class="fas fa-user"></i>
-                                </span>
+                        <div class="profile-header sm-profile-header">
+                            <div class="image-name">
+                                <div class="profile-image-section d-flex justify-content-center">
+                                    <span class="avatar-2 placeholder">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div> 
                             </div>
-                
-                            <div class="profile-info">
-                                <h2 class="profile-name">Jane Adrine Doe</h2>
-                                <p class="profile-staff-id">Staff ID: lofy-61635-staff</p>
+                            <div class="d-flex justify-content-between align-items-top" style="width: 87%; gap: 1rem">
+                                               
+                                <div class="profile-info">
+                                    <div>
+                                        <h2 class="profile-name mb-0">Jane Adrine Doe</h2>
+                                        <p class="profile-staff-id mt-1 mb-2"></p>
+                    
+                                    </div>  
+                                    
+                                    <div class="">
+                                        <span class="detail-value" id="btn-status"></span>
+                                    </div>             
+                                </div>
+                            <div class="balance">
+                                <h2 class="profile-name mb-0">Balance</h2>
+                                <p class="profile-staff-id mt-1"></p>
+                            </div>
+
                             </div>
                         </div>
                 
@@ -418,32 +644,128 @@
                                     <i class="fas fa-edit"></i> Edit Profile
                                 </button>
                             </div>
-                            <div class="details-grid">
-                                <div class="detail-item">
-                                    <span class="detail-label">Email</span>
-                                    <span class="detail-value">john@example.com</span>
+                            <div class="details-grid-wrap row grid-row-flex">
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">First Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
                                 </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Phone</span>
-                                    <span class="detail-value">+23480128654</span>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Middle Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
                                 </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Status</span>
-                                    <span class="status-suspended">Suspended</span>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Last Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
                                 </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Department</span>
-                                    <span class="detail-value">Marketing</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Date Joined</span>
-                                    <span class="detail-value">March 02, 2025</span>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Gender</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                
+                            <div class="details-grid-wrap row grid-row-flex">
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Country</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Phone</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">BVN</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Account Verification</span>
+                                    <div class="mt-2">
+                                        <span class="detail-value status-active"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-8">
+                                    <span class="detail-label">Email</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-4">
+                                    <span class="detail-label">Current Tier</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">Business Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">Address</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Date Joined</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Last Updated</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">KYC Verification</span>
+                                    <div class="mt-2">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Registered By</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">National Identification Number (NIN)</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value"></span>
+                                        <span class="detail-value" style="color: var(--secondary-color); cursor: pointer;">View Image</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
                         <div class="profile-actions">
-                            <button class="btn-delete-supervisor">
+                            <button class="btn-delete-supervisor m-3">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </div>
@@ -595,8 +917,7 @@
 
     <!-- Add Supervisor Page Specific JavaScript -->
     <!-- <script src="assets/js/script.js"></script> -->
-    <script type="module" src="assets/js/supervisors.js"></script>
-    
+    <script type="module" src="assets/js/customer.js"></script>
 
 </body>
 
