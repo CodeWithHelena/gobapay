@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/css/general.css">
+    <script src="assets/js/theme-manager.js"></script>
+    <style>
+        
+        .main-content {
+            padding-top: 0 !important;
+            padding-right: 0;
+            /* background: #fff; */
+        }
+
+        .employee-name-section {
+            margin-bottom: 25px;
+        }
+
+        .section-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .section-label span {
+            color: #f4717f;
+        }
+
+        .country-section {
+            margin-top: 25px;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 1rem 1rem 1rem 0;
+            margin-bottom: 30px;
+        }
+
+        .form-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--header-border);
+        }
+
+        .form-title {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        .form-subtitle {
+            color: var(--stat-title-color);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--input-bg);
+            color: var(--muted);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(12, 58, 48, 0.1);
+        }
+
+        .form-group input:required:valid {
+            border-color: var(--secondary-color);
+        }
+
+        .form-group input:required:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #f4717f;
+        }
+
+        .custom-select-wrap select{
+            color:var(--select-text-color) !important;
+        }
+
+        .custom-select-wrap select option{
+            background: var(--select-bg); 
+            color:var(--select-text-color);
+        }
+
+        /* [data-theme="dark"] .custom-select-wrap select {
+            color: var(--muted);
+        } */
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--header-border);
+        }
+
+        .btn {
+            
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            padding: .4rem .5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--lite-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--lite-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(12, 58, 48, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-grey);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+
+        /* Responsive Design for Form */
+        @media (max-width: 992px) {
+            .container-fluid{
+                --bs-gutter-x: 0;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-container{
+                margin-right: 0;
+                box-shadow: none !important;
+                padding-left: 10px;
+                
+            }
+            
+        }
+
+        @media (max-width: 576px) {
+            
+            
+            .form-container {
+                padding: 20px 20px 20px 0;
+            }
+
+
+            .btn {
+                width: 100%;
+            }
+        .form-actions{
+            margin-right: 0 !important;
+            /* flex-direction: column-reverse; */
+        }
+        }
+
+        .container-hero {
+            padding: 20px 20px 20px 10px;
+        }
+
+        /* select for department */
+        #department {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 12px 44px 12px 14px;
+        border-radius: 8px;
+        border: none;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        }
+
+        /* caret icon on the right - uses fontawesome caret inserted in HTML by helper */
+        .custom-select-wrap { position: relative; }
+        .custom-select-wrap i.fa-caret-down {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(0,0,0,0.45);
+        pointer-events: none;
+        }
+
+
+        .gender-radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    margin: 0;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+    border-color: var(--secondary-color) !important;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+    .customer {
+        padding: 0;
+    }
+
+    .customer .profile-header{
+        background-color: var(--lite-secondary);
+        height: 110px;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem 1rem .5rem 1rem;
+        border-bottom: none;
+    }
+
+    .customer .profile-info {
+        padding-top: 0;
+    }
+    .customer .profile-header .image-name{
+        gap: 1rem;
+    }
+
+    .customer .profile-image-section {
+        display: block;
+        gap: 0.75rem;
+        /* transform: translateY(50px); */
+    }
+    .customer  .avatar-2.placeholder {
+        width: 90px;
+        height: 90px;
+        font-size: 3rem;
+        background: #efeeee;
+        color: var(--primary-color);
+        cursor: pointer;
+        opacity: 1;
+    }
+
+    .customer .detail-value.status-badge{
+        font-size: .8rem;
+    }
+
+    .customer .profile-name{
+        color: var(--primary-color);
+    }
+
+    .customer .profile-staff-id{
+        color: var(--lite-primary);
+        font-weight: 600;
+    }
+
+    .customer .btn-edit-profile{
+        background: var(--secondary-color);
+        color: #fff;
+        padding: .3rem .5rem;
+    }
+
+    .customer .btn-edit-profile:hover{
+        background: var(--secondary-color);
+    }
+
+    .customer .profile-details{
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem ;
+    }
+
+    .customer .details-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .customer .details-grid-wrap{
+        margin-bottom: 1rem;
+    }
+
+    .customer .detail-item-wrapper{
+    }
+    .customer .detail-item{
+        padding: .5rem .5rem;
+        text-wrap: wrap;
+    }
+    .customer .detail-label{
+        padding-left: .3rem;
+    }
+    .customer .detail-value{
+        text-wrap: wrap;
+    }
+    .customer .status-active,
+    .customer .status-suspended{
+        font-size: .9rem;
+    
+    }
+    .customer .status-suspended{
+        color: var(--suspend);
+    }
+    .customer .status-active{
+        background: var(--active);
+        color: #fff;
+    }
+
+    
+    @media (max-width: 991px) {
+        .tab-container .tab-content {
+            margin-left: 0;
+        }
+        .form-container {
+        padding-left: 30px;
+    }
+    }
+    
+    @media (max-width: 768px) {
+        .customer .sm-profile-header{
+            flex-direction: row;
+            text-align: left;
+        }
+        .customer  .avatar-2.placeholder {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        .customer .profile-image-section {
+            
+            /* transform: translateY(-18px); */
+        }
+    }
+
+    @media (max-width: 640px) {
+    .customer .grid-row-flex{
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .customer .btn-back{
+        margin-bottom: 0 !important;
+    }
+    .tab-container .tab-content {
+        
+        margin-left: 0;
+    }
+    .btn-back-wrapper{
+        margin-bottom: 0 !important;
+    }
+    .customer .profile-details {
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+    }
+    @media (max-width: 480px) {
+    .customer .profile-name {
+        font-size: 1.1rem;
+    }
+    }
+
+    /* Add to your CSS file */
+.view-image-link {
+    transition: color 0.2s ease;
+    text-decoration: underline !important;
+}
+
+.view-image-link:hover {
+    color: var(--primary-color) !important;
+}
+
+#modalImageView {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.modal-content {
+    border: none;
+    border-radius: 12px;
+}
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="dashboard-header d-flex">
+            <button class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="align-self-center w-100">
+                <h1 class="header-title">Customer</h1>
+            </div>
+        </div>
+
+        <div class="tab-container d-flex">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <ul class="tab-list">
+                    <li class="tab-item active" data-tab="add-customer">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Customer</span>
+                    </li>
+                    <li class="tab-item" data-tab="view-customers">
+                        <i class="fas fa-list"></i>
+                        <span>View Customers</span>
+                    </li>
+                    <li class="tab-item" data-tab="history">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Tab Content -->
+            <div class="tab-content-wrapper">
+                <div class="tab-content active" id="add-customer-tab">
+                    <div class="form-container">
+                        <div class="employee-details-card">
+                            <div class="card-header">
+                                <div>
+                                    <div class="card-icon">
+                                        <span class=""><i class="fas fa-user"></i></span>
+                                        <span class="i-fa-plus d-flex justify-content-center align-items-center"><i class="fa-solid fa-plus"></i></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="card-title">Add Customer</div>
+                                    <div class="card-description">Fill in the details below to add a new customer to the system.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-header">
+                            <h2 class="form-title">Customer Details</h2>
+                        </div>
+            
+                        <form id="addCustomerForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="first_name">First name *</label>
+                                    <input id="first_name" name="first_name" type="text" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="middle_name">Middle name</label>
+                                    <input id="middle_name" name="middle_name" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last name *</label>
+                                    <input id="last_name" name="last_name" type="text" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input id="email" name="email" type="email" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender *</label>
+                                    <div class="gender-radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="male" required>
+                                            Male
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="female" required>
+                                            Female
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="gender" value="other" required>
+                                            Other
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input id="phone" name="phone" type="tel" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input id="country" name="country" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input id="address" name="address" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessName">Business Name</label>
+                                    <input id="businessName" name="businessName" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="bvn">BVN</label>
+                                    <input id="bvn" name="bvn" type="text" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password *</label>
+                                    <input id="password" name="password" type="password" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="comfirm-password">Comfirm Password *</label>
+                                    <input id="comfirm-password" name="comfirm-password" type="password" required />
+                                </div>
+                            </div>
+            
+                            <div class="form-actions me-5">
+                                <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-brand" id="createCustomerBtn">Add Customer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            
+                <div class="tab-content views-tab" id="view-customers-tab">
+                    <div class="">                      
+                        <div class="container-fluid my-4">
+                            <div class="table-card">
+                                <div class="topbar">
+                                    <div class="container-hero gap-3">
+                                        <div class="mb-4">
+                                            <h4 class="mb-0"><i class="fas fa-users me-2"></i>Manage Customers</h4>
+                                            <small class="text-muted">Search for customer, edit, suspend and delete.</small>
+                                        </div>
+                                        <div class="custom-search-container">
+                                        
+                                            <div class="search-filters">
+                                                <!-- Search by Account Number -->
+                                                <div class="filter-group" style="width: 60%; flex: 1;">
+                                                    <label class="filter-label">Search by account</label>
+                                                    <div class="search-input-wrapper">
+                                                        <input type="text" class="search-input" placeholder="Enter  number" id="accountSearch">
+                                                        <i class="search-icon fas fa-search"></i>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Filter by Tier -->
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Filter by tier</label>
+                                                    <div class="custom-dropdown" id="tierDropdown">
+                                                        <button class="dropdown-toggle" type="button">
+                                                            <span class="selected-text">Select tier</span>
+                                                            <i class="dropdown-arrow fas fa-chevron-down"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <div class="dropdown-item" data-value="tier1">Tier 1</div>
+                                                            <div class="dropdown-item" data-value="tier2">Tier 2</div>
+                                                            <div class="dropdown-item" data-value="tier3">Tier 3</div>
+                                                            <div class="dropdown-item" data-value="premium">Premium</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Filter by Status -->
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Filter by status</label>
+                                                    <div class="custom-dropdown" id="statusDropdown">
+                                                        <button class="dropdown-toggle" type="button">
+                                                            <span class="selected-text">Select status</span>
+                                                            <i class="dropdown-arrow fas fa-chevron-down"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <div class="dropdown-item" data-value="active">Active</div>
+                                                            <div class="dropdown-item" data-value="suspended">Suspended</div>
+                                                            <div class="dropdown-item" data-value="inactive">Inactive</div>
+                                                            <div class="dropdown-item" data-value="pending">Pending</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Filter by Year -->
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Filter by year</label>
+                                                    <div class="custom-dropdown" id="yearDropdown">
+                                                        <button class="dropdown-toggle" type="button">
+                                                            <span class="selected-text">Select year</span>
+                                                            <i class="dropdown-arrow fas fa-chevron-down"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <div class="dropdown-item" data-value="2024">2024</div>
+                                                            <div class="dropdown-item" data-value="2023">2023</div>
+                                                            <div class="dropdown-item" data-value="2022">2022</div>
+                                                            <div class="dropdown-item" data-value="2021">2021</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <!-- Search Button -->
+                                                <div class="filter-group">
+                                                    <label class="filter-label">&nbsp;</label>
+                                                    <button class="search-btn" id="searchButton">
+                                                        <i class="fas fa-search"></i>
+                                                        Search
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    .custom-search-container {
+    
+    
+   
+}
+
+
+
+.search-filters {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+/* Search Input Styles */
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* Custom Dropdown Styles */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    border-color: var(--secondary-color);
+}
+
+.dropdown-toggle.active {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(var(--secondary-color-rgb), 0.1);
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+.dropdown-toggle.active .dropdown-arrow {
+    transform: rotate(180deg);
+    color: var(--secondary-color);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 2px solid var(--secondary-color);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.dropdown-item:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Search Button Styles */
+.search-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-filters {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .custom-search-container {
+        padding: 1rem;
+    }
+}
+
+                                </style>
+                                <!-- responsive scrollable table -->
+                                <div class="table-wrapper">
+                                    <table class="table  mb-0">
+                                        <thead class="border-bottom">
+                                            <tr>
+                                                <th>
+                                                    <div><input type="checkbox" aria-label="select all"></div>
+                                                </th>
+                                                <th>Name</th>
+                                                <th>Acc. Number</th>
+                                                <th>Status</th>
+                                                <th>Date Joined</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Table content added dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                        
+                                <div class="p-3 text-muted"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="history-tab">
+                    <!-- <h1>Supervisor History</h1> -->
+                    <div class="profile-header2 mb-2">
+                        <!-- <button class="btn btn-back" id="backToSupervisorsBtn">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Customers
+                        </button> -->
+                    </div>
+                </div>
+            
+                <div class="tab-content" id="customer-details-tab">
+                    <div class="btn-back-wrapper mb-2">
+                        <button class="btn btn-back" id="backToCustomersBtn">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Customers
+                        </button>
+                    </div>
+                <section class="tab-profile-wrapper customer">
+                    <div class="profile-container">
+                        <div class="profile-header sm-profile-header">
+                            <div class="image-name">
+                                <div class="profile-image-section d-flex justify-content-center">
+                                    <span class="avatar-2 placeholder">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div> 
+                            </div>
+                            <div class="d-flex justify-content-between align-items-top" style="width: 87%; gap: 1rem">
+                                               
+                                <div class="profile-info">
+                                    <div>
+                                        <h2 class="profile-name mb-0">Jane Adrine Doe</h2>
+                                        <p class="profile-staff-id mt-1 mb-2"></p>
+                    
+                                    </div>  
+                                    
+                                    <div class="">
+                                        <span class="detail-value" id="btn-status"></span>
+                                    </div>             
+                                </div>
+                            <div class="balance">
+                                <h2 class="profile-name mb-0">Balance</h2>
+                                <p class="profile-staff-id mt-1"></p>
+                            </div>
+
+                            </div>
+                        </div>
+                
+                        <div class="profile-details">
+                            <div class="detail-title-wrapper d-flex justify-content-between align-items-center">
+                                <h3 class="details-title">Profile Details</h3>
+                                <button class="btn-edit-profile" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                    <i class="fas fa-edit"></i> Edit Profile
+                                </button>
+                            </div>
+                            <div class="details-grid-wrap row grid-row-flex">
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">First Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-first-name"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Middle Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-middle-name"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Last Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-last-name"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Gender</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-gender"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row grid-row-flex">
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Country</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-country"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Phone</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-phone"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">BVN</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-bvn"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                    <span class="detail-label">Account Verification</span>
+                                    <div class="mt-2">
+                                        <span class="detail-value" id="customer-verification"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-8">
+                                    <span class="detail-label">Email</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-email"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-4">
+                                    <span class="detail-label">Current Tier</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-tier"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">Business Name</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-business-name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">Address</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-address"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Date Joined</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-date-joined"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Last Updated</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-last-updated"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">KYC Verification</span>
+                                    <div class="mt-2">
+                                        <span class="detail-value" id="customer-kyc-status"></span>
+                                    </div>
+                                </div>
+                                <div class="detail-item-wrapper col-md-6">
+                                    <span class="detail-label">Registered By</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-registered-by"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-grid-wrap row">
+                                <div class="detail-item-wrapper col-md-12">
+                                    <span class="detail-label">National Identification Number (NIN)</span>
+                                    <div class="detail-item">
+                                        <span class="detail-value" id="customer-nin"></span>
+                                        <span class="detail-value view-image-link" style="color: var(--secondary-color); cursor: pointer;" data-image-type="nin">
+                                            View Image
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+                        <div class="profile-actions">
+                            <button class="btn-delete-supervisor m-3">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-wrapper" id="sidebar_container">
+        <div class="overlay"></div>
+        <!-- Side Bar goes here  -->
+        <script src="assets/js/sidebar.js"></script>
+    </div>
+
+    <div class="message-container">
+        <div id="toast-container"></div>
+    </div>
+
+    <!-- Confirm Cancel Modal (Bootstrap) -->
+    <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm cancel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel? All unsaved changes will be lost.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keep editing</button>
+                    <button type="button" id="confirmCancelBtn" class="btn btn-danger">Yes, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap Modal for Profile Editing -->
+    <div class="modal fade editModal" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form class="profile-edit-form">
+                        <!-- Profile Image Section -->
+                        <div class="form-image-section text-center mb-4">
+                            <div class="image-preview mb-3">
+                                <span class="avatar-2 placeholder large">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-camera me-2"></i>Change Image
+                            </button>
+                        </div>
+                
+                        <!-- Personal Information -->
+                        <div class="section-title mb-3">Personal Information</div>
+                        <div class="mb-4">
+                            <div class="">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="">
+                                <label for="middleName" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" id="middleName">
+                            </div>
+                            <div class="">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                
+                        <!-- Contact Information -->
+                        <div class="section-title mb-3">Contact Information</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="editEmail" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="editPhone" required>
+                            </div>
+                        </div>
+                
+                        <!-- Work Information -->
+                        <div class="section-title mb-3">Work Information</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="staffId" class="form-label">Staff ID *</label>
+                                <input type="text" class="form-control" id="staffId" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="department" class="form-label">Department *</label>
+                                <select class="form-select" id="editDepartment" required>
+                                    <option value="">Select Department</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="technical">Technical IT</option>
+                                    <option value="administrator">Administrator</option>
+                                    <option value="support">Support</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <!-- Password Field (you added this) -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-12">
+                                <label for="editPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="editPassword" placeholder="Leave blank to keep current password">
+                            </div>
+                        </div>
+                
+                        <!-- Account Status -->
+                        <div class="account-status-section">
+                            <div class="section-title mb-3">Account Status</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isActive">
+                                <label class="form-check-label" for="isActive">
+                                    Active Account
+                                </label>
+                            </div>
+                            <div class="form-text">When inactive, the supervisor cannot access the system</div>
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-brand" id="saveProfileChanges">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image View Modal -->
+    <div class="modal fade" id="imageViewModal" tabindex="-1" aria-labelledby="imageViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageViewModalLabel">Customer Document</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImageView" src="" alt="Customer Document" class="img-fluid" style="max-height: 70vh; object-fit: contain;">
+                    <div id="imageLoading" class="d-none mt-3">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading image...</span>
+                        </div>
+                        <p class="mt-2">Loading image...</p>
+                    </div>
+                    <div id="imageError" class="d-none mt-3 text-danger">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        <p class="mt-2">Failed to load image</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="downloadImageLink" href="#" class="btn btn-primary" download>
+                        <i class="fas fa-download me-2"></i>Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/script.js"></script>
+
+    <!-- Add Supervisor Page Specific JavaScript -->
+    <!-- <script src="assets/js/script.js"></script> -->
+    <script type="module" src="assets/js/customer.js"></script>
+
+    <script>
+        // Custom Dropdown Functionality
+            class CustomDropdown {
+                constructor(container) {
+                    this.container = container;
+                    this.toggle = container.querySelector('.dropdown-toggle');
+                    this.menu = container.querySelector('.dropdown-menu');
+                    this.selectedText = container.querySelector('.selected-text');
+                    this.items = container.querySelectorAll('.dropdown-item');
+
+                    this.init();
+                }
+
+                init() {
+                    // Toggle dropdown
+                    this.toggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggleDropdown();
+                    });
+
+                    // Handle item selection
+                    this.items.forEach(item => {
+                        item.addEventListener('click', () => {
+                            this.selectItem(item);
+                        });
+                    });
+
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', () => {
+                        this.close();
+                    });
+                }
+
+                toggleDropdown() {
+                    const isOpen = this.menu.classList.contains('show');
+
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                        if (menu !== this.menu) {
+                            menu.classList.remove('show');
+                            menu.previousElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    if (isOpen) {
+                        this.close();
+                    } else {
+                        this.open();
+                    }
+                }
+
+                open() {
+                    this.menu.classList.add('show');
+                    this.toggle.classList.add('active');
+                }
+
+                close() {
+                    this.menu.classList.remove('show');
+                    this.toggle.classList.remove('active');
+                }
+
+                selectItem(item) {
+                    const value = item.getAttribute('data-value');
+                    const text = item.textContent;
+
+                    this.selectedText.textContent = text;
+                    this.container.setAttribute('data-selected', value);
+                    this.close();
+
+                    // Trigger custom event
+                    this.container.dispatchEvent(new CustomEvent('dropdownChange', {
+                        detail: { value, text }
+                    }));
+                }
+
+                getValue() {
+                    return this.container.getAttribute('data-selected');
+                }
+
+                reset() {
+                    this.selectedText.textContent = this.selectedText.getAttribute('data-default') || 'Select option';
+                    this.container.removeAttribute('data-selected');
+                }
+            }
+
+            // Initialize Dropdowns
+            function initializeCustomDropdowns() {
+                // Initialize all dropdowns
+                const tierDropdown = new CustomDropdown(document.getElementById('tierDropdown'));
+                const statusDropdown = new CustomDropdown(document.getElementById('statusDropdown'));
+                const yearDropdown = new CustomDropdown(document.getElementById('yearDropdown'));
+
+                // Store default texts
+                document.querySelectorAll('.selected-text').forEach(text => {
+                    text.setAttribute('data-default', text.textContent);
+                });
+
+                // Return methods for external control
+                return {
+                    getValues: () => ({
+                        accountNumber: document.getElementById('accountSearch').value.trim(),
+                        tier: tierDropdown.getValue(),
+                        status: statusDropdown.getValue(),
+                        year: yearDropdown.getValue()
+                    }),
+                    reset: () => {
+                        document.getElementById('accountSearch').value = '';
+                        tierDropdown.reset();
+                        statusDropdown.reset();
+                        yearDropdown.reset();
+                    },
+                    tierDropdown,
+                    statusDropdown,
+                    yearDropdown
+                };
+            }
+
+            // Initialize when DOM is ready
+            document.addEventListener('DOMContentLoaded', function () {
+                const dropdowns = initializeCustomDropdowns();
+
+                // Make dropdowns available globally if needed
+                window.customDropdowns = dropdowns;
+
+                // Example: Listen for dropdown changes
+                document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+                    dropdown.addEventListener('dropdownChange', (e) => {
+                        console.log('Dropdown changed:', e.detail);
+                    });
+                });
+            });
+    </script>
+
+</body>
+
+</html>

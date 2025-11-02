@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/css/general.css">
+    <script src="assets/js/theme-manager.js"></script>
+    <style>
+        .main-content {
+            padding-top: 0 !important;
+            padding-right: 0;
+            /* background: #fff; */
+        }
+
+     
+        .account-limit .limits{
+  padding: 1rem;
+}
+     .account-limit .limits{
+  border-radius: 10px;
+}
+
+.account-limit .limits .tiers{
+  background: var(--lite-secondary);
+  padding: .5rem;
+}
+
+.account-limit .limits .content{
+  border-bottom: 1px solid var(--grey);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+.account-limit .limits .limit-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.account-limit .limits .content .current,
+.account-limit .limits .content .upgrade{
+  font-weight: 500;
+  font-size: 13px;
+  padding: .3rem .5rem;
+  border-radius: 4px;
+  color: var(--primary-color);
+}
+
+.account-limit .limits .content .current{  
+  background: rgb(245, 142, 33);
+}
+
+.account-limit .limits .content .upgrade{  
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.account-limit .limits table td{
+  /* font-weight: 500;
+  color: #515151; */
+}
+
+.account-limit .limits table .left-item{
+  font-weight: 600;
+  color: #000;
+}
+
+.account-limit .btn-upgrade{
+  width: fit-content;
+  margin:1.5rem auto 0;
+}
+
+    table {
+    min-width: 0 !important;
+  }
+ .btn-search{
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+ }
+
+ .btn-search:hover{
+    opacity: 0.8;
+    background: var(--secondary-color);
+ }
+
+ .tier-level{
+    background: rgb(245, 142, 33);
+    padding: .3rem 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+ }
+ 
+ .btn-edit{
+    color: var(--secondary-color);
+ }
+
+ .btn-edit:hover{
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color) !important;
+ }
+
+       
+
+        
+
+        /* Responsive Design for Form */
+ 
+
+
+
+        @media (max-width: 991px) {
+            .tab-container .tab-content {
+                margin-left: 0;
+            }
+
+        }
+               @media (max-width: 992px) {
+            .container-fluid {
+                --bs-gutter-x: 0;
+            }
+
+
+        }
+
+        @media (max-width: 768px) {
+            .account-limit .topbar{
+                border-top: 1px solid var(--grey);
+            }
+            .account-limit .limits .limit-grid{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            }
+            .account-limit .limits{
+            margin-top: 0 !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .customer .grid-row-flex {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+
+
+           
+        
+
+        .container-hero {
+            padding: 20px 20px 20px 10px;
+        }
+    
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="dashboard-header d-flex">
+            <button class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="align-self-center w-100">
+                <h1 class="header-title">Account Limits</h1>
+            </div>
+        </div>
+
+        <div class="tab-container d-flex">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <ul class="tab-list">
+                    <li class="tab-item active" data-tab="add-customer">
+                        <i class="fas fa-user-plus"></i>
+                        <span>View Tier Level</span>
+                    </li>
+                    <li class="tab-item" data-tab="view-customers">
+                        <i class="fas fa-list"></i>
+                        <span>Change Tier</span>
+                    </li>
+                    <li class="tab-item" data-tab="history">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content-wrapper">
+                <div class="tab-content" id="add-customer-tab">
+                    <div class="form-container">
+                        <div class="employee-details-card">
+                            <div class="card-header">
+                                <div>
+                                    <div class="card-icon">
+                                        <span class=""><i class="fas fa-user"></i></span>
+                                        <span class="i-fa-plus d-flex justify-content-center align-items-center"><i class="fa-solid fa-plus"></i></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="card-title">Add Customer</div>
+                                    <div class="card-description">Fill in the details below to add a new customer to the system.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+                <div class="tab-content active" id="view-tier-tab">
+                    <div class="account-limit">
+                        <div class="container-fluid my-4">
+                            <div class="table-card">
+                                <div class="topbar pt-2 px-2">
+                                    <div class="container-hero gap-3">
+                                        <div class="mb-4">
+                                            <h4 class="mb-0"><i class="fas fa-users me-2"></i>Manage Tier Level</h4>
+                                            <small class="text-muted">View all tier, edit, and delete.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="limits">
+                                        <div class="limit-grid">
+                                            <div class="content">
+                                                <div class="tiers d-flex justify-content-between"><span>Tier 2</span> <span class="upgrade"><i class="fas fa-edit me-1"></i>Update</span></div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Daily transaction limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Balance Limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="tiers d-flex justify-content-between"><span>Tier 2</span> <span class="upgrade"><i class="fas fa-edit me-1"></i>Update</span></div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Daily transaction limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Balance Limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="limits mt-3">
+                                        <div class="limit-grid">
+                                            <div class="content">
+                                                <div class="tiers d-flex justify-content-between"><span>Tier 2</span> <span class="upgrade"><i class="fas fa-edit me-1"></i>Update</span></div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Daily transaction limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Balance Limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <div class="tiers d-flex justify-content-between"><span>Tier 2</span><span class="upgrade"><i class="fas fa-edit me-1"></i>Update</span></div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Daily transaction limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p>Balance Limit</p>
+                                                        <p>N200,000.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="history-tab">
+                    <div class="table-card">
+                        <div class="topbar p-2">
+                            <div class="container-hero gap-3">
+                                <div class="mb-4">
+                                    <h4 class="mb-0"><i class="fas fa-users me-2"></i>Change Customers Tier Level</h4>
+                                    <small class="text-muted">Search for customer, edit customer tier level.</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center search-export-div">
+                                    <div class="input-group search-div">
+                                        <input type="text" class="form-control" placeholder="Enter account number">
+                                        <button class="btn btn-search" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- responsive scrollable table -->
+                        <div class="table-wrapper">
+                            <table class="table  mb-0 mt-4">
+                                <thead class="border-bottom">
+                                    <tr>
+                                        <th>
+                                            <div><input type="checkbox" aria-label="select all"></div>
+                                        </th>
+                                        <th>Name</th>
+                                        <th>Acc. Number</th>
+                                        <th>Tier Level</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table content added dynamically -->
+
+                                    <tr class="customer-row" data-customer='${customerData}'>
+                                        <td><input type="checkbox" data-id="${id}"></td>
+                                        <td>
+                                            <div class="name-block">
+                                                
+                                                <div class="name-meta">
+                                                    <div><span class="title">Amarachi Eneh</span></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>23123435434</td>
+                                        <td> <span class="tier-level">Tier 2</span></td>
+                                        <td class="actions">
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-sm btn-edit" data-bs-toggle="modal" data-bs-target="#editCustomerModal" data-customer='${customerData}'>
+                                                    <i class="fa fa-edit"></i>Edit
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                        <div class="p-3 text-muted"></div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="customer-details-tab">
+                    <div class="btn-back-wrapper mb-2">
+                        <button class="btn btn-back" id="backToCustomersBtn">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Customers
+                        </button>
+                    </div>
+                    <section class="tab-profile-wrapper customer">
+                        <div class="profile-container">
+                            <div class="profile-header sm-profile-header">
+                                <div class="image-name">
+                                    <div class="profile-image-section d-flex justify-content-center">
+                                        <span class="avatar-2 placeholder">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-top" style="width: 87%; gap: 1rem">
+
+                                    <div class="profile-info">
+                                        <div>
+                                            <h2 class="profile-name mb-0">Jane Adrine Doe</h2>
+                                            <p class="profile-staff-id mt-1 mb-2"></p>
+
+                                        </div>
+
+                                        <div class="">
+                                            <span class="detail-value" id="btn-status"></span>
+                                        </div>
+                                    </div>
+                                    <div class="balance">
+                                        <h2 class="profile-name mb-0">Balance</h2>
+                                        <p class="profile-staff-id mt-1"></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="profile-details">
+                                <div class="detail-title-wrapper d-flex justify-content-between align-items-center">
+                                    <h3 class="details-title">Profile Details</h3>
+                                    <button class="btn-edit-profile" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                        <i class="fas fa-edit"></i> Edit Profile
+                                    </button>
+                                </div>
+                                <div class="details-grid-wrap row grid-row-flex">
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">First Name</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-first-name"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Middle Name</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-middle-name"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Last Name</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-last-name"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Gender</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-gender"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row grid-row-flex">
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Country</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-country"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Phone</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-phone"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">BVN</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-bvn"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-lg-3 col-md-6 col-sm-6">
+                                        <span class="detail-label">Account Verification</span>
+                                        <div class="mt-2">
+                                            <span class="detail-value" id="customer-verification"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-8">
+                                        <span class="detail-label">Email</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-email"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-md-4">
+                                        <span class="detail-label">Current Tier</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-tier"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-12">
+                                        <span class="detail-label">Business Name</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-business-name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-12">
+                                        <span class="detail-label">Address</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-address"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-6">
+                                        <span class="detail-label">Date Joined</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-date-joined"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-md-6">
+                                        <span class="detail-label">Last Updated</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-last-updated"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-6">
+                                        <span class="detail-label">KYC Verification</span>
+                                        <div class="mt-2">
+                                            <span class="detail-value" id="customer-kyc-status"></span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item-wrapper col-md-6">
+                                        <span class="detail-label">Registered By</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-registered-by"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="details-grid-wrap row">
+                                    <div class="detail-item-wrapper col-md-12">
+                                        <span class="detail-label">National Identification Number (NIN)</span>
+                                        <div class="detail-item">
+                                            <span class="detail-value" id="customer-nin"></span>
+                                            <span class="detail-value view-image-link" style="color: var(--secondary-color); cursor: pointer;" data-image-type="nin">
+                                                View Image
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-actions">
+                                <button class="btn-delete-supervisor m-3">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-wrapper" id="sidebar_container">
+        <div class="overlay"></div>
+        <!-- Side Bar goes here  -->
+        <script src="assets/js/sidebar.js"></script>
+    </div>
+
+    <div class="message-container">
+        <div id="toast-container"></div>
+    </div>
+
+    <!-- Confirm Cancel Modal (Bootstrap) -->
+    <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm cancel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel? All unsaved changes will be lost.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keep editing</button>
+                    <button type="button" id="confirmCancelBtn" class="btn btn-danger">Yes, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap Modal for Profile Editing -->
+    <div class="modal fade editModal" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form class="profile-edit-form">
+                        <!-- Profile Image Section -->
+                        <div class="form-image-section text-center mb-4">
+                            <div class="image-preview mb-3">
+                                <span class="avatar-2 placeholder large">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-camera me-2"></i>Change Image
+                            </button>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="section-title mb-3">Personal Information</div>
+                        <div class="mb-4">
+                            <div class="">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="">
+                                <label for="middleName" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" id="middleName">
+                            </div>
+                            <div class="">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="section-title mb-3">Contact Information</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="editEmail" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="editPhone" required>
+                            </div>
+                        </div>
+
+                        <!-- Work Information -->
+                        <div class="section-title mb-3">Work Information</div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="staffId" class="form-label">Staff ID *</label>
+                                <input type="text" class="form-control" id="staffId" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="department" class="form-label">Department *</label>
+                                <select class="form-select" id="editDepartment" required>
+                                    <option value="">Select Department</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="technical">Technical IT</option>
+                                    <option value="administrator">Administrator</option>
+                                    <option value="support">Support</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Password Field (you added this) -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-12">
+                                <label for="editPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="editPassword" placeholder="Leave blank to keep current password">
+                            </div>
+                        </div>
+
+                        <!-- Account Status -->
+                        <div class="account-status-section">
+                            <div class="section-title mb-3">Account Status</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isActive">
+                                <label class="form-check-label" for="isActive">
+                                    Active Account
+                                </label>
+                            </div>
+                            <div class="form-text">When inactive, the supervisor cannot access the system</div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-brand" id="saveProfileChanges">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image View Modal -->
+    <div class="modal fade" id="imageViewModal" tabindex="-1" aria-labelledby="imageViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageViewModalLabel">Customer Document</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImageView" src="" alt="Customer Document" class="img-fluid" style="max-height: 70vh; object-fit: contain;">
+                    <div id="imageLoading" class="d-none mt-3">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading image...</span>
+                        </div>
+                        <p class="mt-2">Loading image...</p>
+                    </div>
+                    <div id="imageError" class="d-none mt-3 text-danger">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        <p class="mt-2">Failed to load image</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="downloadImageLink" href="#" class="btn btn-primary" download>
+                        <i class="fas fa-download me-2"></i>Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="assets/js/script.js"></script>
+
+    <!-- Add Supervisor Page Specific JavaScript -->
+    <!-- <script src="assets/js/script.js"></script> -->
+    <script type="module" src="assets/js/customer.js"></script>
+
+</body>
+
+</html>

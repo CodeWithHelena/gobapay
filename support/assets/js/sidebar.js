@@ -18,6 +18,18 @@ sideBarContainer.innerHTML += `
             </li>
             <li>
                 <div class="dropdown">
+                    <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:cog" class="iconify"></iconify-icon><span>Account Limit</span></button>
+                    <div class="dropdown-container">                                
+                        <a href="account-limit.html"><iconify-icon icon="mdi:account-circle" class="iconify"></iconify-icon>View Tiers</a>
+                        <a href="account-limit.html" class="sidebar-theme-option">
+                            <iconify-icon icon="solar:moon-bold" class="iconify"></iconify-icon> 
+                            Update Tier
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
                     <button type="button" class="dropdown-button dropdown-toggle"><iconify-icon icon="mdi:cog" class="iconify"></iconify-icon><span>Settings</span></button>
                     <div class="dropdown-container">                                
                         <a href="settings.html"><iconify-icon icon="mdi:account-circle" class="iconify"></iconify-icon>Profile</a>
